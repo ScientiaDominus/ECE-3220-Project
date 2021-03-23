@@ -8,11 +8,13 @@ class item{
     public:
 
     private:
-        std::string name;
-        std::string type;
-        int base_dmg;
-        int weight;
-        
+        std::string name_;
+        std::string type_;
+        std::string description_;
+        int base_dmg_;
+        int weight_;
+        int price_;
+
         
         
 
