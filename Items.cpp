@@ -1,9 +1,10 @@
 #include "Item.h"
 
-Item::Item(std::string name, std::string damage, double weight, int itemID, int price)
+Item::Item(std::string name, std::string damage, Type itemType, double weight, int itemID, int price)
 {
     name_ = name;
     damage_ = damage;
+    itemType_ = itemType;
     weight_ = weight;
     itemID_ = itemID;
     price_ =  price;
