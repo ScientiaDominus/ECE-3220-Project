@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-class item{
+class Item{
     public:
 
     private:
@@ -14,9 +14,6 @@ class item{
         int base_dmg_;
         int weight_;
         int price_;
-
-        
-        
 
 };
 
