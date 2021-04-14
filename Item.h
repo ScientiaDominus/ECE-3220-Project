@@ -4,9 +4,9 @@
 #include <string>
 #include <iostream>
 
-class item{
+class Item{
     public:
-        item(std::string name, std::string damage, double weight, int itemID, int price);
+        Item(std::string name, std::string damage, double weight, int itemID, int price);
 
         std::string getName() const{return name_;}
         std::string getDamage() const{return damage_;}
