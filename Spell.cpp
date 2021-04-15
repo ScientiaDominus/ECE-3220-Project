@@ -1,4 +1,4 @@
-#include "spell.h"
+#include "Spell.h"
 
 //default constructor
 Spell::Spell(){
@@ -71,3 +71,4 @@ std::string Spell::to_string(){
     return returnString;
     
 }
+
