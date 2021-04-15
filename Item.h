@@ -19,6 +19,7 @@ class Item{
 
         void setName_(std::string name);
         void setDamage_(std::string damage);
+        void setItemType_(Type itemType);
         void setWeight_(double weight);
         void setID_(int ID);
         void setPrice_(int price);

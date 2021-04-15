@@ -18,6 +18,10 @@ void Item::setDamage_(std::string damage)
 {
     damage_ = damage;
 }
+void Item::setItemType_(Type type)
+{
+    itemType_ = type;
+}
 void Item::setWeight_(double weight)
 {
     weight_ = weight;
