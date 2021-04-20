@@ -16,9 +16,9 @@ std::string Weapon::to_string()
     weaponSS << "Behold, a " << Name_() << std::endl;
     weaponSS << std::setprecision(2) << std::fixed << "Its weight, " << Weight_() << " pounds." << std::endl;
     weaponSS << "Its value, a mere " << Price_ << " gold pieces." << std::endl;
-    weaponSS << "This "
+    weaponSS << "However, it strikes fear into the hearts of enemies weak against " << typeToString(type_) << "." << std::endl;
     
-    
+    //Finish this function retard or else its gonna hurt you later
 }
 std::string typeToString(dmgType type)
 {

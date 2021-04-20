@@ -17,6 +17,19 @@ class System{
         void printItemList();
         void printCharacter();
         void printSpell();
-}
+
+
+        void addItem(const Item &item);
+        void addSpell(const Spell &spell);
+        void addCharacter(const Character &character);
+        Character* getCharacter(std::string name);
+        Spell* getSpell(std::string name);
+        Item* getItem(std::string name);
+        Character* getCharacterByID(int charID);
+        Spell* getSpellByID(int spellID);
+        Item* getItemByID(int itemID);
+
+
+};
 
 #endif
