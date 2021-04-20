@@ -17,6 +17,8 @@ class Weapon : public Item
 
         void setRange_(int range);
         void setDamageType_(dmgType type);
+        std::string typeToString(dmgType type);
+        std::string to_string() override;
 
     private:
         dmgType type_; 

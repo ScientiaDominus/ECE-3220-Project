@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 
 enum Type {WEAPON, ARMOR, OBJECT};
 
@@ -23,6 +25,8 @@ class Item{
         void setWeight_(double weight);
         void setID_(int ID);
         void setPrice_(int price);
+
+        virtual std::string to_string() = 0;
 
         
         
