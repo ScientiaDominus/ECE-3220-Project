@@ -16,6 +16,7 @@ class System{
         std::vector<Character> characterVector;
 
         System();
+
     public:
         void printItemList();
         void printCharacter();
@@ -32,6 +33,7 @@ class System{
         Spell* getSpellByID(int spellID);
         Item* getItemByID(int itemID);
         static System *getInstance();
+
 
 
 };

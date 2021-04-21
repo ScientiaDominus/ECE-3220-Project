@@ -181,6 +181,7 @@ Spell* System::getSpellByID(int spellID)
     {
         std::cerr << e << std::endl;
     }
+<<<<<<< HEAD
 }
 
 System* System::getInstance(){
@@ -188,4 +189,6 @@ System* System::getInstance(){
         instance = new System;
     }
     return instance;
+=======
+>>>>>>> 493c75a9c946b27e7bab3c99fe8ed1559a5b1fed
 }

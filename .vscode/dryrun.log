@@ -1,13 +1,15 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/cameron/Classes/ece3220/project/ECE-3220-Project'
-g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o armor.o armor.cpp
-g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o item_vector.o item_vector.cpp
-g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o ch_vector.o ch_vector.cpp
-g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o weapon.o weapon.cpp
+
+make: Entering directory '/home/kevin/3220/finalProject/ECE-3220-Project'
 g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o character.o character.cpp
-g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o items.o items.cpp
+
 g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o character_functions.o character_functions.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o ch_vector.o ch_vector.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o items.o items.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o item_vector.o item_vector.cpp
 g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o main.o main.cpp
-g++ -std=c++11 -Wall -Werror -ggdb -O0 armor.o item_vector.o ch_vector.o weapon.o character.o items.o character_functions.o main.o -o character 
-make: Leaving directory '/home/cameron/Classes/ece3220/project/ECE-3220-Project'
- 
+
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o spell.o spell.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0 character.o character_functions.o ch_vector.o items.o item_vector.o main.o spell.o -o character 
+make: Leaving directory '/home/kevin/3220/finalProject/ECE-3220-Project'
+
