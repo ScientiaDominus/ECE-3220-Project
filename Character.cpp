@@ -23,3 +23,5 @@ AbilityScores Character::get_ability_scores() const{return ability_scores;}
 std::vector<Item> Character::get_item_inventory() const{return item_inventory;}
 std::vector<Spell> Character::get_spell_inventory() const{return spell_inventory;}
 int Character::get_gold_count() const{return gold_count;}
+std::string Character::to_string() const{return "";}
+std::string Character::toExportString() const{return "";}

@@ -1,4 +1,10 @@
+#include <iostream>
+#include <fstream>
 #include "System.h"
+
+
+System::System(){
+}
 
 void System::addItem(const Item &item)
 {
@@ -181,7 +187,6 @@ Spell* System::getSpellByID(int spellID)
     {
         std::cerr << e << std::endl;
     }
-<<<<<<< HEAD
 }
 
 System* System::getInstance(){
@@ -189,6 +194,33 @@ System* System::getInstance(){
         instance = new System;
     }
     return instance;
-=======
->>>>>>> 493c75a9c946b27e7bab3c99fe8ed1559a5b1fed
+}
+
+void System::exportToFile(std::string characterFilePath, std::string spellFilePath, std::string itemFilePath){
+    std::ofstream characterFile;
+    characterFile.open(characterFilePath, std::ios::out);
+    std::vector<Character>::iterator characterIterator;
+    characterFile << "character records start\n";
+    for(characterIterator = characterVector.begin(); characterIterator != characterVector.end(); characterIterator++){
+        characterFile << characterIterator->toExportString();
+    }
+    characterFile << "character records end\n";
+    
+    std::ofstream spellFile;
+    characterFile.open(spellFilePath, std::ios::out);
+    std::vector<Spell>::iterator spellIterator;
+    spellFile << "spell records start\n";
+    for(spellIterator = spellVector.begin(); spellIterator != spellVector.end(); spellIterator++){
+        spellFile << spellIterator->toExportString();
+    }
+    spellFile << "spell records end\n";
+    
+    std::ofstream itemFile;
+    characterFile.open(itemFilePath, std::ios::out);
+    std::vector<Item>::iterator itemIterator;
+    itemFile << "item records start\n";
+    for(itemIterator = itemVector.begin(); itemIterator != itemVector.end(); itemIterator++){
+        itemFile << itemIterator->toExportString();
+    }
+    itemFile << "item records end\n";
 }

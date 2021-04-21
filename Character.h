@@ -26,6 +26,7 @@ class Character{
 		std::vector<Spell> get_spell_inventory() const;
 		int get_gold_count() const;
 		std::string to_string() const;
+		std::string toExportString() const;
 
 	private:
 		std::string player_name;
