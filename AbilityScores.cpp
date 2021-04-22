@@ -1,4 +1,5 @@
 #include "AbilityScores.h"
+#include <iostream>
 
 AbilityScores::AbilityScores(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma){
     this->strength = strength;
@@ -26,4 +27,15 @@ void AbilityScores::increaseWisdom(int points){
 }
 void AbilityScores::increaseCharisma(int points){
     charisma += points;
+}
+
+std::string AbilityScores::toExportString() {
+    std::string exportString = this->getStrength() +
+                                "\n" + std::to_string(getDexterity()) +
+                                "\n" + std::to_string(getConstitution()) +
+                                "\n" + std::to_string(getIntelligence()) +
+                                "\n" + std::to_string(getWisdom()) + 
+                                "\n" + std::to_string(getCharisma());
+
+    return exportString;
 }

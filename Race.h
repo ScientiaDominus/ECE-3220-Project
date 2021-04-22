@@ -1,6 +1,6 @@
 #ifndef RACE_H
 #define RACE_H
 
-enum Race { PALADIN, FIGHTER, ROUGE, CLERIC, RANGER, WIZARD };
+enum Race { ELF, HUMAN, DWARF, HALF_ORC, GNOME };
 
 #endif

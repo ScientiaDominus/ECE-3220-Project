@@ -64,7 +64,7 @@ void Spell::set_duration(int duration){
     duration_=duration;
 }
 
-std::string Spell::to_string(){
+std::string Spell::to_string() const{
     char buff[100];
     const char *name = spellName_.c_str();
     const char *description = description_.c_str();
@@ -73,4 +73,6 @@ std::string Spell::to_string(){
     return returnString;
     
 }
+
+std::string Spell::toExportString() const{return "";}
 

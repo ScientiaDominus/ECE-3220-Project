@@ -17,6 +17,7 @@ class AbilityScores{
         void increaseIntelligence(int points);
         void increaseWisdom(int points);
         void increaseCharisma(int points);
+        std::string toExportString();
     private:
         int strength;
         int dexterity;
