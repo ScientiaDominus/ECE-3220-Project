@@ -196,7 +196,7 @@ System* System::getInstance(){
     return instance;
 }
 
-void System::exportToFile(std::string characterFilePath, std::string spellFilePath, std::string itemFilePath){
+void System::exportCharactersToFile(std::string characterFilePath){
     std::ofstream characterFile;
     characterFile.open(characterFilePath, std::ios::out);
     std::vector<Character>::iterator characterIterator;
@@ -205,22 +205,32 @@ void System::exportToFile(std::string characterFilePath, std::string spellFilePa
         characterFile << characterIterator->toExportString();
     }
     characterFile << "character records end\n";
-    
-    std::ofstream spellFile;
-    characterFile.open(spellFilePath, std::ios::out);
-    std::vector<Spell>::iterator spellIterator;
-    spellFile << "spell records start\n";
-    for(spellIterator = spellVector.begin(); spellIterator != spellVector.end(); spellIterator++){
-        spellFile << spellIterator->toExportString();
-    }
-    spellFile << "spell records end\n";
-    
+}
+
+void System::exportItemsToFile(std::string itemFilePath){
     std::ofstream itemFile;
-    characterFile.open(itemFilePath, std::ios::out);
+    itemFile.open(itemFilePath, std::ios::out);
     std::vector<Item>::iterator itemIterator;
     itemFile << "item records start\n";
     for(itemIterator = itemVector.begin(); itemIterator != itemVector.end(); itemIterator++){
         itemFile << itemIterator->toExportString();
     }
     itemFile << "item records end\n";
+}
+
+void System::exportSpellsToFile(std::string spellFilePath){
+    std::ofstream spellFile;
+    spellFile.open(spellFilePath, std::ios::out);
+    std::vector<Spell>::iterator spellIterator;
+    spellFile << "spell records start\n";
+    for(spellIterator = spellVector.begin(); spellIterator != spellVector.end(); spellIterator++){
+        spellFile << spellIterator->toExportString();
+    }
+    spellFile << "spell records end\n";
+}
+
+void System::standardSystemExportToFiles(){
+    exportCharactersToFile("charactersExport.txt");
+    exportItemsToFile("itemsExport.txt");
+    exportSpellsToFile("spellsExport.txt");
 }

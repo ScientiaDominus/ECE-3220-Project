@@ -33,9 +33,10 @@ class System{
         Spell* getSpellByID(int spellID);
         Item* getItemByID(int itemID);
         static System *getInstance();
-        void exportToFile(std::string characterFilePath, std::string spellFilePath, std::string itemFilePath);
-
-
+        void exportCharactersToFile(std::string spellFilePath);
+        void exportItemsToFile(std::string spellFilePath);
+        void exportSpellsToFile(std::string spellFilePath);
+        void standardSystemExportToFiles();
 
 };
 
