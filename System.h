@@ -29,6 +29,9 @@ class System{
         Spell* getSpellByID(int spellID);
         Item* getItemByID(int itemID);
 
+        void deleteCharacter(std::string name);
+        void deleteSpell(std::string name);
+        void deleteItem(std::string name);
 
 };
 
