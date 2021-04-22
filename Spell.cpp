@@ -64,15 +64,30 @@ void Spell::set_duration(int duration){
     duration_=duration;
 }
 
-std::string Spell::to_string() const{
-    char buff[100];
+std::string Spell::to_string(){
+    char buff[1000];
     const char *name = spellName_.c_str();
     const char *description = description_.c_str();
-    sprintf(buff, "%s\n     Casting Time: %d action\n      Range: %d feet\n     Duration: %d\n      Description: %s\n", name, castingTime_, range_, duration_, description);
+    sprintf(buff, "%s\n     Spell ID: %d\n      Casting Time: %d action\n      Range: %d feet\n     Duration: %d\n      Description: %s\n", name, spellID_, castingTime_, range_, duration_, description);
     std::string returnString = buff;
     return returnString;
     
 }
 
-std::string Spell::toExportString() const{return "";}
+std::string Spell::to_exportString(){
+    char buff[1000];
+    const char *name = spellName_.c_str();
+    const char *description = description_.c_str();
+    sprintf(buff, "%s\n%d\n%d\n%d\n%d\n%s\n", name, spellID_, castingTime_, range_, duration_, description);
+    std::string exportString = buff;
+    return exportString;
+}
 
+std::string Spell::to_simpleString(){
+    char buff[100];
+    const char *name = spellName_.c_str();
+    sprintf(buff, "Name: %s ID: %d", name, spellID_);
+    std::string returnString = buff;
+    return returnString;
+    
+}

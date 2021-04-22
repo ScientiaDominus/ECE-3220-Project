@@ -30,8 +30,9 @@ class Spell{
         void set_range(int);
         void set_duration(int);
 
-        std::string to_string() const;
-        std::string toExportString() const;
+        std::string to_string();
+        std::string to_exportString();
+        std::string to_simpleString();
 
     private:
         std::string spellName_;
