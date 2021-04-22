@@ -189,6 +189,75 @@ Spell* System::getSpellByID(int spellID)
     }
 }
 
+void System::deleteCharacter(std::string name)
+{
+    int i =0;
+    try
+    {
+        std::vector<Character>::iterator iter;
+
+        for(iter = characterVector.begin(); iter != characterVector.end(); iter++, i++)
+        {
+            if(iter->get_character_name() == name)
+            {
+                characterVector.erase(characterVector.begin()+i);
+                return;
+            }
+        }
+        throw std::string("Exception: Character not found in vector.");
+    }
+    catch(std::string& e)
+    {
+        std::cerr << e << std::endl;
+    }
+}
+
+void System::deleteItem(std::string name)
+{
+    int i =0;
+    try
+    {
+        std::vector<Item>::iterator iter;
+
+        for(iter = itemVector.begin(); iter != itemVector.end(); iter++, i++)
+        {
+            if(iter->Name_() == name)
+            {
+                itemVector.erase(itemVector.begin()+i);
+                return;
+            }
+        }
+        throw std::string("Exception: Item not found in vector.");
+    }
+    catch(std::string& e)
+    {
+        std::cerr << e << std::endl;
+    }
+}
+
+void System::deleteSpell(std::string name)
+{
+    int i =0;
+    try
+    {
+        std::vector<Spell>::iterator iter;
+
+        for(iter = spellVector.begin(); iter != spellVector.end(); iter++, i++)
+        {
+            if(iter->get_spellName() == name)
+            {
+                spellVector.erase(spellVector.begin()+i);
+                
+                return;
+            }
+        }
+        throw std::string("Exception: Spell not found in vector.");
+    }
+    catch(std::string& e)
+    {
+        std::cerr << e << std::endl;
+    }
+
 System* System::getInstance(){
     if(!(instance)){
         instance = new System;

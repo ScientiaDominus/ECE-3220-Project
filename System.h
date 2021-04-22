@@ -32,6 +32,10 @@ class System{
         Character* getCharacterByID(int charID);
         Spell* getSpellByID(int spellID);
         Item* getItemByID(int itemID);
+
+        void deleteCharacter(std::string name);
+        void deleteSpell(std::string name);
+        void deleteItem(std::string name);
         static System *getInstance();
         void exportCharactersToFile(std::string spellFilePath);
         void exportItemsToFile(std::string spellFilePath);

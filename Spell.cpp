@@ -22,6 +22,8 @@ Spell::Spell(const Spell &spell){
     range_=spell.get_range();
     duration_=spell.get_duration();
 }
+Spell::~Spell(){
+}
 
 //getters and setters
 std::string Spell::get_spellName() const{

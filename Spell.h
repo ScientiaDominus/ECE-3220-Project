@@ -13,6 +13,7 @@ class Spell{
         Spell(std::string, int, std::string, int, int, int);
         //copy constructor
         Spell(const Spell &spell);
+        ~Spell();
 
         //getters and setters
         std::string get_spellName() const;
