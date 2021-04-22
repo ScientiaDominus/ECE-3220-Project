@@ -10,9 +10,13 @@
 
 class System{
     private:
+        static System *instance; 
         std::vector<Item> itemVector;
         std::vector<Spell> spellVector;
         std::vector<Character> characterVector;
+
+        System();
+
     public:
         void printItemList();
         void printCharacter();
@@ -28,7 +32,11 @@ class System{
         Character* getCharacterByID(int charID);
         Spell* getSpellByID(int spellID);
         Item* getItemByID(int itemID);
-
+        static System *getInstance();
+        void exportCharactersToFile(std::string spellFilePath);
+        void exportItemsToFile(std::string spellFilePath);
+        void exportSpellsToFile(std::string spellFilePath);
+        void standardSystemExportToFiles();
 
 };
 
