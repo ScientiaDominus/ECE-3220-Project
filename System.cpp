@@ -146,7 +146,26 @@ Character* System::getCharacterByID(int charID)
         std::cerr << e << std::endl;
     }
 }
+/*Character* System::getCharacterByPlayer(std::string player)
+{
+    try
+    {
+        std::vector<Character>::iterator iter;
 
+        for(iter = characterVector.begin(); iter != characterVector.end(); iter++)
+        {
+            if(iter->get_player_name() == player)
+            {
+                return &(*iter);
+            }
+        }
+        throw std::string("Exception: Player not found in vector.");
+    }
+    catch(std::string& e)
+    {
+        std::cerr << e << std::endl;
+    }
+}*/
 Item* System::getItemByID(int itemID)
 {
     try

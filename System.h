@@ -29,6 +29,7 @@ class System{
         Character* getCharacter(std::string name);
         Spell* getSpell(std::string name);
         Item* getItem(std::string name);
+        /*Character* getCharacterByPlayer(std::string player);*/
         Character* getCharacterByID(int charID);
         Spell* getSpellByID(int spellID);
         Item* getItemByID(int itemID);
