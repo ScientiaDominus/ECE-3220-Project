@@ -37,15 +37,28 @@ void Item::setPrice_(int price)
 
 std::string Item::to_string()
 {
-    std::stringstream mystream;
+    std::stringstream myStream;
 
-    mystream << "NAME: " << Name_() << std::endl; 
-    mystream << "DAMAGE: " << Damage_() << std::endl;
-    mystream << "ITEMTYPE: " << ItemType_() << std::endl;
-    mystream << "WEIGHT: " << Weight_() << std::endl;
-    mystream << "ID: " << ID_() << std::endl;
-    mystream << "PRICE: " << Price_() << std::endl; 
+    myStream << "NAME: " << Name_() << std::endl; 
+    myStream << "DAMAGE: " << Damage_() << std::endl;
+    myStream << "ITEMTYPE: " << ItemType_() << std::endl;
+    myStream << "WEIGHT: " << Weight_() << std::endl;
+    myStream << "ID: " << ID_() << std::endl;
+    myStream << "PRICE: " << Price_() << std::endl; 
 
-    return mystream.str();
+    return myStream.str();
 }
-std::string Item::toExportString() const{return "";}
+std::string Item::toExportString()
+{
+    std::stringstream myStream;
+
+    myStream << Name_() << std::endl;
+    myStream << Damage_() << std::endl;
+    myStream << ItemType_() << std::endl;
+    myStream << Weight_() << std::endl;
+    myStream << ID_() << std::endl;
+    myStream << Price_() << std::endl;
+
+    return myStream.str();
+
+}

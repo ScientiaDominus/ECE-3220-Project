@@ -13,8 +13,9 @@ class Armor : public Item
         }
 
         void setArmorType(armorType type);
-        armorType getArmorType() const{return type_;}
+        armorType ArmorType() const{return type_;}
         std::string to_string() override;
+        std::string toExportString() override;
     private:
         armorType type_;
 

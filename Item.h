@@ -27,7 +27,7 @@ class Item{
         void setPrice_(int price);
 
         virtual std::string to_string() = 0;
-        std::string toExportString() const;
+        virtual std::string toExportString() = 0;
 
         
         
