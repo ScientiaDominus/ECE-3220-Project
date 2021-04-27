@@ -35,5 +35,17 @@ void Item::setPrice_(int price)
     price_ = price;
 }
 
-std::string Item::to_string() const{return "";}
+std::string Item::to_string()
+{
+    std::stringstream mystream;
+
+    mystream << "NAME: " << Name_() << std::endl; 
+    mystream << "DAMAGE: " << Damage_() << std::endl;
+    mystream << "ITEMTYPE: " << ItemType_() << std::endl;
+    mystream << "WEIGHT: " << Weight_() << std::endl;
+    mystream << "ID: " << ID_() << std::endl;
+    mystream << "PRICE: " << Price_() << std::endl; 
+
+    return mystream.str();
+}
 std::string Item::toExportString() const{return "";}
