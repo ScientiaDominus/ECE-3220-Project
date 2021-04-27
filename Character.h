@@ -25,6 +25,7 @@ class Character{
 		std::vector<Item> get_item_inventory() const;
 		std::vector<Spell> get_spell_inventory() const;
 		int get_gold_count() const;
+		int get_character_id() const;
 		std::string to_string() const;
 		std::string toExportString();
 		std::string itemInventoryToExportString();
@@ -42,6 +43,7 @@ class Character{
 		std::vector<Item> item_inventory;
 		std::vector<Spell> spell_inventory;
 		int gold_count;
+		int id;
 
 
 
