@@ -57,12 +57,11 @@ std::string Weapon::typeToString()
 std::string Weapon::toExportString()
 {
     std::stringstream myStream;
-
+    myStream << ItemType_() << std::endl;
     myStream << Name_() << std::endl;
     myStream << Damage_() << std::endl;
     myStream << DamageType_() << std::endl;
     myStream << Range_() << std::endl;
-    myStream << ItemType_() << std::endl;
     myStream << Weight_() << std::endl;
     myStream << ID_() << std::endl;
     myStream << Price_() << std::endl;

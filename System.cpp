@@ -5,6 +5,10 @@
 
 System::System(){
 }
+std::vector<Item> System::itemVectorFromFile(std::string filepath)
+{
+    
+}
 
 void System::addItem(const Item &item)
 {

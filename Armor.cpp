@@ -24,9 +24,9 @@ std::string Armor::toExportString()
 {
     std::stringstream myStream;
 
+    myStream << ItemType_() << std::endl;
     myStream << Name_() << std::endl;
     myStream << Damage_() << std::endl;
-    myStream << ItemType_() << std::endl;
     myStream << ArmorType() << std::endl;
     myStream << Weight_() << std::endl;
     myStream << ID_() << std::endl;

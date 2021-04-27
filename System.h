@@ -21,6 +21,7 @@ class System{
         void printItemList();
         void printCharacter();
         void printSpell();
+        std::vector<Item> itemVectorFromFile(std::string filepath);
 
 
         void addItem(const Item &item);
@@ -37,7 +38,7 @@ class System{
         void deleteCharacter(std::string name);
         void deleteSpell(std::string name);
         void deleteItem(std::string name);
-        static System *getInstance();
+        static System* getInstance();
         void exportCharactersToFile(std::string spellFilePath);
         void exportItemsToFile(std::string spellFilePath);
         void exportSpellsToFile(std::string spellFilePath);
