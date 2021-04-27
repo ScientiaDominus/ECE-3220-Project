@@ -26,6 +26,9 @@ class Item{
         void setID_(int ID);
         void setPrice_(int price);
 
+        virtual void edit() = 0;
+        virtual void create() = 0;
+
         std::string itemTypeToString();
 
         virtual std::string to_string() = 0;

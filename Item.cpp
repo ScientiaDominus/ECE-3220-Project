@@ -34,7 +34,26 @@ void Item::setPrice_(int price)
 {
     price_ = price;
 }
-
+void Item::edit()
+{
+    std::string name;
+    std::string damage;
+    double weight;
+    int price;
+    std::cout << this->to_string();
+    std::cout << "Enter the item name: ";
+    std::cin >> name;
+    std::cout << std::endl << "Enter the item's damage string (ex. 2d4): ";
+    std::cin >> damage;
+    std::cout << std::endl << "Enter the item's weight: ";
+    std::cin >> weight;
+    std::cout << std::endl << "Enter the item's price: ";
+    std::cin >> price;
+    setName_(name);
+    setDamage_(damage);
+    setWeight_(weight);
+    setPrice_(price);
+}
 std::string Item::to_string()
 {
     std::stringstream myStream;
