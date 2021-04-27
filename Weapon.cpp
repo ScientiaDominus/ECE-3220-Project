@@ -1,11 +1,6 @@
 #include "Weapon.h"
 
-Weapon::Weapon(std::string name, std::string damage, double weight, int itemID, int price,  dmgType type, int range) : Item(name, damage, WEAPON, weight, itemID, price)
-{
-    setDamageType_(type);
-    setRange_(range);
-    std::cout << "Weapon Constructor called" << std::endl;
-}
+//Weapon::Weapon(std::string name, std::string damage, double weight, int itemID, int price,  dmgType type, int range) : Item(name, damage, WEAPON, weight, itemID, price){}
 void Weapon::setRange_(int range)
 {
     range_ = range;
@@ -57,6 +52,20 @@ std::string Weapon::typeToString()
             //std::cout << "ERROR::UNKNOWN DAMAGE TYPE";
             return std::string("ERROR::UNKNOWN DAMAGE TYPE");
     }
-        
+}
 
+std::string Weapon::toExportString()
+{
+    std::stringstream myStream;
+
+    myStream << Name_() << std::endl;
+    myStream << Damage_() << std::endl;
+    myStream << DamageType_() << std::endl;
+    myStream << Range_() << std::endl;
+    myStream << ItemType_() << std::endl;
+    myStream << Weight_() << std::endl;
+    myStream << ID_() << std::endl;
+    myStream << Price_() << std::endl;
+
+    return myStream.str();
 }

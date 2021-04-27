@@ -1,7 +1,7 @@
 #ifndef ABILITY_SCORES_H
 #define ABILITY_SCORES_H
 
-
+#include <string>
 class AbilityScores{
     public:
         AbilityScores(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma);

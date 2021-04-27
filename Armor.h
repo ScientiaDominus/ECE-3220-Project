@@ -7,7 +7,11 @@ enum armorType {LIGHT, MEDIUM, HEAVY};
 class Armor : public Item
 {
     public:
-        Armor(std::string name, std::string damage, double weight, int itemID, int price,  armorType type) : Item(name, damage, ARMOR, weight, itemID, price){}
+        Armor(std::string name, std::string damage, double weight, int itemID, int price,  armorType type) : Item(name, damage, ARMOR, weight, itemID, price)
+        {
+            setArmorType(type);
+            std::cout << "Armor Constructor Called" << std::endl;
+        }
 
         void setArmorType(armorType type);
         std::string typeToString();
