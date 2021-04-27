@@ -41,7 +41,7 @@ std::string Item::to_string()
 
     myStream << "NAME: " << Name_() << std::endl; 
     myStream << "DAMAGE: " << Damage_() << std::endl;
-    myStream << "ITEMTYPE: " << ItemType_() << std::endl;
+    myStream << "ITEMTYPE: " << itemTypeToString() << std::endl; //need an itemtype switch for proper string display.
     myStream << "WEIGHT: " << Weight_() << std::endl;
     myStream << "ID: " << ID_() << std::endl;
     myStream << "PRICE: " << Price_() << std::endl; 
@@ -61,4 +61,19 @@ std::string Item::toExportString()
 
     return myStream.str();
 
+}
+
+std::string Item::itemTypeToString()
+{
+    switch(itemType_)
+    {
+        case OBJECT:
+            return std::string("Object");
+        case ARMOR:
+            return std::string("Armor");
+        case WEAPON:
+            return std::string("Weapon");
+        default:
+            return std::string("ERROR: ITEMTYPE IS UNDEFINED");
+    }
 }

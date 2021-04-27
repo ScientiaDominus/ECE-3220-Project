@@ -11,8 +11,8 @@ std::string Armor::to_string()
 
     myStream << "NAME: " << Name_() << std::endl; 
     myStream << "DAMAGE: " << Damage_() << std::endl;
-    myStream << "ITEMTYPE: " << ItemType_() << std::endl;
-    myStream << "ARMORTYPE: " << ArmorType() << std::endl;
+    myStream << "ITEMTYPE: " << itemTypeToString() << std::endl;
+    myStream << "ARMORTYPE: " << typeToString() << std::endl; //Probably need a armor type switch function to properly display this
     myStream << "WEIGHT: " << Weight_() << std::endl;
     myStream << "ID: " << ID_() << std::endl;
     myStream << "PRICE: " << Price_() << std::endl; 
@@ -33,4 +33,19 @@ std::string Armor::toExportString()
     myStream << Price_() << std::endl;
 
     return myStream.str();
+}
+std::string Armor::typeToString()
+{
+    switch(type_)
+    {
+        case LIGHT:
+            return std::string("Light");
+        case MEDIUM:
+            return std::string("Medium");
+        case HEAVY:
+            return std::string("Heavy");
+        default:
+            return std::string("ERROR: ARMORTYPE UNDEFINED");
+
+    }
 }

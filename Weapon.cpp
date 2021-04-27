@@ -12,32 +12,44 @@ void Weapon::setDamageType_(dmgType type)
 
 std::string Weapon::to_string()
 {
-    std::stringstream weaponSS;
-    weaponSS << "Behold, a " << Name_() << std::endl;
-    weaponSS << std::setprecision(2) << std::fixed << "Its weight, " << Weight_() << " pounds." << std::endl;
-    weaponSS << "Its value, a mere " << Price_ << " gold pieces." << std::endl;
-    weaponSS << "However, it strikes fear into the hearts of enemies weak against " << typeToString(type_) << "." << std::endl;
-    
-    //Finish this function retard or else its gonna hurt you later
+    std::stringstream myStream;
+
+    myStream << "NAME: " << Name_() << std::endl; 
+    myStream << "DAMAGE: " << Damage_() << std::endl;
+    myStream << "DAMAGETYPE: " << typeToString() << std::endl;
+    myStream << "RANGE: " << Range_() << std::endl;
+    myStream << "ITEMTYPE: " << itemTypeToString() << std::endl;
+    myStream << "WEIGHT: " << Weight_() << std::endl;
+    myStream << "ID: " << ID_() << std::endl;
+    myStream << "PRICE: " << Price_() << std::endl; 
+
+    return myStream.str();
 }
-std::string typeToString(dmgType type)
+std::string Weapon::typeToString()
 {
-    switch(type)
+    switch(type_)
     {
         case POISON:
-            std::cout << "Poison";
+            //std::cout << "Poison";
+            return std::string("Poison");
         case SLASHING:
-            std::cout << "Slashing";
+            //std::cout << "Slashing";
+            return std::string("Slashing");
         case COLD:
-            std::cout << "Cold";
+            //std::cout << "Cold";
+            return std::string("Cold");
         case FIRE:
-            std::cout << "Fire";
+            //std::cout << "Fire";
+            return std::string("Fire");
         case ACID:
-            std::cout << "Acid";
+            //std::cout << "Acid";
+            return std::string("Acid");
         case LIGHTNING:
-            std::cout << "Lightning";
+            //std::cout << "Lightning";
+            return std::string("Lighting");
         default:
-            std::cout << "ERROR::UNKNOWN DAMAGE TYPE";
+            //std::cout << "ERROR::UNKNOWN DAMAGE TYPE";
+            return std::string("ERROR::UNKNOWN DAMAGE TYPE");
     }
         
 

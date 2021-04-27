@@ -13,6 +13,7 @@ class Armor : public Item
         }
 
         void setArmorType(armorType type);
+        std::string typeToString();
         armorType ArmorType() const{return type_;}
         std::string to_string() override;
         std::string toExportString() override;

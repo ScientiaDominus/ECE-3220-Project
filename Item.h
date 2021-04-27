@@ -26,6 +26,8 @@ class Item{
         void setID_(int ID);
         void setPrice_(int price);
 
+        std::string itemTypeToString();
+
         virtual std::string to_string() = 0;
         virtual std::string toExportString() = 0;
 

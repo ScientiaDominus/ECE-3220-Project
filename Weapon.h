@@ -12,12 +12,12 @@ class Weapon : public Item
             std::cout << "Weapon Constructor called" << std::endl;
         }
 
-        dmgType getDamageType_() const{return type_;}
-        int getRange_() const{return range_;}
+        dmgType DamageType_() const{return type_;}
+        int Range_() const{return range_;}
 
         void setRange_(int range);
         void setDamageType_(dmgType type);
-        std::string typeToString(dmgType type);
+        std::string typeToString();
         std::string to_string() override;
 
     private:
