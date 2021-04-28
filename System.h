@@ -6,6 +6,8 @@
 #include <iostream>
 #include "Spell.h"
 #include "Item.h"
+#include "Weapon.h"
+#include "Armor.h"
 #include "Character.h"
 
 class System{

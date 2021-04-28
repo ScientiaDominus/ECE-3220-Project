@@ -49,3 +49,17 @@ std::string Armor::typeToString()
 
     }
 }
+armorType Armor::intToType(int type)
+{
+    switch(type)
+    {
+        case 0:
+            return LIGHT;
+        case 1:
+            return MEDIUM;
+        case 2:
+            return HEAVY;
+        default:
+            return MEDIUM;
+    }
+}

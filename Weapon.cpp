@@ -68,3 +68,24 @@ std::string Weapon::toExportString()
 
     return myStream.str();
 }
+
+dmgType Weapon::intToType(int type)
+{
+    switch(type)
+    {
+        case 0:
+            return FIRE;
+        case 1:
+            return COLD;
+        case 2:
+            return LIGHTNING;
+        case 3:
+            return ACID;
+        case 4:
+            return SLASHING;
+        case 5:
+            return POISON;
+        default:
+            return SLASHING;
+    }
+}

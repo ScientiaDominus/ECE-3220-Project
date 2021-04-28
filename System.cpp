@@ -7,7 +7,76 @@ System::System(){
 }
 std::vector<Item> System::itemVectorFromFile(std::string filepath)
 {
-    
+    std::fstream readFile;
+    std::vector<Item>::iterator iter;
+    std::vector<Item> outVector;
+    readFile.open(filepath);
+    while(!readFile.eof())
+    {
+        int type;
+        std::string name;
+        std::string damage;
+        double weight;
+        int id;
+        int range;
+        int price;
+
+        Weapon temp1;
+        Armor temp2;
+        Item temp3;
+        
+        readFile >> type;
+        switch(type)
+        {
+            case 0:
+                temp1.setItemType_(temp3.intToType(type));
+                readFile >> name;
+                temp1.setName_(name);
+                readFile >> damage;
+                temp1.setDamage_(damage);
+                readFile >> type;
+                temp1.setDamageType_(temp1.intToType(type));
+                readFile >> range;
+                temp1.setRange_(range);
+                readFile >> weight;
+                temp1.setWeight_(weight);
+                readFile >> id;
+                temp1.setID_(id);
+                readFile >> price;
+                temp1.setPrice_(price);
+                outVector.emplace_back(temp1);
+            case 1:
+                temp2.setItemType_(temp3.intToType(type));
+                readFile >> name;
+                temp2.setName_(name);
+                readFile >> damage;
+                temp2.setDamage_(damage);
+                readFile >> type;
+                temp2.setArmorType(temp2.intToType(type));
+                readFile >> weight;
+                temp2.setWeight_(weight);
+                readFile >> id;
+                temp2.setID_(id);
+                readFile >> price;
+                temp2.setPrice_(price);
+                outVector.emplace_back(temp2);
+            case 2:
+                temp3.setItemType_(temp3.intToType(type));
+                readFile >> name;
+                temp3.setName_(name);
+                readFile >> damage;
+                temp3.setDamage_(damage);
+                readFile >> weight;
+                temp3.setWeight_(weight);
+                readFile >> id;
+                temp3.setID_(id);
+                readFile >> price;
+                temp3.setPrice_(price);
+                outVector.emplace_back(temp3);
+        }
+    }
+    readFile.close();
+    return outVector;
 }
 
 void System::addItem(const Item &item)

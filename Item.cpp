@@ -108,3 +108,17 @@ std::string Item::itemTypeToString()
             return std::string("ERROR: ITEMTYPE IS UNDEFINED");
     }
 }
+Type Item::intToType(int type)
+{
+    switch(type)
+    {
+        case 0:
+            return WEAPON;
+        case 1:
+            return ARMOR;
+        case 2:
+            return OBJECT;
+        default:
+            return OBJECT;
+    }
+}
