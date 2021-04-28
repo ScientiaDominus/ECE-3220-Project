@@ -306,9 +306,12 @@ void System::standardSystemExportToFiles(){
 
 void System::spellMenu(){
     std::cout << "1. View/Edit a spell \n2. Create a new spell\n3. Back to main menu" << std::endl;
-    std::cout << "Type the number of the option you would like to do" << std::endl;
     int input = 0;
-    std::cin >> input;
+    do{
+        std::cout << "Type the number of the option you would like to do" << std::endl;
+        std::cin >> input;
+    }while(input > 3 || input < 1);
+    
     switch (input)
     {
     case 1:
@@ -353,9 +356,11 @@ void createSpell(){
 
 void System::veSpellMenu(){
     std::cout << "1. View whole list \n2. Find a certain spell\n3. Back to spell menu" << std::endl;
-    std::cout << "Type the number of the option you would like to do" << std::endl;
     int input = 0;
-    std::cin >> input;
+    do{
+        std::cout << "Type the number of the option you would like to do" << std::endl;
+        std::cin >> input;
+    }while(input > 3 || input < 1);
     switch (input)
     {
     case 1:
@@ -375,9 +380,11 @@ void System::veSpellMenu(){
 
 void System::certainSpellMenu(){
     std::cout << "1. Search spell by name \n2. Search spell by ID\n3. Back to view/edit menu" << std::endl;
-    std::cout << "Type the number of the option you would like to do" << std::endl;
     int input = 0;
-    std::cin >> input;
+    do{
+        std::cout << "Type the number of the option you would like to do" << std::endl;
+        std::cin >> input;
+    }while(input > 3 || input < 1);
     switch (input)
     {
     case 1:
@@ -443,31 +450,35 @@ void System::certainSpellMenu(){
         }
     }
     case 3:
+    {
         veSpellMenu();
         break;
+    }
     
     default:
+    {
         break;
+    }
     }
 }
 
 void System::editSpell(Spell* editSpell){
-    std::cout << "Please type in the name of the spell you would like to add\n";
+    std::cout << "Enter the new name of the spell\n";
     std::string spellName;
     getline(std::cin, spellName);
-    std::cout << "Please type an integer to represent the Spell ID\n";
+    std::cout << "Enter the new spell ID\n";
     int spellID;
     std::cin >> spellID;
-    std::cout << "Please type an integer for the casting time of the spell. This is in terms of actions.\n";
+    std::cout << "Enter the new casting time for the spell. This is in terms of actions.\n";
     int castingTime;
     std::cin >> castingTime;
-    std::cout << "Please type an integer for the range of the spell. This is in terms of feet.\n";
+    std::cout << "Enter the new range of the spell. This is in terms of feet.\n";
     int range;
     std::cin >> range;
-    std::cout << "Please type an integer for the duration of the spell. This is in terms of hours.\n";
+    std::cout << "Enter the new duration of the spell. This is in terms of hours.\n";
     int duration;
     std::cin >> duration;
-    std::cout << "Finally, please type a short description of the spell";
+    std::cout << "Finally, please enter the new description of the spell";
     std::string description;
     getline(std::cin, description);
 
