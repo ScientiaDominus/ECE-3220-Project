@@ -110,7 +110,7 @@ void System::addSpell(const Spell &spell)
                 throw std::string("Exception: This spell already exists in the vector");
             }
         }
-        itemVector.emplace_back(spell);
+        spellVector.emplace_back(spell);
     }
     catch(const std::string& e)
     {
@@ -129,7 +129,7 @@ void System::addCharacter(const Character &character)
                 throw std::string("Exception: This character already exists in the vector");
             }
         }
-        itemVector.emplace_back(character);
+        characterVector.emplace_back(character);
     }
     catch(const std::string& e)
     {
@@ -350,7 +350,8 @@ void System::deleteSpell(std::string name)
         std::cerr << e << std::endl;
     }
 
-System* System::getInstance(){
+System* System::getInstance()
+{
     if(!(instance)){
         instance = new System;
     }
