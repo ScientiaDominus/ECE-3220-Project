@@ -354,9 +354,9 @@ void System::characterMenu(){
 
     switch (response){
         case 1:
-            viewEditCharacterMenu();
+            //viewEditCharacterMenu();
         case 2:
-            createCharacterMenu();
+            //createCharacterMenu();
         case 3:
             displayDefaultCaseMenuResponse();
     }
@@ -370,26 +370,18 @@ void viewEditCharacterMenu(){
     std::cin >> response;
     switch (response){
         case 1:
-            printCharacterList();
+            //printCharacterList();
         case 2:
-            searchCharacterMenu();
+            //searchCharacterMenu();
         case 3:
             return;
     }
-    {
-    case /* constant-expression */:
-        /* code */
-        break;
-    
-    default:
-        break;
-    }
 }
 
-void System::printCharacterList(){
-    std::cout << "Print the list here"
-}
-void System::searchCharacterMenu(){
-    std::cout << "Search Characters By:" << std::endl;
-    std::cout << "\t1) By ID\n\t2) By Name\n\t3)Return"
-}
+// void System::printCharacterList(){
+//     std::cout << "Print the list here"
+// }
+// void System::searchCharacterMenu(){
+//     std::cout << "Search Characters By:" << std::endl;
+//     std::cout << "\t1) By ID\n\t2) By Name\n\t3)Return"
+// }
