@@ -161,7 +161,7 @@ void System::createItem()
                     std::cout << "Please enter its name (string): ";
                     std::cin >> itemName;
                     std::cout << std::endl;
-                }while(searchItemByName(itemName));
+                }while(getItem(itemName));
                 std::cout << "Please enter its damage (string): ";
                 std::cin >> itemDmg;
                 std::cout << std::endl;
@@ -178,7 +178,7 @@ void System::createItem()
                     std::cout << "Please enter its unique ID (integer): ";
                     std::cin >> itemID;
                     std::cout << std::endl;
-                }while(searchItemByID(itemID));
+                }while(getItemByID(itemID));
                 std::cout << "Please enter its price (integer): ";
                 std::cin >> itemPrice;
                 itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
@@ -231,13 +231,13 @@ void System::editItem()
                 std::cout << "Please Enter the ID of the item you want to view (integer): ";
                 std::cin >> inputID;
                 std::cout << std::endl;
-                (searchItemByID(inputID))->to_string();
+                (getItemByID(inputID))->to_string();
             case 2:
                 printItemShortList();
                 std::cout << "Please Enter the ID of the item you want to edit (integer): ";
                 std::cin >> inputID;
                 std::cout << std::endl;
-                (searchItemByID(inputID))->edit();
+                (getItemByID(inputID))->edit();
             case 3:
                 break;
             default:
@@ -245,7 +245,7 @@ void System::editItem()
         }
     }while(input > 3 || input < 1);
 }
-Item* System::searchItemByName(std::string name)
+/*Item* System::searchItemByName(std::string name)
 {
     try
     {
@@ -262,6 +262,7 @@ Item* System::searchItemByName(std::string name)
     catch(const std::string& e)
     {
         std::cerr << e << std::endl;
+        return (new Item());
     }
 }
 
@@ -282,8 +283,9 @@ Item* System::searchItemByID(int ID)
     catch(const std::string& e)
     {
         std::cerr << e << std::endl;
+        return (new Item());
     }
-}
+}*/
 
 
 void System::addItem(const Item &item)
@@ -362,6 +364,7 @@ Character* System::getCharacter(std::string name)
     catch(std::string& e)
     {
         std::cerr << e << std::endl;
+        return (new Character());
     }
 }
 
@@ -383,6 +386,7 @@ Item* System::getItem(std::string name)
     catch(std::string& e)
     {
         std::cerr << e << std::endl;
+        return (new Item());
     }
 }
 
@@ -404,6 +408,7 @@ Spell* System::getSpell(std::string name)
     catch(std::string& e)
     {
         std::cerr << e << std::endl;
+        return (new Spell());
     }
 }
 Character* System::getCharacterByID(int charID)
@@ -424,6 +429,7 @@ Character* System::getCharacterByID(int charID)
     catch(std::string& e)
     {
         std::cerr << e << std::endl;
+        return (new Character());
     }
 }
 
@@ -445,6 +451,7 @@ Item* System::getItemByID(int itemID)
     catch(std::string& e)
     {
         std::cerr << e << std::endl;
+        return (new Item());
     }
 }
 
@@ -466,6 +473,7 @@ Spell* System::getSpellByID(int spellID)
     catch(std::string& e)
     {
         std::cerr << e << std::endl;
+        return (new Spell());
     }
 }
 

@@ -25,7 +25,7 @@ class System{
         void printSpell();
         void itemVectorFromFile(std::string filepath);
         void printItemDetailedList();
-        void System::printItemShortList();
+        void printItemShortList();
         Item* searchItemByName(std::string name);
         Item* searchItemByID(int ID);
         void createItem();

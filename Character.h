@@ -13,6 +13,7 @@
 
 class Character{
 	public: 
+		Character();
 		Character(std::string player_name, std::string character_name, CharacterClass character_class,
                     Race race, int level, AbilityScores ability_scores, std::vector<Item> item_inventory,
                     std::vector<Spell> spell_inventory, int gold_count);
@@ -32,6 +33,7 @@ class Character{
 		std::string spellInventoryToExportString();
 		std::string characterClassToString(CharacterClass characterClass);
 		std::string raceToString(Race race);
+		~Character();
 
 	private:
 		std::string player_name;
