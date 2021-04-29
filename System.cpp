@@ -191,26 +191,26 @@ void System::createItem()
 void System::itemMenu()
 {
     int input = 0;
-    std::cout << "1. View/Edit an Item" << std::endl;
-    std::cout << "2. Create an Item" << std::endl;
-    std::cout << "3. Go back" << std::endl;
     do{
+        std::cout << "1. View/Edit an Item" << std::endl;
+        std::cout << "2. Create an Item" << std::endl;
+        std::cout << "3. Go back" << std::endl;
         std::cout << "What would you like to do?" << std::endl;
         std::cout << "Enter your choice here (integer): ";
         std::cin >> input;
         std::cout << std::endl;
+        switch(input)
+        {
+            case 1:
+                editItem();
+            case 2:
+                createItem();
+            case 3: 
+                break;
+            default:
+                break;
+        }
     }while(input > 3 || input < 1);
-    switch(input)
-    {
-        case 1:
-            editItem();
-        case 2:
-            createItem();
-        case 3: 
-            break;
-        default:
-            break;
-    }
 }
 void System::editItem()
 {
