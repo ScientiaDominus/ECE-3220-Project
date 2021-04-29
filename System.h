@@ -42,6 +42,13 @@ class System{
         void exportItemsToFile(std::string spellFilePath);
         void exportSpellsToFile(std::string spellFilePath);
         void standardSystemExportToFiles();
+        void MenuStart();
+        void displayDefaultCaseMenuResponse();
+        void displayMainMenu();
+        void displayApplicationWelcomeMessage();
+        void characterMenu();
+        void itemMenu();
+        void spellMenu();
 
         void spellMenu();
         void veSpellMenu();
