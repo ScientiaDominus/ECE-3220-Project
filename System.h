@@ -27,7 +27,11 @@ class System{
         void printItemDetailedList();
         void System::printItemShortList();
         Item* searchItemByName(std::string name);
+        Item* searchItemByID(int ID);
         void createItem();
+        void editItem();
+
+
         void addItem(const Item &item);
         void addSpell(const Spell &spell);
         void addCharacter(const Character &character);

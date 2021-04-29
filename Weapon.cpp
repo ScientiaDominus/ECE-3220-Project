@@ -31,25 +31,18 @@ std::string Weapon::typeToString()
     switch(type_)
     {
         case POISON:
-            //std::cout << "Poison";
             return std::string("Poison");
         case SLASHING:
-            //std::cout << "Slashing";
             return std::string("Slashing");
         case COLD:
-            //std::cout << "Cold";
             return std::string("Cold");
         case FIRE:
-            //std::cout << "Fire";
             return std::string("Fire");
         case ACID:
-            //std::cout << "Acid";
             return std::string("Acid");
         case LIGHTNING:
-            //std::cout << "Lightning";
             return std::string("Lighting");
         default:
-            //std::cout << "ERROR::UNKNOWN DAMAGE TYPE";
             return std::string("ERROR::UNKNOWN DAMAGE TYPE");
     }
 }

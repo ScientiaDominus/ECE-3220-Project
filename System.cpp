@@ -170,7 +170,51 @@ void System::createItem()
         default:
             break;
     } 
- }
+}
+void System::editItem()
+{
+    
+}
+
+Item* System::searchItemByName(std::string name)
+{
+    try
+    {
+        std::vector<Item*>::iterator iter;
+        for(iter=itemVector.begin(); iter != itemVector.end(); iter++)
+        {
+            if((*iter)->Name_() == name)
+            {
+                return *iter;
+            }
+        }
+        throw(std::string("ERROR: THIS ITEM DOES NOT EXIST!!!!!")); 
+    }
+    catch(const std::string& e)
+    {
+        std::cerr << e << std::endl;
+    }
+}
+
+Item* System::searchItemByID(int ID)
+{
+    try
+    {
+        std::vector<Item*>::iterator iter;
+        for(iter=itemVector.begin(); iter != itemVector.end(); iter++)
+        {
+            if((*iter)->ID_() == ID)
+            {
+                return *iter;
+            }
+        }
+        throw(std::string("ERROR: THIS ITEM DOES NOT EXIST!!!!!")); 
+    }
+    catch(const std::string& e)
+    {
+        std::cerr << e << std::endl;
+    }
+}
 
 
 void System::addItem(const Item &item)
