@@ -6,12 +6,14 @@
 #include <iostream>
 #include "Spell.h"
 #include "Item.h"
+#include "Weapon.h"
+#include "Armor.h"
 #include "Character.h"
 
 class System{
     private:
         static System *instance; 
-        std::vector<Item> itemVector;
+        std::vector<Item*> itemVector;
         std::vector<Spell> spellVector;
         std::vector<Character> characterVector;
 
@@ -21,6 +23,14 @@ class System{
         void printItemList();
         void printCharacter();
         void printSpell();
+        void itemVectorFromFile(std::string filepath);
+        void printItemDetailedList();
+        void printItemShortList();
+        Item* searchItemByName(std::string name);
+        Item* searchItemByID(int ID);
+        void createItem();
+        void editItem();
+        void itemMenu();
 
 
         void addItem(const Item &item);
@@ -29,6 +39,7 @@ class System{
         Character* getCharacter(std::string name);
         Spell* getSpell(std::string name);
         Item* getItem(std::string name);
+        /*Character* getCharacterByPlayer(std::string player);*/
         Character* getCharacterByID(int charID);
         Spell* getSpellByID(int spellID);
         Item* getItemByID(int itemID);
@@ -36,8 +47,8 @@ class System{
         void deleteCharacter(std::string name);
         void deleteSpell(std::string name);
         void deleteItem(std::string name);
-        
-        static System *getInstance();
+
+        static System* getInstance();
         void exportCharactersToFile(std::string spellFilePath);
         void exportItemsToFile(std::string spellFilePath);
         void exportSpellsToFile(std::string spellFilePath);

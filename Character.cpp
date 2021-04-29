@@ -20,6 +20,7 @@ Character::Character(
 std::string Character::get_player_name() const{return player_name;}
 std::string Character::get_character_name() const{return character_name;}
 CharacterClass Character::get_character_class() const{return character_class;}
+int Character::get_character_id() const{return id;}
 Race Character::get_race() const{return race;}
 int Character::get_level() const{return level;}
 AbilityScores Character::get_ability_scores() const{return ability_scores;}

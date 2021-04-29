@@ -74,7 +74,7 @@ std::string Spell::to_string(){
     
 }
 
-std::string Spell::to_exportString(){
+std::string Spell::toExportString(){
     char buff[1000];
     const char *name = spellName_.c_str();
     const char *description = description_.c_str();

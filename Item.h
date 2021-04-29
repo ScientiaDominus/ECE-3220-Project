@@ -10,8 +10,9 @@ enum Type {WEAPON, ARMOR, OBJECT};
 
 class Item{
     public:
+        Item();
         Item(std::string name, std::string damage, Type itemType, double weight, int itemID, int price);
-
+        ~Item();
         std::string Name_() const{return name_;}
         std::string Damage_() const{return damage_;}
         Type ItemType_() const{return itemType_;}
@@ -26,8 +27,15 @@ class Item{
         void setID_(int ID);
         void setPrice_(int price);
 
-        std::string to_string() const;
-        std::string toExportString() const;
+        virtual void edit();
+        /*virtual void create() = 0;*/
+
+        std::string itemTypeToString();
+        Type intToType(int type);
+
+        virtual std::string to_string();
+        std::string to_ShortString();
+        virtual std::string toExportString();
 
         
         
