@@ -30,6 +30,7 @@ class System{
         Item* searchItemByID(int ID);
         void createItem();
         void editItem();
+        void itemMenu();
 
 
         void addItem(const Item &item);

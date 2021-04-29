@@ -79,103 +79,172 @@ void System::createItem()
     Weapon weapon;
     Item item;
     Armor armor;
-    int select;
-    std::cout << "1. Create Weapon" << std::endl;
-    std::cout << "2. Create Armor" << std::endl;
-    std::cout << "3. Create Object" << std::endl;
-    std::cout << "Please enter what type of item you would like to create (1, 2, or 3): ";
-    std::cin >> select;
-    std::cout << std::endl;
-    std::string itemName;
-    std::string itemDmg;
-    int itemDmgType;
-    int itemArmorType;
-    double itemWght;
-    int itemID;
-    int itemRng;
-    int itemPrice;
-    switch(select)
+    int select = 0;
+    do{
+        std::cout << "1. Create Weapon" << std::endl;
+        std::cout << "2. Create Armor" << std::endl;
+        std::cout << "3. Create Object" << std::endl;
+        std::cout << "4. Go Back" << std::endl;
+        std::cout << "Please enter what type of item you would like to create (1, 2, or 3): ";
+        std::cin >> select;
+        std::cout << std::endl;
+        std::string itemName;
+        std::string itemDmg;
+        int itemDmgType;
+        int itemArmorType;
+        double itemWght;
+        int itemID;
+        int itemRng;
+        int itemPrice;
+        switch(select)
+        {
+            case 1:
+                std::cout << "You have chosen to create a weapon! Excellent!" << std::endl;
+                do{
+                    std::cout << "Please enter its name (string): ";
+                    std::cin >> itemName;
+                    std::cout << std::endl;
+                }while(searchItemByName(itemName));
+                std::cout << "Please enter its damage (string): ";
+                std::cin >> itemDmg;
+                std::cout << std::endl;
+                std::cout << "0. FIRE" << std::endl;
+                std::cout << "1. COLD" << std::endl;
+                std::cout << "2. LIGHTNING" << std::endl;
+                std::cout << "3. ACID" << std::endl;
+                std::cout << "4. SLASHING" << std::endl;
+                std::cout << "5. POISON" << std::endl;
+                std::cout << "Please enter its damage type (integer): ";
+                std::cin >> itemDmgType;
+                std::cout << std::endl;
+                std::cout << "Please enter its range (integer): ";
+                std::cin >> itemRng;
+                std::cout << std::endl;
+                std::cout << "Please enter its weight (double): ";
+                std::cin >> itemWght;
+                std::cout << std::endl;
+                do{
+                    std::cout << "Please enter its unique ID (integer): ";
+                    std::cin >> itemID;
+                    std::cout << std::endl;
+                }while(searchItemByID(itemID));
+                std::cout << "Please enter its price (integer): ";
+                std::cin >> itemPrice;
+                std::cout << std::endl;
+                itemVector.emplace_back(new Weapon(itemName, itemDmg, itemWght, itemID, itemPrice, weapon.intToType(itemDmgType), itemRng));
+                break;
+            case 2:
+                std::cout << "You have chosen to create a piece of armor! Excellent!" << std::endl;
+                do{
+                    std::cout << "Please enter its name (string): ";
+                    std::cin >> itemName;
+                    std::cout << std::endl;
+                }while(searchItemByName(itemName));
+                std::cout << "Please enter its damage (string): ";
+                std::cin >> itemDmg;
+                std::cout << std::endl;
+                std::cout << "Please enter its weight (double): ";
+                std::cin >> itemWght;
+                std::cout << std::endl;
+                do{
+                    std::cout << "Please enter its unique ID (integer): ";
+                    std::cin >> itemID;
+                    std::cout << std::endl;
+                }while(searchItemByID(itemID));
+                std::cout << "Please enter its price (integer): ";
+                std::cin >> itemPrice;
+                itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
+                break;
+            case 3:
+                std::cout << "You have chosen to create a piece of armor! Excellent!" << std::endl;
+                do{
+                    std::cout << "Please enter its name (string): ";
+                    std::cin >> itemName;
+                    std::cout << std::endl;
+                }while(searchItemByName(itemName));
+                std::cout << "Please enter its damage (string): ";
+                std::cin >> itemDmg;
+                std::cout << std::endl;
+                std::cout << "0. LIGHT" << std::endl;
+                std::cout << "1. MEDIUM" << std::endl;
+                std::cout << "2. HEAVY" << std::endl;
+                std::cout << "Please enter its armor type (integer): ";
+                std::cin >> itemArmorType;
+                std::cout << std::endl;
+                std::cout << "Please enter its weight (double): ";
+                std::cin >> itemWght;
+                std::cout << std::endl;
+                do{
+                    std::cout << "Please enter its unique ID (integer): ";
+                    std::cin >> itemID;
+                    std::cout << std::endl;
+                }while(searchItemByID(itemID));
+                std::cout << "Please enter its price (integer): ";
+                std::cin >> itemPrice;
+                itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
+                break;
+            default:
+                break;
+        }
+    }while(select > 4 || select < 1); 
+}
+void System::itemMenu()
+{
+    int input = 0;
+    std::cout << "1. View/Edit an Item" << std::endl;
+    std::cout << "2. Create an Item" << std::endl;
+    std::cout << "3. Go back" << std::endl;
+    do{
+        std::cout << "What would you like to do?" << std::endl;
+        std::cout << "Enter your choice here (integer): ";
+        std::cin >> input;
+        std::cout << std::endl;
+    }while(input > 3 || input < 1);
+    switch(input)
     {
         case 1:
-            std::cout << "You have chosen to create a weapon! Excellent!" << std::endl;
-            std::cout << "Please enter its name (string): ";
-            std::cin >> itemName;
-            std::cout << std::endl;
-            std::cout << "Please enter its damage (string): ";
-            std::cin >> itemDmg;
-            std::cout << std::endl;
-            std::cout << "0. FIRE" << std::endl;
-            std::cout << "1. COLD" << std::endl;
-            std::cout << "2. LIGHTNING" << std::endl;
-            std::cout << "3. ACID" << std::endl;
-            std::cout << "4. SLASHING" << std::endl;
-            std::cout << "5. POISON" << std::endl;
-            std::cout << "Please enter its damage type (integer): ";
-            std::cin >> itemDmgType;
-            std::cout << std::endl;
-            std::cout << "Please enter its range (integer): ";
-            std::cin >> itemRng;
-            std::cout << std::endl;
-            std::cout << "Please enter its weight (double): ";
-            std::cin >> itemWght;
-            std::cout << std::endl;
-            std::cout << "Please enter its unique ID (integer): ";
-            std::cin >> itemID;
-            std::cout << std::endl;
-            std::cout << "Please enter its price (integer): ";
-            std::cin >> itemPrice;
-            std::cout << std::endl;
-            itemVector.emplace_back(new Weapon(itemName, itemDmg, itemWght, itemID, itemPrice, weapon.intToType(itemDmgType), itemRng));
-            break;
+            editItem();
         case 2:
-            std::cout << "You have chosen to create a piece of armor! Excellent!" << std::endl;
-            std::cout << "Please enter its name (string): ";
-            std::cin >> itemName;
-            std::cout << std::endl;
-            std::cout << "Please enter its damage (string): ";
-            std::cin >> itemDmg;
-            std::cout << std::endl;
-            std::cout << "Please enter its weight (double): ";
-            std::cin >> itemWght;
-            std::cout << std::endl;
-            std::cout << "Please enter its unique ID (integer): ";
-            std::cin >> itemID;
-            std::cout << std::endl;
-            std::cout << "Please enter its price (integer): ";
-            std::cin >> itemPrice;
-            itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
-            break;
-        case 3:
-            std::cout << "You have chosen to create a piece of armor! Excellent!" << std::endl;
-            std::cout << "Please enter its name (string): ";
-            std::cin >> itemName;
-            std::cout << std::endl;
-            std::cout << "Please enter its damage (string): ";
-            std::cin >> itemDmg;
-            std::cout << std::endl;
-            std::cout << "0. LIGHT" << std::endl;
-            std::cout << "1. MEDIUM" << std::endl;
-            std::cout << "2. HEAVY" << std::endl;
-            std::cout << "Please enter its armor type (integer): ";
-            std::cin >> itemArmorType;
-            std::cout << std::endl;
-            std::cout << "Please enter its weight (double): ";
-            std::cin >> itemWght;
-            std::cout << "Please enter its unique ID (integer): ";
-            std::cin >> itemID;
-            std::cout << "Please enter its price (integer): ";
-            std::cin >> itemPrice;
-            itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
+            createItem();
+        case 3: 
             break;
         default:
             break;
-    } 
+    }
 }
 void System::editItem()
 {
-    
+    int input = 0;
+    do{
+        std::cout << "1. View an Item" << std::endl;
+        std::cout << "2. Edit an Item" << std::endl;
+        std::cout << "3. Go back" << std::endl;
+        std::cout << "What would you like to do?" << std::endl;
+        std::cout << "Enter your choice here (integer): ";
+        std::cin >> input;
+        std::cout << std::endl;
+        int inputID = 0;
+        switch(input)
+        {
+            case 1:
+                printItemShortList();
+                std::cout << "Please Enter the ID of the item you want to view (integer): ";
+                std::cin >> inputID;
+                std::cout << std::endl;
+                (searchItemByID(inputID))->to_string();
+            case 2:
+                printItemShortList();
+                std::cout << "Please Enter the ID of the item you want to edit (integer): ";
+                std::cin >> inputID;
+                std::cout << std::endl;
+                (searchItemByID(inputID))->edit();
+            case 3:
+                break;
+            default:
+                break;
+        }
+    }while(input > 3 || input < 1);
 }
-
 Item* System::searchItemByName(std::string name)
 {
     try
@@ -357,26 +426,7 @@ Character* System::getCharacterByID(int charID)
         std::cerr << e << std::endl;
     }
 }
-/*Character* System::getCharacterByPlayer(std::string player)
-{
-    try
-    {
-        std::vector<Character>::iterator iter;
 
-        for(iter = characterVector.begin(); iter != characterVector.end(); iter++)
-        {
-            if(iter->get_player_name() == player)
-            {
-                return &(*iter);
-            }
-        }
-        throw std::string("Exception: Player not found in vector.");
-    }
-    catch(std::string& e)
-    {
-        std::cerr << e << std::endl;
-    }
-}*/
 Item* System::getItemByID(int itemID)
 {
     try
