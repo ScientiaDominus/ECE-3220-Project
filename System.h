@@ -36,6 +36,7 @@ class System{
         void deleteCharacter(std::string name);
         void deleteSpell(std::string name);
         void deleteItem(std::string name);
+        
         static System *getInstance();
         void exportCharactersToFile(std::string spellFilePath);
         void exportItemsToFile(std::string spellFilePath);
@@ -48,6 +49,12 @@ class System{
         void characterMenu();
         void itemMenu();
         void spellMenu();
+
+        void spellMenu();
+        void veSpellMenu();
+        void createSpell();
+        void certainSpellMenu();
+        void editSpell(Spell*);
 
 };
 
