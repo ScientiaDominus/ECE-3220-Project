@@ -34,6 +34,7 @@ class Item{
         Type intToType(int type);
 
         virtual std::string to_string();
+        std::string to_ShortString();
         virtual std::string toExportString();
 
         

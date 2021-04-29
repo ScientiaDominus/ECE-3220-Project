@@ -13,7 +13,7 @@
 class System{
     private:
         static System *instance; 
-        std::vector<Item> itemVector;
+        std::vector<Item*> itemVector;
         std::vector<Spell> spellVector;
         std::vector<Character> characterVector;
 
@@ -23,8 +23,9 @@ class System{
         void printItemList();
         void printCharacter();
         void printSpell();
-        std::vector<Item> itemVectorFromFile(std::string filepath);
+        std::vector<Item*> itemVectorFromFile(std::string filepath);
 
+        Item* searchItemByName(std::string name);
 
         void addItem(const Item &item);
         void addSpell(const Spell &spell);

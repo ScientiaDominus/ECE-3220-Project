@@ -31,7 +31,7 @@ class Spell{
         void set_duration(int);
 
         std::string to_string();
-        std::string to_exportString();
+        std::string toExportString();
         std::string to_simpleString();
 
     private:

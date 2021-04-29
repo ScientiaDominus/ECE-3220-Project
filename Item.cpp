@@ -122,3 +122,13 @@ Type Item::intToType(int type)
             return OBJECT;
     }
 }
+std::string Item::to_ShortString()
+{
+    std::stringstream myStream;
+
+    myStream << "NAME: " << Name_() << std::endl; 
+    myStream << "ITEMTYPE: " << itemTypeToString() << std::endl;
+    myStream << "ID: " << ID_() << std::endl;
+
+    return myStream.str();
+}
