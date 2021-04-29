@@ -29,10 +29,10 @@ std::vector<Spell> Character::get_spell_inventory() const{return spell_inventory
 int Character::get_gold_count() const{return gold_count;}
 std::string Character::to_string() const{return "";}
 std::string Character::toExportString(){
-    std::string exportString = this->character_name +
+    std::string exportString = character_name +
                                 "\n" + get_player_name() +
                                 "\n" + get_character_name() +
-                                "\n" + get_character_class().characterClassToString() +
+                                "\n" + (get_character_class()).characterClassToString() +
                                 "\n" + get_race().raceToString() +
                                 "\n" + std::to_string(this->get_level()) +
                                 "\n" + get_ability_scores().toExportString() +

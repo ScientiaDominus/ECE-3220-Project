@@ -4,13 +4,14 @@
 #include <string>
 class AbilityScores{
     public:
+        AbilityScores();
         AbilityScores(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma);
-        void getStrength();
-        void getDexterity();
-        void getConstitution();
-        void getIntelligence();
-        void getWisdom();
-        void getCharisma();
+        int getStrength() const{return strength;}
+        int getDexterity() const{return dexterity;}
+        int getConstitution() const{return constitution;}
+        int getIntelligence() const{return intelligence;}
+        int getWisdom() const{return wisdom;}
+        int getCharisma() const{return charisma;}
         void increaseStrength(int points);
         void increaseDexterity(int points);
         void increaseConstitution(int points);
@@ -18,6 +19,7 @@ class AbilityScores{
         void increaseWisdom(int points);
         void increaseCharisma(int points);
         std::string toExportString();
+        ~AbilityScores();
     private:
         int strength;
         int dexterity;
