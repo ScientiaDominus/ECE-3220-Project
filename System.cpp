@@ -37,7 +37,7 @@ void System::addSpell(const Spell &spell)
                 throw std::string("Exception: This spell already exists in the vector");
             }
         }
-        itemVector.emplace_back(spell);
+        spellVector.emplace_back(spell);
     }
     catch(const std::string& e)
     {
@@ -56,7 +56,7 @@ void System::addCharacter(const Character &character)
                 throw std::string("Exception: This character already exists in the vector");
             }
         }
-        itemVector.emplace_back(character);
+        characterVector.emplace_back(character);
     }
     catch(const std::string& e)
     {
@@ -257,6 +257,7 @@ void System::deleteSpell(std::string name)
     {
         std::cerr << e << std::endl;
     }
+}
 
 System* System::getInstance(){
     if(!(instance)){
@@ -293,7 +294,7 @@ void System::exportSpellsToFile(std::string spellFilePath){
     std::vector<Spell>::iterator spellIterator;
     spellFile << "spell records start\n";
     for(spellIterator = spellVector.begin(); spellIterator != spellVector.end(); spellIterator++){
-        spellFile << spellIterator->toExportString();
+        spellFile << spellIterator->to_exportString();
     }
     spellFile << "spell records end\n";
 }
@@ -302,4 +303,93 @@ void System::standardSystemExportToFiles(){
     exportCharactersToFile("charactersExport.txt");
     exportItemsToFile("itemsExport.txt");
     exportSpellsToFile("spellsExport.txt");
+}
+
+void System::MenuStart(){
+    displayApplicationWelcomeMessage();
+    bool menuContinue = true;
+
+    do{
+        displayMainMenu();
+        int response;
+        std::cin >> response;
+
+        switch(response){
+            case 1:
+                characterMenu();
+            case 2:
+                itemMenu();
+            case 3:
+                spellMenu();
+            case 4:
+                menuContinue = false;
+            default:
+                displayDefaultCaseMenuResponse();
+                break;
+        }
+    } while(menuContinue == true);
+}
+
+void System::displayDefaultCaseMenuResponse(){
+    std::cout << "I'm Sorry, the response we recorded does not match one of the possible, options, please try again" << std::endl;
+}
+
+void System::displayMainMenu(){
+    std::cout << "Please type the number corresponding to the game element you wish to interact with below..." << std::endl;
+
+    std::cout << "\t1) Characters\n\t2) Items\n\t3) Spells\n\t4) Exit Application" << std::endl;
+}
+
+void System::displayApplicationWelcomeMessage(){
+    std::cout << "Welcome to the D&D Data Management System! Here you can create, view, and edit various elements of your D&D game!" << std::endl;
+}
+
+void System::characterMenu(){
+    std::cout << "----------Character Menu----------" << std::endl;
+    std::cout << "Please enter your menu choice according to the list below:\n" << std::endl;
+    std::cout << "\t1) View/Edit Character\n\t2) Create Character\n" << std::endl;
+    std::cout << "Your choice: ";
+    int response;
+    std::cin >> response;
+
+    switch (response){
+        case 1:
+            viewEditCharacterMenu();
+        case 2:
+            createCharacterMenu();
+        case 3:
+            displayDefaultCaseMenuResponse();
+    }
+}
+void System::itemMenu(){}
+void System::spellMenu(){}
+void viewEditCharacterMenu(){
+    std::cout << "Here are the options available to the lookup menu:" << std::endl;
+    std::cout << "\t1) View Entire Character Roster\n\t2) Search Character\n\t3) Return\n" << std::endl;
+    int response;
+    std::cin >> response;
+    switch (response){
+        case 1:
+            printCharacterList();
+        case 2:
+            searchCharacterMenu();
+        case 3:
+            return;
+    }
+    {
+    case /* constant-expression */:
+        /* code */
+        break;
+    
+    default:
+        break;
+    }
+}
+
+void System::printCharacterList(){
+    std::cout << "Print the list here"
+}
+void System::searchCharacterMenu(){
+    std::cout << "Search Characters By:" << std::endl;
+    std::cout << "\t1) By ID\n\t2) By Name\n\t3)Return"
 }
