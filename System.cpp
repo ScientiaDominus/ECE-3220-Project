@@ -477,6 +477,7 @@ Spell* System::getSpellByID(int spellID)
     }
 }
 
+
 void System::deleteCharacter(std::string name)
 {
     int i =0;
@@ -583,7 +584,7 @@ void System::exportSpellsToFile(std::string spellFilePath){
     std::vector<Spell>::iterator spellIterator;
     spellFile << "spell records start\n";
     for(spellIterator = spellVector.begin(); spellIterator != spellVector.end(); spellIterator++){
-        spellFile << spellIterator->toExportString();
+        spellFile << spellIterator->to_exportString();
     }
     spellFile << "spell records end\n";
 }
@@ -592,4 +593,269 @@ void System::standardSystemExportToFiles(){
     exportCharactersToFile("charactersExport.txt");
     exportItemsToFile("itemsExport.txt");
     exportSpellsToFile("spellsExport.txt");
+}
+
+void System::MenuStart(){
+    displayApplicationWelcomeMessage();
+    bool menuContinue = true;
+
+    do{
+        displayMainMenu();
+        int response;
+        std::cin >> response;
+
+        switch(response){
+            case 1:
+                characterMenu();
+            case 2:
+                itemMenu();
+            case 3:
+                spellMenu();
+            case 4:
+                menuContinue = false;
+            default:
+                displayDefaultCaseMenuResponse();
+                break;
+        }
+    } while(menuContinue == true);
+}
+
+void System::displayDefaultCaseMenuResponse(){
+    std::cout << "I'm Sorry, the response we recorded does not match one of the possible, options, please try again" << std::endl;
+}
+
+void System::displayMainMenu(){
+    std::cout << "Please type the number corresponding to the game element you wish to interact with below..." << std::endl;
+
+    std::cout << "\t1) Characters\n\t2) Items\n\t3) Spells\n\t4) Exit Application" << std::endl;
+}
+
+void System::displayApplicationWelcomeMessage(){
+    std::cout << "Welcome to the D&D Data Management System! Here you can create, view, and edit various elements of your D&D game!" << std::endl;
+}
+
+void System::characterMenu(){
+    std::cout << "----------Character Menu----------" << std::endl;
+    std::cout << "Please enter your menu choice according to the list below:\n" << std::endl;
+    std::cout << "\t1) View/Edit Character\n\t2) Create Character\n" << std::endl;
+    std::cout << "Your choice: ";
+    int response;
+    std::cin >> response;
+
+    switch (response){
+        case 1:
+            //viewEditCharacterMenu();
+        case 2:
+            //createCharacterMenu();
+        case 3:
+            displayDefaultCaseMenuResponse();
+    }
+}
+void viewEditCharacterMenu(){
+    std::cout << "Here are the options available to the lookup menu:" << std::endl;
+    std::cout << "\t1) View Entire Character Roster\n\t2) Search Character\n\t3) Return\n" << std::endl;
+    int response;
+    std::cin >> response;
+    switch (response){
+        case 1:
+            //printCharacterList();
+        case 2:
+            //searchCharacterMenu();
+        case 3:
+            return;
+    }
+}
+
+// void System::printCharacterList(){
+//     std::cout << "Print the list here"
+// }
+// void System::searchCharacterMenu(){
+//     std::cout << "Search Characters By:" << std::endl;
+//     std::cout << "\t1) By ID\n\t2) By Name\n\t3)Return"
+// }
+
+void System::spellMenu(){
+    std::cout << "1. View/Edit a spell \n2. Create a new spell\n3. Back to main menu" << std::endl;
+    int input = 0;
+    do{
+        std::cout << "Type the number of the option you would like to do" << std::endl;
+        std::cin >> input;
+    }while(input > 3 || input < 1);
+    
+    switch (input)
+    {
+    case 1:
+        veSpellMenu();
+        break;
+    case 2:
+        createSpell();
+        break;
+    case 3:
+        mainMenu();
+        break;
+    
+    default:
+        break;
+    }
+}
+
+void createSpell(){
+    std::cout << "Please type in the name of the spell you would like to add\n";
+    std::string spellName;
+    getline(std::cin, spellName);
+    std::cout << "Please type an integer to represent the Spell ID\n";
+    int spellID;
+    std::cin >> spellID;
+    std::cout << "Please type an integer for the casting time of the spell. This is in terms of actions.\n";
+    int castingTime;
+    std::cin >> castingTime;
+    std::cout << "Please type an integer for the range of the spell. This is in terms of feet.\n";
+    int range;
+    std::cin >> range;
+    std::cout << "Please type an integer for the duration of the spell. This is in terms of hours.\n";
+    int duration;
+    std::cin >> duration;
+    std::cout << "Finally, please type a short description of the spell";
+    std::string description;
+    getline(std::cin, description);
+
+    Spell newSpell(spellName, spellID, description, castingTime, range, duration);
+    std::cout << "Your new spell is:\n" << newSpell.to_string() << std::endl;
+    addSpell(newSpell);
+}
+
+void System::veSpellMenu(){
+    std::cout << "1. View whole list \n2. Find a certain spell\n3. Back to spell menu" << std::endl;
+    int input = 0;
+    do{
+        std::cout << "Type the number of the option you would like to do" << std::endl;
+        std::cin >> input;
+    }while(input > 3 || input < 1);
+    switch (input)
+    {
+    case 1:
+        printSpell();
+        break;
+    case 2:
+        certainSpellMenu();
+        break;
+    case 3:
+        spellMenu();
+        break;
+    
+    default:
+        break;
+    }
+}
+
+void System::certainSpellMenu(){
+    std::cout << "1. Search spell by name \n2. Search spell by ID\n3. Back to view/edit menu" << std::endl;
+    int input = 0;
+    do{
+        std::cout << "Type the number of the option you would like to do" << std::endl;
+        std::cin >> input;
+    }while(input > 3 || input < 1);
+    switch (input)
+    {
+    case 1:
+    {
+        std::cout << "Please type the name of the spell you would like to find\n";
+        std::string spellName;
+        getline(std::cin, spellName);
+        Spell* newSpell = getSpell(spellName);
+        std::cout << newSpell->to_string() << std::endl;
+        std::cout << "Would you like to edit this spell. Type 1 for yes or 0 for no." << std::endl;
+        int input=-1;
+        std::cin >> input;
+        if(input == 1){
+            editSpell(newSpell);
+        }
+        std::cout << "Would you like to export this spell to a file. Type 1 for yes or 0 for no." <<std::endl;
+        int input2=-1;
+        std::cin >> input2;
+        if(input2 == 1){
+            std::cout << "Please enter the name of the file where you would like the spell to be stored. (ex. exportfilepath.txt)" <<std::endl;
+            std::string exportfilepath;
+            getline(std::cin, exportfilepath);
+            std::string exportString = newSpell->to_exportString();
+            FILE* sFile;
+            sFile = fopen(exportfilepath.c_str(), "a");
+            if(sFile == NULL){
+                std::cout << "unable to open file" << std::endl;
+            }
+            fprintf(sFile, "%s", exportString);
+            fclose(sFile);
+        }
+        break;
+    }
+    case 2:
+    {
+        std::cout << "Please type the ID of the spell you would like to find\n";
+        int spellID;
+        std::cin >> spellID;
+        Spell* newSpell = getSpellByID(spellID);
+        std::cout << newSpell->to_string() << std::endl;
+        std::cout << "Would you like to edit this spell. Type 1 for yes or 0 for no." << std::endl;
+        int input;
+        std::cin >> input;
+        if(input == 1){
+            editSpell(newSpell);
+        }
+        break;
+        std::cout << "Would you like to export this spell to a file. Type 1 for yes or 0 for no." <<std::endl;
+        int input2=-1;
+        std::cin >> input2;
+        if(input2 == 1){
+            std::cout << "Please enter the name of the file where you would like the spell to be stored. (ex. exportfilepath.txt)" <<std::endl;
+            std::string exportfilepath;
+            getline(std::cin, exportfilepath);
+            std::string exportString = newSpell->to_exportString();
+            FILE* sFile;
+            sFile = fopen(exportfilepath.c_str(), "a");
+            if(sFile == NULL){
+                std::cout << "unable to open file" << std::endl;
+            }
+            fprintf(sFile, "%s", exportString);
+            fclose(sFile);
+        }
+    }
+    case 3:
+    {
+        veSpellMenu();
+        break;
+    }
+    
+    default:
+    {
+        break;
+    }
+    }
+}
+
+void System::editSpell(Spell* editSpell){
+    std::cout << "Enter the new name of the spell\n";
+    std::string spellName;
+    getline(std::cin, spellName);
+    std::cout << "Enter the new spell ID\n";
+    int spellID;
+    std::cin >> spellID;
+    std::cout << "Enter the new casting time for the spell. This is in terms of actions.\n";
+    int castingTime;
+    std::cin >> castingTime;
+    std::cout << "Enter the new range of the spell. This is in terms of feet.\n";
+    int range;
+    std::cin >> range;
+    std::cout << "Enter the new duration of the spell. This is in terms of hours.\n";
+    int duration;
+    std::cin >> duration;
+    std::cout << "Finally, please enter the new description of the spell";
+    std::string description;
+    getline(std::cin, description);
+
+    editSpell->set_spellName(spellName);
+    editSpell->set_spellID(spellID);
+    editSpell->set_description(description);
+    editSpell->set_castingTime(castingTime);
+    editSpell->set_range(range);
+    editSpell->set_duration(duration);
 }

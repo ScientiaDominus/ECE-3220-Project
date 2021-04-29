@@ -47,11 +47,25 @@ class System{
         void deleteCharacter(std::string name);
         void deleteSpell(std::string name);
         void deleteItem(std::string name);
+
         static System* getInstance();
         void exportCharactersToFile(std::string spellFilePath);
         void exportItemsToFile(std::string spellFilePath);
         void exportSpellsToFile(std::string spellFilePath);
         void standardSystemExportToFiles();
+        void MenuStart();
+        void displayDefaultCaseMenuResponse();
+        void displayMainMenu();
+        void displayApplicationWelcomeMessage();
+        void characterMenu();
+        void itemMenu();
+        void spellMenu();
+
+        void spellMenu();
+        void veSpellMenu();
+        void createSpell();
+        void certainSpellMenu();
+        void editSpell(Spell*);
 
 };
 
