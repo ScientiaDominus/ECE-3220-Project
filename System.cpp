@@ -5,7 +5,7 @@
 
 System::System(){
 }
-std::vector<Item*> System::itemVectorFromFile(std::string filepath)
+void System::itemVectorFromFile(std::string filepath)
 {
     std::fstream readFile;
     std::vector<Item*>::iterator iter;
@@ -31,54 +31,48 @@ std::vector<Item*> System::itemVectorFromFile(std::string filepath)
         switch(type)
         {
             case 0:
-                //temp1.setItemType_(temp3.intToType(type));
                 readFile >> name;
-                //temp1.setName_(name);
                 readFile >> damage;
-                //temp1.setDamage_(damage);
                 readFile >> dmgtype;
-                //temp1.setDamageType_(temp1.intToType(type));
                 readFile >> range;
-                //temp1.setRange_(range);
                 readFile >> weight;
-                //temp1.setWeight_(weight);
                 readFile >> id;
-                //temp1.setID_(id);
                 readFile >> price;
-                //temp1.setPrice_(price);
-                outVector.emplace_back(new Weapon(name, damage, weight, id, price, temp1.intToType(dmgtype), range));
+                itemVector.emplace_back(new Weapon(name, damage, weight, id, price, temp1.intToType(dmgtype), range));
             case 1:
-                //temp2.setItemType_(temp3.intToType(type));
                 readFile >> name;
-                //temp2.setName_(name);
                 readFile >> damage;
-                //temp2.setDamage_(damage);
                 readFile >> armortype;
-                //temp2.setArmorType(temp2.intToType(armortype));
                 readFile >> weight;
-                //temp2.setWeight_(weight);
                 readFile >> id;
-                //temp2.setID_(id);
                 readFile >> price;
-                //temp2.setPrice_(price);
-                outVector.emplace_back(new Armor(name, damage, weight, id, price, temp2.intToType(armortype)));
+                itemVector.emplace_back(new Armor(name, damage, weight, id, price, temp2.intToType(armortype)));
             case 2:
-                //temp3.setItemType_(temp3.intToType(type));
                 readFile >> name;
-                //temp3.setName_(name);
                 readFile >> damage;
-                //temp3.setDamage_(damage);
                 readFile >> weight;
-                //temp3.setWeight_(weight);
                 readFile >> id;
-                //temp3.setID_(id);
                 readFile >> price;
-                //temp3.setPrice_(price);
-                outVector.emplace_back(new Item(name, damage, temp3.intToType(type), weight, id, price));
+                itemVector.emplace_back(new Item(name, damage, temp3.intToType(type), weight, id, price));
         }
     }
     readFile.close();
-    return outVector;
+}
+void System::printItemDetailedList()
+{
+    std::vector<Item*>::iterator iter;
+    for(iter=itemVector.begin(); iter != itemVector.end(); iter++)
+    {
+        (*iter)->to_string();
+    }
+}
+void System::printItemShortList()
+{
+    std::vector<Item*>::iterator iter;
+    for(iter=itemVector.begin(); iter != itemVector.end(); iter++)
+    {
+        (*iter)->to_ShortString();
+    }
 }
 
 

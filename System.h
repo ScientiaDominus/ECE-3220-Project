@@ -23,8 +23,9 @@ class System{
         void printItemList();
         void printCharacter();
         void printSpell();
-        std::vector<Item*> itemVectorFromFile(std::string filepath);
-
+        void itemVectorFromFile(std::string filepath);
+        void printItemDetailedList();
+        void System::printItemShortList();
         Item* searchItemByName(std::string name);
 
         void addItem(const Item &item);
