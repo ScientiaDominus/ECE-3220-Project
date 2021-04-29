@@ -74,6 +74,103 @@ void System::printItemShortList()
         (*iter)->to_ShortString();
     }
 }
+void System::createItem()
+{
+    Weapon weapon;
+    Item item;
+    Armor armor;
+    int select;
+    std::cout << "1. Create Weapon" << std::endl;
+    std::cout << "2. Create Armor" << std::endl;
+    std::cout << "3. Create Object" << std::endl;
+    std::cout << "Please enter what type of item you would like to create (1, 2, or 3): ";
+    std::cin >> select;
+    std::cout << std::endl;
+    std::string itemName;
+    std::string itemDmg;
+    int itemDmgType;
+    int itemArmorType;
+    double itemWght;
+    int itemID;
+    int itemRng;
+    int itemPrice;
+    switch(select)
+    {
+        case 1:
+            std::cout << "You have chosen to create a weapon! Excellent!" << std::endl;
+            std::cout << "Please enter its name (string): ";
+            std::cin >> itemName;
+            std::cout << std::endl;
+            std::cout << "Please enter its damage (string): ";
+            std::cin >> itemDmg;
+            std::cout << std::endl;
+            std::cout << "0. FIRE" << std::endl;
+            std::cout << "1. COLD" << std::endl;
+            std::cout << "2. LIGHTNING" << std::endl;
+            std::cout << "3. ACID" << std::endl;
+            std::cout << "4. SLASHING" << std::endl;
+            std::cout << "5. POISON" << std::endl;
+            std::cout << "Please enter its damage type (integer): ";
+            std::cin >> itemDmgType;
+            std::cout << std::endl;
+            std::cout << "Please enter its range (integer): ";
+            std::cin >> itemRng;
+            std::cout << std::endl;
+            std::cout << "Please enter its weight (double): ";
+            std::cin >> itemWght;
+            std::cout << std::endl;
+            std::cout << "Please enter its unique ID (integer): ";
+            std::cin >> itemID;
+            std::cout << std::endl;
+            std::cout << "Please enter its price (integer): ";
+            std::cin >> itemPrice;
+            std::cout << std::endl;
+            itemVector.emplace_back(new Weapon(itemName, itemDmg, itemWght, itemID, itemPrice, weapon.intToType(itemDmgType), itemRng));
+            break;
+        case 2:
+            std::cout << "You have chosen to create a piece of armor! Excellent!" << std::endl;
+            std::cout << "Please enter its name (string): ";
+            std::cin >> itemName;
+            std::cout << std::endl;
+            std::cout << "Please enter its damage (string): ";
+            std::cin >> itemDmg;
+            std::cout << std::endl;
+            std::cout << "Please enter its weight (double): ";
+            std::cin >> itemWght;
+            std::cout << std::endl;
+            std::cout << "Please enter its unique ID (integer): ";
+            std::cin >> itemID;
+            std::cout << std::endl;
+            std::cout << "Please enter its price (integer): ";
+            std::cin >> itemPrice;
+            itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
+            break;
+        case 3:
+            std::cout << "You have chosen to create a piece of armor! Excellent!" << std::endl;
+            std::cout << "Please enter its name (string): ";
+            std::cin >> itemName;
+            std::cout << std::endl;
+            std::cout << "Please enter its damage (string): ";
+            std::cin >> itemDmg;
+            std::cout << std::endl;
+            std::cout << "0. LIGHT" << std::endl;
+            std::cout << "1. MEDIUM" << std::endl;
+            std::cout << "2. HEAVY" << std::endl;
+            std::cout << "Please enter its armor type (integer): ";
+            std::cin >> itemArmorType;
+            std::cout << std::endl;
+            std::cout << "Please enter its weight (double): ";
+            std::cin >> itemWght;
+            std::cout << "Please enter its unique ID (integer): ";
+            std::cin >> itemID;
+            std::cout << "Please enter its price (integer): ";
+            std::cin >> itemPrice;
+            itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
+            break;
+        default:
+            break;
+    } 
+ }
 
 
 void System::addItem(const Item &item)

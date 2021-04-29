@@ -4,7 +4,7 @@ Item::Item(std::string name, std::string damage, Type itemType, double weight, i
 {
     name_ = name;
     damage_ = damage;
-    itemType_ = itemType;
+    itemType_ = OBJECT;
     weight_ = weight;
     itemID_ = itemID;
     price_ =  price;
