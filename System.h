@@ -58,8 +58,7 @@ class System{
         void displayMainMenu();
         void displayApplicationWelcomeMessage();
         void characterMenu();
-        void itemMenu();
-        void spellMenu();
+        
 
         void spellMenu();
         void veSpellMenu();
