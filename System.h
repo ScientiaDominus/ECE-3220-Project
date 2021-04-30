@@ -18,6 +18,7 @@ class System{
         std::vector<Character> characterVector;
 
         System();
+        ~System();
 
     public:
         void printItemList();
@@ -58,14 +59,14 @@ class System{
         void displayMainMenu();
         void displayApplicationWelcomeMessage();
         void characterMenu();
-        void itemMenu();
-        void spellMenu();
+        
 
         void spellMenu();
         void veSpellMenu();
         void createSpell();
         void certainSpellMenu();
         void editSpell(Spell*);
+        void printSpellShortList();
 
 };
 

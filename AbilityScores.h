@@ -6,6 +6,7 @@
 #include <string>
 class AbilityScores{
     public:
+        AbilityScores();
         AbilityScores(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma);
         int getStrength();
         int getDexterity();
@@ -20,6 +21,7 @@ class AbilityScores{
         void increaseWisdom(int points);
         void increaseCharisma(int points);
         std::string toExportString();
+        ~AbilityScores();
     private:
         int strength;
         int dexterity;

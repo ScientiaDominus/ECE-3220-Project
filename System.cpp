@@ -3,8 +3,8 @@
 #include "System.h"
 
 
-System::System(){
-}
+System::System(){}
+System::~System(){}
 void System::itemVectorFromFile(std::string filepath)
 {
     std::fstream readFile;
@@ -23,9 +23,9 @@ void System::itemVectorFromFile(std::string filepath)
         int range;
         int price;
 
-        Weapon temp1;
-        Armor temp2;
-        Item temp3;
+        Weapon temp1 = Weapon();
+        Armor temp2 = Armor();
+        Item temp3 = Item();
         
         readFile >> type;
         switch(type)
@@ -104,7 +104,7 @@ void System::createItem()
                     std::cout << "Please enter its name (string): ";
                     std::cin >> itemName;
                     std::cout << std::endl;
-                }while(searchItemByName(itemName));
+                }while(getItem(itemName));
                 std::cout << "Please enter its damage (string): ";
                 std::cin >> itemDmg;
                 std::cout << std::endl;
@@ -127,7 +127,7 @@ void System::createItem()
                     std::cout << "Please enter its unique ID (integer): ";
                     std::cin >> itemID;
                     std::cout << std::endl;
-                }while(searchItemByID(itemID));
+                }while(getItemByID(itemID));
                 std::cout << "Please enter its price (integer): ";
                 std::cin >> itemPrice;
                 std::cout << std::endl;
@@ -139,7 +139,7 @@ void System::createItem()
                     std::cout << "Please enter its name (string): ";
                     std::cin >> itemName;
                     std::cout << std::endl;
-                }while(searchItemByName(itemName));
+                }while(getItem(itemName));
                 std::cout << "Please enter its damage (string): ";
                 std::cin >> itemDmg;
                 std::cout << std::endl;
@@ -150,7 +150,7 @@ void System::createItem()
                     std::cout << "Please enter its unique ID (integer): ";
                     std::cin >> itemID;
                     std::cout << std::endl;
-                }while(searchItemByID(itemID));
+                }while(getItemByID(itemID));
                 std::cout << "Please enter its price (integer): ";
                 std::cin >> itemPrice;
                 itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
@@ -584,7 +584,7 @@ void System::exportSpellsToFile(std::string spellFilePath){
     std::vector<Spell>::iterator spellIterator;
     spellFile << "spell records start\n";
     for(spellIterator = spellVector.begin(); spellIterator != spellVector.end(); spellIterator++){
-        spellFile << spellIterator->to_exportString();
+        spellFile << spellIterator->toExportString();
     }
     spellFile << "spell records end\n";
 }
@@ -691,7 +691,7 @@ void System::spellMenu(){
         createSpell();
         break;
     case 3:
-        mainMenu();
+        displayMainMenu();
         break;
     
     default:
@@ -699,7 +699,7 @@ void System::spellMenu(){
     }
 }
 
-void createSpell(){
+void System::createSpell(){
     std::cout << "Please type in the name of the spell you would like to add\n";
     std::string spellName;
     getline(std::cin, spellName);
@@ -724,6 +724,15 @@ void createSpell(){
     addSpell(newSpell);
 }
 
+void System::printSpellShortList()
+{
+    //std::vector<Spell*>::iterator iter;
+    for(auto iter=spellVector.begin(); iter != spellVector.end(); iter++)
+    {
+        iter->to_simpleString();
+    }
+}
+
 void System::veSpellMenu(){
     std::cout << "1. View whole list \n2. Find a certain spell\n3. Back to spell menu" << std::endl;
     int input = 0;
@@ -733,8 +742,8 @@ void System::veSpellMenu(){
     }while(input > 3 || input < 1);
     switch (input)
     {
-    case 1:
-        printSpell();
+    case 1: 
+        printSpellShortList();
         break;
     case 2:
         certainSpellMenu();
@@ -777,13 +786,13 @@ void System::certainSpellMenu(){
             std::cout << "Please enter the name of the file where you would like the spell to be stored. (ex. exportfilepath.txt)" <<std::endl;
             std::string exportfilepath;
             getline(std::cin, exportfilepath);
-            std::string exportString = newSpell->to_exportString();
+            std::string exportString = newSpell->toExportString();
             FILE* sFile;
             sFile = fopen(exportfilepath.c_str(), "a");
             if(sFile == NULL){
                 std::cout << "unable to open file" << std::endl;
             }
-            fprintf(sFile, "%s", exportString);
+            fprintf(sFile, "%s", exportString.c_str());
             fclose(sFile);
         }
         break;
@@ -809,13 +818,13 @@ void System::certainSpellMenu(){
             std::cout << "Please enter the name of the file where you would like the spell to be stored. (ex. exportfilepath.txt)" <<std::endl;
             std::string exportfilepath;
             getline(std::cin, exportfilepath);
-            std::string exportString = newSpell->to_exportString();
+            std::string exportString = newSpell->toExportString();
             FILE* sFile;
             sFile = fopen(exportfilepath.c_str(), "a");
             if(sFile == NULL){
                 std::cout << "unable to open file" << std::endl;
             }
-            fprintf(sFile, "%s", exportString);
+            fprintf(sFile, "%s", exportString.c_str());
             fclose(sFile);
         }
     }

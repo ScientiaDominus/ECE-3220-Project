@@ -2,7 +2,8 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
-
+Character::Character(){}
+Character::~Character(){}
 Character::Character(
                     std::string player_name, std::string character_name, CharacterClass character_class,
                     Race race, int level, AbilityScores ability_scores, std::vector<Item> item_inventory,

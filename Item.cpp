@@ -1,5 +1,7 @@
 #include "Item.h"
 
+Item::Item(){}
+Item::~Item(){}
 Item::Item(std::string name, std::string damage, Type itemType, double weight, int itemID, int price)
 {
     name_ = name;
