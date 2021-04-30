@@ -17,6 +17,8 @@ int main(){
     armorList.printList();
 
     System system = System();
+    system.addEntity(ITEM, item6);
+    system.addEntity(ITEM, item7);
     system.StartMenu();
     std::cout << "hello is this working";
 }

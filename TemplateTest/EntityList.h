@@ -13,7 +13,7 @@ class EntityList{
         void printList(){
             typename std::vector<T>::iterator i;
             for(i = entityVector.begin(); i < entityVector.end(); i++){
-                i->longPrint();  
+                i->shortPrint();  
             }
         }
 

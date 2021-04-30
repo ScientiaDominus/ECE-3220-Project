@@ -38,12 +38,15 @@ class System{
 
         template<typename E>
         void EntityMenu(EntityList<E> list){
-            std::cout << "Welcome to the " << menuModeString << " Entity Menu" << std::endl;
+            std::cout << "Welcome to the " << menuModeString << " Entity Menu\nPlease select and option below" << std::endl;
+            std::cout << "\t1) View/Edit Existing " << menuModeString << std::endl;
+            std::cout << "\t2) Create New " << menuModeString << std::endl;
+            std::cout << "\t3) Exit" << std::endl;
             int response;
             std::cin >> response;
             switch (response){
                 case 1:
-                    std::cout << "Youve selected option 1!" << std::endl;
+                    ViewEditMenu<E>(list);
                     break;
                 case 2:
                     std::cout << "Youve selected option 2" << std::endl;
@@ -69,23 +72,28 @@ class System{
         //     }
         // }
 
-        // template<typename E>
-        // void ViewEditMenu(EntityList<E> list){
-        //     std::cout << "Welcome to the Menu, Pick an Option" << std::cout;
-        //     int response;
-        //     std::cin >> response;
-        //     switch (response)
-        //     {
-        //     case 1:
-        //         list.printList();
-        //         break;
-        //     case 2:
-        //         SearchListMenu(EntityList<E> list);
-        //     default:
-        //         return;
-        //         break;
-        //     }
-        // }
+        template<typename E>
+        void ViewEditMenu(EntityList<E> list){
+            std::cout << "Welcome to the View/Edit " << menuModeString << " Menu\nPlease select an option below" << std::endl;
+            std::cout << "\t1) View List of Existing " << menuModeString << std::endl;
+            std::cout << "\t2) Look up " << menuModeString << std::endl;
+            std::cout << "\t3) Exit" << std::endl;
+            int response;
+            std::cin >> response;
+            switch (response)
+            {
+            case 1:
+                std::cout << "You've selected to view the list of all existing " << menuModeString << "!" << std::endl;
+                std::cout << "Here are all the " << menuModeString << " stored in the database:" << std::endl;
+                list.printList();
+                break;
+            case 2:
+                //SearchListMenu(EntityList<E> list);
+            default:
+                return;
+                break;
+            }
+        }
 
         // template<typename E>
         // void SearchListMenu(EntityList<E> list){
@@ -118,8 +126,7 @@ class System{
 
         void changeMenuMode(MenuModeType menuMode){
             this->menuMode = menuMode;
-            switch (this->menuMode)
-            {
+            switch (this->menuMode){
                 case CHARACTER:
                     menuModeString = "Character";
                     break;
@@ -130,6 +137,23 @@ class System{
                     menuModeString = "Spell";
                 default:
                     menuModeString = "";
+                    break;
+            }
+        }
+
+        template<typename T>
+        void addEntity(MenuModeType entityType, T entity){
+            switch(entityType){
+                case CHARACTER:
+                    //characterList.addEntity(entity);
+                    break;
+                case ITEM:
+                    itemList.addEntity(entity);
+                    break;
+                case SPELL:
+                    //spellList.addEntity(entity);
+                    break;
+                default:
                     break;
             }
         }
