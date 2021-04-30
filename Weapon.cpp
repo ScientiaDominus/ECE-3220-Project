@@ -31,6 +31,7 @@ std::string Weapon::typeToString()
     switch(type_)
     {
         case POISON:
+
             return std::string("Poison");
         case SLASHING:
             return std::string("Slashing");

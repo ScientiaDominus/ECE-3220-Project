@@ -35,9 +35,11 @@ class Character{
 		std::string raceToString(Race race);
 		~Character();
 
+
 	private:
 		std::string player_name;
 		std::string character_name;
+		int character_id;
 		CharacterClass character_class;
 		Race race;
 		int level;

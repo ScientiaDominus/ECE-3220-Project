@@ -27,6 +27,7 @@ class Weapon : public Item
         std::string to_string() override;
         std::string toExportString() override;
 
+
     private:
         dmgType type_; 
         int range_;

@@ -1,6 +1,7 @@
 #ifndef ARMOR_H
 #define ARMOR_H
 #include "Item.h"
+#include <string>
 
 enum armorType {LIGHT, MEDIUM, HEAVY};
 

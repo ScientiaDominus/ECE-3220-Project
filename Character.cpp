@@ -19,6 +19,7 @@ Character::Character(
 }
 std::string Character::get_player_name() const{return player_name;}
 std::string Character::get_character_name() const{return character_name;}
+int Character::get_character_id() const{return character_id;}
 CharacterClass Character::get_character_class() const{return character_class;}
 int Character::get_character_id() const{return id;}
 Race Character::get_race() const{return race;}
@@ -32,8 +33,8 @@ std::string Character::toExportString(){
     std::string exportString = this->character_name +
                                 "\n" + get_player_name() +
                                 "\n" + get_character_name() +
-                                "\n" + get_character_class().characterClassToString() +
-                                "\n" + get_race().raceToString() +
+                                "\n" + characterClassToString(get_character_class()) +
+                                "\n" + raceToString(get_race()) +
                                 "\n" + std::to_string(this->get_level()) +
                                 "\n" + get_ability_scores().toExportString() +
                                 itemInventoryToExportString() +
@@ -85,3 +86,4 @@ std::string Character::characterClassToString(CharacterClass characterClass){
         default : return ""; break;
     }
 }
+

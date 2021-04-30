@@ -1,4 +1,5 @@
 #include "Armor.h"
+
 //Armor::Armor(std::string name, std::string damage, double weight, int itemID, int price,  armorType type) : Item(name, damage, ARMOR, weight, itemID, price){}
 void Armor::setArmorType(armorType type)
 {
@@ -62,4 +63,3 @@ armorType Armor::intToType(int type)
         default:
             return MEDIUM;
     }
-}
