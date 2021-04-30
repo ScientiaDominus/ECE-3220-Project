@@ -18,6 +18,7 @@ class System{
         std::vector<Character> characterVector;
 
         System();
+        ~System();
 
     public:
         void printItemList();

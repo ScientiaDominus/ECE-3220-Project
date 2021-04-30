@@ -3,8 +3,8 @@
 #include "System.h"
 
 
-System::System(){
-}
+System::System(){}
+System::~System(){}
 void System::itemVectorFromFile(std::string filepath)
 {
     std::fstream readFile;
@@ -23,9 +23,9 @@ void System::itemVectorFromFile(std::string filepath)
         int range;
         int price;
 
-        Weapon temp1;
-        Armor temp2;
-        Item temp3;
+        Weapon temp1 = Weapon();
+        Armor temp2 = Armor();
+        Item temp3 = Item();
         
         readFile >> type;
         switch(type)
@@ -104,7 +104,7 @@ void System::createItem()
                     std::cout << "Please enter its name (string): ";
                     std::cin >> itemName;
                     std::cout << std::endl;
-                }while(searchItemByName(itemName));
+                }while(getItem(itemName));
                 std::cout << "Please enter its damage (string): ";
                 std::cin >> itemDmg;
                 std::cout << std::endl;
@@ -127,7 +127,7 @@ void System::createItem()
                     std::cout << "Please enter its unique ID (integer): ";
                     std::cin >> itemID;
                     std::cout << std::endl;
-                }while(searchItemByID(itemID));
+                }while(getItemByID(itemID));
                 std::cout << "Please enter its price (integer): ";
                 std::cin >> itemPrice;
                 std::cout << std::endl;
@@ -139,7 +139,7 @@ void System::createItem()
                     std::cout << "Please enter its name (string): ";
                     std::cin >> itemName;
                     std::cout << std::endl;
-                }while(searchItemByName(itemName));
+                }while(getItem(itemName));
                 std::cout << "Please enter its damage (string): ";
                 std::cin >> itemDmg;
                 std::cout << std::endl;
@@ -150,7 +150,7 @@ void System::createItem()
                     std::cout << "Please enter its unique ID (integer): ";
                     std::cin >> itemID;
                     std::cout << std::endl;
-                }while(searchItemByID(itemID));
+                }while(getItemByID(itemID));
                 std::cout << "Please enter its price (integer): ";
                 std::cin >> itemPrice;
                 itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
@@ -734,7 +734,7 @@ void System::veSpellMenu(){
     switch (input)
     {
     case 1:
-        printSpell();
+        //printSpell();
         break;
     case 2:
         certainSpellMenu();
