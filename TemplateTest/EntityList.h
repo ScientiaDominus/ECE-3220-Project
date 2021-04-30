@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 
 template<typename T>
 class EntityList{
@@ -10,7 +11,7 @@ class EntityList{
         void printList(){
             typename std::vector<T>::iterator i;
             for(i = entityVector.begin(); i < entityVector.end(); i++){
-                i->shortPrint();    
+                i->longPrint();  
             }
         }
 

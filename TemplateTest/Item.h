@@ -28,7 +28,7 @@ class Item : public Entity{
         Type intToType(int type);
         std::string to_ShortString();
         
-        virtual void longPrint() =0;
+        virtual void longPrint();
         virtual std::string toExportString();
         virtual std::string to_string();
 

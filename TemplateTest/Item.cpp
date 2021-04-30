@@ -59,3 +59,7 @@ Type Item::intToType(int type){
             return OBJECT;
     }
 }
+void Item::longPrint(){
+    std::cout << "Long Print for all Items" << std::endl;
+    shortPrint();
+}
