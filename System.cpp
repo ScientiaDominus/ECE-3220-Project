@@ -724,6 +724,15 @@ void System::createSpell(){
     addSpell(newSpell);
 }
 
+void System::printSpellShortList()
+{
+    //std::vector<Spell*>::iterator iter;
+    for(auto iter=spellVector.begin(); iter != spellVector.end(); iter++)
+    {
+        iter->to_simpleString();
+    }
+}
+
 void System::veSpellMenu(){
     std::cout << "1. View whole list \n2. Find a certain spell\n3. Back to spell menu" << std::endl;
     int input = 0;
@@ -734,7 +743,7 @@ void System::veSpellMenu(){
     switch (input)
     {
     case 1:
-        printSpell();
+        printSpellShortList();
         break;
     case 2:
         certainSpellMenu();
