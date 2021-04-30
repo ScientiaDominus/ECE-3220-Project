@@ -66,6 +66,7 @@ class System{
         void createSpell();
         void certainSpellMenu();
         void editSpell(Spell*);
+        void printSpellShortList();
 
 };
 
