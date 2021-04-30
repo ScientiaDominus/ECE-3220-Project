@@ -584,7 +584,7 @@ void System::exportSpellsToFile(std::string spellFilePath){
     std::vector<Spell>::iterator spellIterator;
     spellFile << "spell records start\n";
     for(spellIterator = spellVector.begin(); spellIterator != spellVector.end(); spellIterator++){
-        spellFile << spellIterator->to_exportString();
+        spellFile << spellIterator->toExportString();
     }
     spellFile << "spell records end\n";
 }
@@ -691,7 +691,7 @@ void System::spellMenu(){
         createSpell();
         break;
     case 3:
-        mainMenu();
+        displayMainMenu();
         break;
     
     default:
@@ -699,7 +699,7 @@ void System::spellMenu(){
     }
 }
 
-void createSpell(){
+void System::createSpell(){
     std::cout << "Please type in the name of the spell you would like to add\n";
     std::string spellName;
     getline(std::cin, spellName);
@@ -777,13 +777,13 @@ void System::certainSpellMenu(){
             std::cout << "Please enter the name of the file where you would like the spell to be stored. (ex. exportfilepath.txt)" <<std::endl;
             std::string exportfilepath;
             getline(std::cin, exportfilepath);
-            std::string exportString = newSpell->to_exportString();
+            std::string exportString = newSpell->toExportString();
             FILE* sFile;
             sFile = fopen(exportfilepath.c_str(), "a");
             if(sFile == NULL){
                 std::cout << "unable to open file" << std::endl;
             }
-            fprintf(sFile, "%s", exportString);
+            fprintf(sFile, "%s", exportString.c_str());
             fclose(sFile);
         }
         break;
@@ -809,13 +809,13 @@ void System::certainSpellMenu(){
             std::cout << "Please enter the name of the file where you would like the spell to be stored. (ex. exportfilepath.txt)" <<std::endl;
             std::string exportfilepath;
             getline(std::cin, exportfilepath);
-            std::string exportString = newSpell->to_exportString();
+            std::string exportString = newSpell->toExportString();
             FILE* sFile;
             sFile = fopen(exportfilepath.c_str(), "a");
             if(sFile == NULL){
                 std::cout << "unable to open file" << std::endl;
             }
-            fprintf(sFile, "%s", exportString);
+            fprintf(sFile, "%s", exportString.c_str());
             fclose(sFile);
         }
     }
