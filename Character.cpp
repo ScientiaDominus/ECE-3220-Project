@@ -32,8 +32,8 @@ std::string Character::toExportString(){
     std::string exportString = this->character_name +
                                 "\n" + get_player_name() +
                                 "\n" + get_character_name() +
-                                "\n" + get_character_class().characterClassToString() +
-                                "\n" + get_race().raceToString() +
+                                "\n" + characterClassToString(get_character_class()) +
+                                "\n" + raceToString(get_race()) +
                                 "\n" + std::to_string(this->get_level()) +
                                 "\n" + get_ability_scores().toExportString() +
                                 itemInventoryToExportString() +
