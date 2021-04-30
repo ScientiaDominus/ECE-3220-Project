@@ -1,6 +1,14 @@
 #include "Armor.h"
-//Armor::Armor(std::string name, std::string damage, double weight, int itemID, int price,  armorType type) : Item(name, damage, ARMOR, weight, itemID, price){}
-
+Armor::Armor(std::string name, std::string damage, double weight, int itemID, int price,  armorType type) : Item(name, damage, ARMOR, weight, itemID, price){
+    setArmorType(type);
+    std::cout << "Armor Constructor Called" << std::endl;
+}
+Armor::Armor(){
+    std::cout << "Armor Default Constructor Called." << std::endl;
+}
+Armor::~Armor(){
+    std::cout << "Armor Default Destructor Called." << std::endl;
+}
 void Armor::setArmorType(armorType type)
 {
     type_ = type;
@@ -63,4 +71,37 @@ armorType Armor::intToType(int type)
         default:
             return MEDIUM;
     }
+}
+
+void Armor::edit()
+{
+    std::string name = "";
+    std::string damage = "";
+    int armorType = 0;
+    double weight = 0;
+    int id = 0;
+    int price = 0;
+    std::cout << this->to_string();
+    std::cout << "Enter the item name: ";
+    std::cin >> name;
+    std::cout << std::endl << "Enter the item's damage string (ex. 2d4): ";
+    std::cin >> damage;
+    std::cout << std::endl;
+    std::cout << "0. LIGHT" << std::endl;
+    std::cout << "1. MEDIUM" << std::endl;
+    std::cout << "2. HEAVY" << std::endl;
+    std::cout << "Enter the item's armor type (ex. for heavy enter: 2): ";
+    std::cin >> weight;
+    std::cout << std::endl << "Enter the item's unique ID (ex. 423567): ";
+    std::cin >> id;
+    std::cout << std::endl << "Enter the item's weight (ex. 15.67): ";
+    std::cin >> weight;
+    std::cout << std::endl << "Enter the item's price in gold pieces(ex. 45): ";
+    std::cin >> price;
+    setName_(name);
+    setDamage_(damage);
+    setID_(id);
+    setArmorType(this->intToType(armorType));
+    setWeight_(weight);
+    setPrice_(price);
 }

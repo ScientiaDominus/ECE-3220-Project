@@ -1,7 +1,14 @@
 #include "Item.h"
 
-Item::Item(){}
-Item::~Item(){}
+Item::Item(){
+    name_ = std::string("UNKNOWN\n");
+    damage_ = std::string("UNKNOWN\n");
+    itemType_ = OBJECT;
+    weight_ = 0;
+    itemID_ = -1000;
+    price_ =  0;
+    std::cout << "Item Default Constructor Called." << std::endl;
+}
 Item::Item(std::string name, std::string damage, Type itemType, double weight, int itemID, int price)
 {
     name_ = name;
@@ -10,6 +17,9 @@ Item::Item(std::string name, std::string damage, Type itemType, double weight, i
     weight_ = weight;
     itemID_ = itemID;
     price_ =  price;
+}
+Item::~Item(){
+    std::cout << "Item Default Destructor Called." << std::endl;
 }
 
 void Item::setName_(std::string name)
