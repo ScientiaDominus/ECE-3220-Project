@@ -1,6 +1,7 @@
 #include "EntityList.h"
 #include "Armor.h"
 #include "Weapon.h"
+#include "System.h"
 
 int main(){
 
@@ -14,4 +15,8 @@ int main(){
     armorList.addEntity(item7);
 
     armorList.printList();
+
+    System system = System();
+    system.StartMenu();
+    std::cout << "hello is this working";
 }

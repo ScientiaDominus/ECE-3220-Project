@@ -1,3 +1,5 @@
+#ifndef ENTITYLIST_H
+#define ENTITYLIST_H
 #include <vector>
 #include <string>
 
@@ -41,3 +43,5 @@ class EntityList{
 
 
 };
+
+#endif
