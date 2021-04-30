@@ -1,6 +1,8 @@
 #include "Weapon.h"
 
 //Weapon::Weapon(std::string name, std::string damage, double weight, int itemID, int price,  dmgType type, int range) : Item(name, damage, WEAPON, weight, itemID, price){}
+
+
 void Weapon::setRange_(int range)
 {
     range_ = range;
