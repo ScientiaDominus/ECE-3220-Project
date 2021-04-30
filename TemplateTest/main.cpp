@@ -1,26 +1,16 @@
 #include "TestItem.h"
 #include "EntityList.h"
 #include "DifferentItem.h"
+#include "Armor.h"
 
 int main(){
-    TestItem item1 = TestItem("Star Wars", 1);
-    TestItem item2 = TestItem("Star Trek", 2);
-    TestItem item3 = TestItem("Infinity War", 3);
 
-    EntityList<TestItem> movieList = EntityList<TestItem>();
-    movieList.addEntity(item1);
-    movieList.addEntity(item2);
-    movieList.addEntity(item3);
+    Armor item6 = Armor("Netherite Chestplate", "Does 2 Damage to any enemy within 2 blocks when struck", 100, 1, 500, HEAVY);
+    item6.longPrint();
 
-    movieList.printList();
+    EntityList<Armor> armorList = EntityList<Armor>();
+    armorList.addEntity(item6);
 
-    DifferentItem item4 = DifferentItem("Cat", 45);
-    DifferentItem item5 = DifferentItem("Dog", 98);
-
-    EntityList<DifferentItem> animalList = EntityList<DifferentItem>();
-    animalList.addEntity(item4);
-    animalList.addEntity(item5);
-
-    animalList.printList();
+    armorList.printList();
 
 }

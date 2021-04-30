@@ -1,6 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
-
+#include <iostream>
 #include <string>
 
 class Entity{
@@ -8,7 +8,11 @@ class Entity{
         std::string name;
         int ID;
     public:
-        virtual void shortPrint() =0;
+        virtual void longPrint() =0;
+        void shortPrint(){
+            std::cout << "Name: " << getName() << std::endl;
+            std::cout << "ID: " << getID() << "\n" << std::endl;
+        }
         void setName(std::string name){
             this->name = name;
         }
