@@ -11,18 +11,21 @@ class Armor : public Item
     private:
         ArmorType armorType;
     public:
-        Armor(){}
+        Armor();
         Armor(std::string name, std::string damage, double weight, int itemID, int price,  ArmorType type);
-        ~Armor(){}
+        ~Armor();
 
+        //helper functions
         static ArmorType intToType(int type);
         std::string typeToString();
-        ArmorType getArmorType() const{return armorType;}
+        ArmorType getArmorType() const;
         
+        //inheritted from Item: String and Printing functions
         void longPrint() override;
         std::string toExportString() override;
         std::string to_string() override;
 
+        //menu related functions
         static void CreateMenu(EntityList<Item*> list);
         void EditMenu();
 
