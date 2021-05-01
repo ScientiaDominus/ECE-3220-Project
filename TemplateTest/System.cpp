@@ -126,20 +126,3 @@ template<typename E>
                 break;
         }
     }
-
-    template<typename T>
-    void System::addEntity(MenuModeType entityType, T entity){
-        switch(entityType){
-            case CHARACTER:
-                //characterList.addEntity(entity);
-                break;
-            case ITEM:
-                itemList.addEntity(entity);
-                break;
-            case SPELL:
-                //spellList.addEntity(entity);
-                break;
-            default:
-                break;
-        }
-    }
