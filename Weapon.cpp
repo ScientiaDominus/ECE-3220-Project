@@ -1,7 +1,16 @@
 #include "Weapon.h"
 
-//Weapon::Weapon(std::string name, std::string damage, double weight, int itemID, int price,  dmgType type, int range) : Item(name, damage, WEAPON, weight, itemID, price){}
-
+Weapon::Weapon(std::string name, std::string damage, double weight, int itemID, int price,  dmgType type, int range) : Item(name, damage, WEAPON, weight, itemID, price){
+            setDamageType_(type);
+            setRange_(range);
+            std::cout << "Weapon Constructor called" << std::endl;
+        }
+Weapon::Weapon(){
+    std::cout << "Weapon Default Constructor Called." << std::endl;
+}
+Weapon::~Weapon(){
+    std::cout << "Weapon Default Destructor Called." << std::endl;
+}
 
 void Weapon::setRange_(int range)
 {
@@ -84,4 +93,43 @@ dmgType Weapon::intToType(int type)
         default:
             return SLASHING;
     }
+}
+
+void Weapon::edit()
+{
+    std::string name = "";
+    std::string damage = "";
+    int dmgType = 0;
+    double weight = 0;
+    int id = 0;
+    int price = 0;
+    int range = 0;
+    std::cout << this->to_string();
+    std::cout << "Enter the item name: ";
+    std::cin >> name;
+    std::cout << std::endl << "Enter the item's damage string (ex. 2d4): ";
+    std::cin >> damage;
+    std::cout << std::endl << "0. FIRE" << std::endl;
+    std::cout << "1. COLD" << std::endl;
+    std::cout << "2. LIGHTNING" << std::endl;
+    std::cout << "3. ACID" << std::endl;
+    std::cout << "4. SLASHING" << std::endl;
+    std::cout << "5. POISON" << std::endl;
+    std::cout << "Enter the item's damage type (ex. 1,2,3,4,etc.): ";
+    std::cin >> dmgType;
+    std::cout << std::endl << "Enter the item's range in feet (ex. 20): ";
+    std::cin >> range;
+    std::cout << std::endl << "Enter the item's unique ID (ex. 423567): ";
+    std::cin >> id;
+    std::cout << std::endl << "Enter the item's weight (ex. 15.67): ";
+    std::cin >> weight;
+    std::cout << std::endl << "Enter the item's price in gold pieces(ex. 45): ";
+    std::cin >> price;
+    setName_(name);
+    setDamage_(damage);
+    setID_(id);
+    setRange_(range);
+    setDamageType_(this->intToType(dmgType));
+    setWeight_(weight);
+    setPrice_(price);
 }

@@ -7,14 +7,9 @@ enum dmgType {FIRE, COLD, LIGHTNING, ACID, SLASHING, POISON};
 class Weapon : public Item
 {
     public:
-        Weapon(){}
-        Weapon(std::string name, std::string damage, double weight, int itemID, int price,  dmgType type, int range) : Item(name, damage, WEAPON, weight, itemID, price)
-        {
-            setDamageType_(type);
-            setRange_(range);
-            std::cout << "Weapon Constructor called" << std::endl;
-        }
-        ~Weapon(){}
+        Weapon();
+        Weapon(std::string name, std::string damage, double weight, int itemID, int price,  dmgType type, int range);
+        ~Weapon();
 
         dmgType DamageType_() const{return type_;}
         int Range_() const{return range_;}
