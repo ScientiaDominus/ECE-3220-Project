@@ -68,7 +68,7 @@ void Armor::CreateMenu(EntityList<Item*> list){
     std::string name;
     int ID;
     std::string damage;
-    Type itemType = ARMOR;
+    //Type itemType = ARMOR;
     double weight;
     int price;
     int armorTypeInt;
