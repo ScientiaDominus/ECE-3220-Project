@@ -1,4 +1,5 @@
 #include "Armor.h"
+#include "EntityList.h"
 
 Armor::Armor(std::string name, std::string damage, double weight, int itemID, int price, ArmorType type) : Item(name, damage, ARMOR, weight, itemID, price){
     this->armorType = type;
@@ -61,4 +62,41 @@ ArmorType Armor::intToType(int type){
 
 void Armor::longPrint(){
     std::cout << to_string();
+}
+
+void Armor::CreateMenu(EntityList<Item*> list){
+    std::string name;
+    int ID;
+    std::string damage;
+    Type itemType = ARMOR;
+    double weight;
+    int price;
+    int armorTypeInt;
+    ArmorType armorType;
+    
+    std::cout << "Please enter the Weapon's name: ";
+    std::cin >> name;
+    std::cout << "Please enter the Weapon's ID: ";
+    std::cin >> ID;
+    std::cout << "Please enter the damage description of your Weapon: "<< std::endl;
+    std::cin >> damage;
+    std::cout << "Please enter your Weapon's weight: " << std::endl;
+    std::cin >> weight;
+    std::cout << "Please enter your Weapon's price" << std::endl;
+    std::cin >> price;
+    std::cout << "Please enter the number corresponding to your desired Weapon's Damage Type:" << std::endl;
+    std::cout << "\t1) Light" << std::endl;
+    std::cout << "\t2) Medium" << std::endl;
+    std::cout << "\t3) Heavy" << std::endl;
+    std::cin >> armorTypeInt;
+    armorType = intToType(armorTypeInt);
+
+    Armor* temp = new Armor(name, damage, weight, ID, price, armorType);
+    list.addEntity(temp);
+}
+
+void Armor::EditMenu(){
+    this->longPrint();
+    //gathers info from user
+    //alters calling object
 }

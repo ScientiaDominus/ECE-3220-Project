@@ -1,6 +1,7 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 #include "Item.h"
+#include "EntityList.h"
 
 enum DMGType {FIRE, COLD, LIGHTNING, ACID, SLASHING, POISON};
 
@@ -21,12 +22,14 @@ class Weapon : public Item
         int getRange() const{return range;}
 
         std::string typeToString();
-        DMGType intToType(int type);
+        static DMGType intToType(int type);
 
         std::string to_string() override;
         std::string toExportString() override;
         void longPrint() override;
 
+        static void CreateMenu(EntityList<Item*> list);
+        void EditMenu();
 
     
 };

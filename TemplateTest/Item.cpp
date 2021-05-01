@@ -1,4 +1,8 @@
 #include "Item.h"
+#include "Weapon.h"
+#include "Armor.h"
+#include "EntityList.h"
+#include <vector>
 
 Item::Item(){}
 Item::~Item(){}
@@ -62,4 +66,23 @@ Type Item::intToType(int type){
 void Item::longPrint(){
     std::cout << "Long Print for all Items" << std::endl;
     shortPrint();
+}
+
+void Item::CreateMenu(EntityList<Item*> list){
+    std::cout << "Welcome to the Item Create Menu! Please select which item you'd like to create" << std::endl;
+    std::cout << "\t1) Weapon" << std::endl;
+    std::cout << "\t2) Armor" << std::endl;
+    std::cout << "\t3) Return" << std::endl;
+    int response;
+    std::cin >> response;
+    switch(response){
+        case 1:
+            Weapon::CreateMenu(list);
+            break;
+        case 2:
+            Armor::CreateMenu(list);
+            break;
+        case 3:
+            return;
+    }
 }
