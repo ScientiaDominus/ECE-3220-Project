@@ -1,0 +1,150 @@
+#include "Weapon.h"
+#include "EntityList.h"
+
+std::string Weapon::to_string(){
+    std::stringstream myStream;
+
+    myStream << "NAME: " << getName() << std::endl; 
+    myStream << "DAMAGE: " << getDamage() << std::endl;
+    myStream << "DAMAGETYPE: " << typeToString() << std::endl;
+    myStream << "RANGE: " << getRange() << std::endl;
+    myStream << "ITEMTYPE: " << itemTypeToString() << std::endl;
+    myStream << "WEIGHT: " << getWeight() << std::endl;
+    myStream << "ID: " << getID() << std::endl;
+    myStream << "PRICE: " << getPrice() << std::endl; 
+
+    return myStream.str();
+}
+
+std::string Weapon::typeToString(){
+    switch(type){
+        case POISON:
+            return std::string("Poison");
+        case SLASHING:
+            return std::string("Slashing");
+        case COLD:
+            return std::string("Cold");
+        case FIRE:
+            return std::string("Fire");
+        case ACID:
+            return std::string("Acid");
+        case LIGHTNING:
+            return std::string("Lighting");
+        default:
+            return std::string("ERROR::UNKNOWN DAMAGE TYPE");
+    }
+}
+
+std::string Weapon::toExportString(){
+    std::stringstream myStream;
+    myStream << getItemType() << std::endl;
+    myStream << getName() << std::endl;
+    myStream << getDamage() << std::endl;
+    myStream << getDamageType() << std::endl;
+    myStream << getRange() << std::endl;
+    myStream << getWeight() << std::endl;
+    myStream << getID() << std::endl;
+    myStream << getPrice() << std::endl;
+
+    return myStream.str();
+}
+
+DMGType Weapon::intToType(int type){
+    switch(type){
+        case 0:
+            return FIRE;
+        case 1:
+            return COLD;
+        case 2:
+            return LIGHTNING;
+        case 3:
+            return ACID;
+        case 4:
+            return SLASHING;
+        case 5:
+            return POISON;
+        default:
+            return SLASHING;
+    }
+}
+
+void Weapon::longPrint(){
+    std::cout << to_string() << std::endl;
+}
+
+void Weapon::CreateMenu(EntityList<Item*> list){
+    std::string name;
+    int ID;
+    std::string damage;
+    Type itemType = WEAPON;
+    double weight;
+    int price;
+    int dmgTypeInt;
+    DMGType dmgType;
+    int range;
+    
+    std::cout << "Please enter the Weapon's name: ";
+    std::cin >> name;
+    std::cout << "Please enter the Weapon's ID: ";
+    std::cin >> ID;
+    std::cout << "Please enter the damage description of your Weapon: "<< std::endl;
+    std::cin >> damage;
+    std::cout << "Please enter your Weapon's weight: " << std::endl;
+    std::cin >> weight;
+    std::cout << "Please enter your Weapon's price" << std::endl;
+    std::cin >> price;
+    std::cout << "Please enter the number corresponding to your desired Weapon's Damage Type:" << std::endl;
+    std::cout << "\t1) Fire" << std::endl;
+    std::cout << "\t2) Cold" << std::endl;
+    std::cout << "\t3) Lightning" << std::endl;
+    std::cout << "\t4) Acid" << std::endl;
+    std::cout << "\t5) Slashing" << std::endl;
+    std::cout << "\t6) Poison" << std::endl;
+    std::cout << "\t7) Slashing" << std::endl;
+    std::cin >> dmgTypeInt;
+    dmgType = intToType(dmgTypeInt);
+    std::cout << "Please enter your Weapon's range" << std::endl;
+    std::cin >> range;
+
+    Weapon* temp = new Weapon(name, damage, weight, ID, price, dmgType, range);
+    list.addEntity(temp);
+}
+
+void Weapon::EditMenu(){
+    this->longPrint();
+    std::string name;
+    int ID;
+    std::string damage;
+    Type itemType = WEAPON;
+    double weight;
+    int price;
+    DMGType dmgType;
+    int range;
+    
+    std::cout << std::endl;
+    std::cin >> name;
+    std::cout << std::endl;
+    std::cin >> name;
+    std::cout << std::endl;
+    std::cin >> name;
+    std::cout << std::endl;
+    std::cin >> name;
+    std::cout << std::endl;
+    std::cin >> name;
+    std::cout << std::endl;
+    std::cin >> name;
+    std::cout << std::endl;
+    std::cin >> name;
+    std::cout << std::endl;
+    std::cin >> name;
+
+    setName(name);
+    setID(ID);
+    setDamage(damage);
+    setItemType(itemType);
+    setWeight(weight);
+    setPrice(price);
+    this->type = dmgType;
+    this->range = range;
+
+}

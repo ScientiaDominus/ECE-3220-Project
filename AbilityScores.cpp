@@ -18,6 +18,13 @@ int AbilityScores::getIntelligence(){return intelligence;}
 int AbilityScores::getWisdom(){return wisdom;}
 int AbilityScores::getCharisma(){return charisma;}
 
+int AbilityScores::getStrength(){return strength;}
+int AbilityScores::getDexterity(){return dexterity;}
+int AbilityScores::getConstitution(){return constitution;}
+int AbilityScores::getIntelligence(){return intelligence;}
+int AbilityScores::getWisdom(){return wisdom;}
+int AbilityScores::getCharisma(){return charisma;}
+
 void AbilityScores::increaseStrength(int points){
     strength += points;
 }
@@ -38,7 +45,7 @@ void AbilityScores::increaseCharisma(int points){
 }
 
 std::string AbilityScores::toExportString() {
-    std::string exportString = this->getStrength() +
+    std::string exportString = std::to_string(getStrength()) +
                                 "\n" + std::to_string(getDexterity()) +
                                 "\n" + std::to_string(getConstitution()) +
                                 "\n" + std::to_string(getIntelligence()) +

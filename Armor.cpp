@@ -1,4 +1,5 @@
 #include "Armor.h"
+
 Armor::Armor(std::string name, std::string damage, double weight, int itemID, int price,  armorType type) : Item(name, damage, ARMOR, weight, itemID, price){
     setArmorType(type);
     std::cout << "Armor Constructor Called" << std::endl;
