@@ -74,14 +74,14 @@ void Weapon::longPrint(){
 
 void Weapon::CreateMenu(EntityList<Item*> list){
     std::string name;
-    int ID;
+    int ID = 0;
     std::string damage;
-    Type itemType = WEAPON;
-    double weight;
-    int price;
-    int dmgTypeInt;
-    DMGType dmgType;
-    int range;
+    //Type itemType = WEAPON;
+    double weight = 0;
+    int price = 0;
+    int dmgTypeInt = 0;
+    DMGType dmgType = SLASHING;
+    int range = 0;
     
     std::cout << "Please enter the Weapon's name: ";
     std::cin >> name;
@@ -110,41 +110,41 @@ void Weapon::CreateMenu(EntityList<Item*> list){
     list.addEntity(temp);
 }
 
-void Weapon::EditMenu(){
-    this->longPrint();
-    std::string name;
-    int ID;
-    std::string damage;
-    Type itemType = WEAPON;
-    double weight;
-    int price;
-    DMGType dmgType;
-    int range;
+// void Weapon::EditMenu(){
+//     this->longPrint();
+//     std::string name;
+//     int ID;
+//     std::string damage;
+//     Type itemType = WEAPON;
+//     double weight;
+//     int price;
+//     DMGType dmgType;
+//     int range;
     
-    std::cout << std::endl;
-    std::cin >> name;
-    std::cout << std::endl;
-    std::cin >> name;
-    std::cout << std::endl;
-    std::cin >> name;
-    std::cout << std::endl;
-    std::cin >> name;
-    std::cout << std::endl;
-    std::cin >> name;
-    std::cout << std::endl;
-    std::cin >> name;
-    std::cout << std::endl;
-    std::cin >> name;
-    std::cout << std::endl;
-    std::cin >> name;
+//     std::cout << std::endl;
+//     std::cin >> name;
+//     std::cout << std::endl;
+//     std::cin >> name;
+//     std::cout << std::endl;
+//     std::cin >> name;
+//     std::cout << std::endl;
+//     std::cin >> name;
+//     std::cout << std::endl;
+//     std::cin >> name;
+//     std::cout << std::endl;
+//     std::cin >> name;
+//     std::cout << std::endl;
+//     std::cin >> name;
+//     std::cout << std::endl;
+//     std::cin >> name;
 
-    setName(name);
-    setID(ID);
-    setDamage(damage);
-    setItemType(itemType);
-    setWeight(weight);
-    setPrice(price);
-    this->type = dmgType;
-    this->range = range;
+//     setName(name);
+//     setID(ID);
+//     setDamage(damage);
+//     setItemType(itemType);
+//     setWeight(weight);
+//     setPrice(price);
+//     this->type = dmgType;
+//     this->range = range;
 
-}
+// }

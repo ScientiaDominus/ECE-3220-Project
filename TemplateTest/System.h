@@ -82,8 +82,6 @@ class System{
 
         template<typename E>
         void SearchListMenu(EntityList<E> list){
-            E selectedEntity;
-            
             std::cout << "You've selected to look up an existing " << menuModeString << "\nPlease Select an option below." << std::endl;
             std::cout << "\tSearch " << menuModeString << " by ID\n\t2) Search " << menuModeString << "by Name\n\t3) Exit" << std::endl;
             E entity;
