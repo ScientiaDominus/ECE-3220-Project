@@ -26,7 +26,7 @@ class Armor : public Item
         std::string to_string() override;
 
         //menu related functions
-        static void CreateMenu(EntityList<Item*> list);
+        static void CreateMenu(EntityList<Item*>* list);
         void EditMenu();
 
 

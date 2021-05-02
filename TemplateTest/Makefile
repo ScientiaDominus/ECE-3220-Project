@@ -15,4 +15,3 @@ $(TARGET) : $(OBJS)
 .PHONY : clean
 clean : 
 	rm -rf $(TARGET) $(OBJS)
-	rm a.out

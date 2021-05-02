@@ -66,7 +66,7 @@ void Armor::longPrint(){
     std::cout << to_string();
 }
 
-void Armor::CreateMenu(EntityList<Item*> list){
+void Armor::CreateMenu(EntityList<Item*>* list){
     std::string name;
     int ID;
     std::string damage;
@@ -94,7 +94,7 @@ void Armor::CreateMenu(EntityList<Item*> list){
     armorType = intToType(armorTypeInt);
 
     Armor* temp = new Armor(name, damage, weight, ID, price, armorType);
-    list.addEntity(temp);
+    list->addEntity(temp);
 }
 
 void Armor::EditMenu(){

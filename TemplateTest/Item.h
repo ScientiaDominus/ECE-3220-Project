@@ -32,7 +32,7 @@ class Item : public Entity{
         std::string itemTypeToString();
         Type intToType(int type);
         std::string to_ShortString();
-        static void CreateMenu(EntityList<Item *> list);
+        static void CreateMenu(EntityList<Item*>* list);
         
         virtual void longPrint();
         virtual std::string toExportString();
