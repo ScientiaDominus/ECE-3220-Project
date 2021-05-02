@@ -28,7 +28,7 @@ class Weapon : public Item
         std::string toExportString() override;
         void longPrint() override;
 
-        static void CreateMenu(EntityList<Item*> list);
+        static void CreateMenu(EntityList<Item*>* list);
         void EditMenu();
 
     

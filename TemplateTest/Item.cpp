@@ -68,7 +68,7 @@ void Item::longPrint(){
     shortPrint();
 }
 
-void Item::CreateMenu(EntityList<Item*> list){
+void Item::CreateMenu(EntityList<Item*>* list){
     std::cout << "Welcome to the Item Create Menu! Please select which item you'd like to create" << std::endl;
     std::cout << "\t1) Weapon" << std::endl;
     std::cout << "\t2) Armor" << std::endl;

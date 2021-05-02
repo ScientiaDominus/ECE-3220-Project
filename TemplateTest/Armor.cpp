@@ -1,9 +1,12 @@
 #include "Armor.h"
 #include "EntityList.h"
 
+
+Armor::Armor(){}
 Armor::Armor(std::string name, std::string damage, double weight, int itemID, int price, ArmorType type) : Item(name, damage, ARMOR, weight, itemID, price){
     this->armorType = type;
 }
+Armor::~Armor(){}
 
 std::string Armor::to_string()
 {
@@ -33,9 +36,9 @@ std::string Armor::toExportString(){
 
     return myStream.str();
 }
+
 std::string Armor::typeToString(){
-    switch(armorType)
-{
+    switch(armorType){
         case LIGHT:
             return std::string("Light");
         case MEDIUM:
@@ -44,7 +47,6 @@ std::string Armor::typeToString(){
             return std::string("Heavy");
         default:
             return std::string("ERROR: ARMORTYPE UNDEFINED");
-
     }
 }
 ArmorType Armor::intToType(int type){
@@ -64,7 +66,7 @@ void Armor::longPrint(){
     std::cout << to_string();
 }
 
-void Armor::CreateMenu(EntityList<Item*> list){
+void Armor::CreateMenu(EntityList<Item*>* list){
     std::string name;
     int ID;
     std::string damage;
@@ -92,7 +94,7 @@ void Armor::CreateMenu(EntityList<Item*> list){
     armorType = intToType(armorTypeInt);
 
     Armor* temp = new Armor(name, damage, weight, ID, price, armorType);
-    list.addEntity(temp);
+    list->addEntity(temp);
 }
 
 void Armor::EditMenu(){
@@ -100,3 +102,5 @@ void Armor::EditMenu(){
     //gathers info from user
     //alters calling object
 }
+
+ArmorType Armor::getArmorType() const{return armorType;}

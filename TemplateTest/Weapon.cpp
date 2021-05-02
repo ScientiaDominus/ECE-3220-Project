@@ -72,7 +72,7 @@ void Weapon::longPrint(){
     std::cout << to_string() << std::endl;
 }
 
-void Weapon::CreateMenu(EntityList<Item*> list){
+void Weapon::CreateMenu(EntityList<Item*>* list){
     std::string name;
     int ID = 0;
     std::string damage;
@@ -107,7 +107,7 @@ void Weapon::CreateMenu(EntityList<Item*> list){
     std::cin >> range;
 
     Weapon* temp = new Weapon(name, damage, weight, ID, price, dmgType, range);
-    list.addEntity(temp);
+    list->addEntity(temp);
 }
 
 // void Weapon::EditMenu(){
