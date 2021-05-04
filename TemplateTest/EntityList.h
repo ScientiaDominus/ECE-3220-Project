@@ -53,6 +53,10 @@ class EntityList{
             return stringListOfIDs;
         }
 
+        std::vector<T> getVector(){
+            return entityVector;
+        }
+
 
 };
 

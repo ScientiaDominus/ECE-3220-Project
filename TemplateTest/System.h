@@ -26,8 +26,9 @@ class System{
         template<typename T>
         void addEntity(MenuModeType entityType, T entity);
 
-        //Entity EditMenu();
-        //CreateMenu();
+        EntityList<Item*>* getItemList(){return itemList;}
+        //EntityList<Spell*>* getSpellList(){return spellList;} 
+        //EntityList<CharacterList*>* getCharacterList(){return characterList;} 
 };
 
 template<typename T>
