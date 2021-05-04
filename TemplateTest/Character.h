@@ -17,15 +17,15 @@ class Character : public Entity{
 	public: 
 		Character();
 		Character(std::string player_name, std::string name, int id, CharacterClass character_class,
-                    Race race, int level, AbilityScores ability_scores, std::vector<Item> item_inventory,
-                    std::vector<Spell> spell_inventory, int gold_count);
+                    Race race, int level, AbilityScores ability_scores, EntityList<Item*> *item_inventory,
+                    EntityList<Spell*> *spell_inventory, int gold_count);
 		std::string getPlayer() const;
 		CharacterClass getClass() const;
 		Race getRace() const;
 		int getLevel() const;
 		AbilityScores getScores() const;
-		std::vector<Item*> getItems() const;
-		std::vector<Spell> getSpells() const;
+		EntityList<Item*>* getItems() const;
+		EntityList<Spell*>*  getSpells() const;
 		int getGold() const;
 		std::string toExportString();
 		std::string itemsToExport();
@@ -39,6 +39,8 @@ class Character : public Entity{
 		int raceToInt(Race race_);
 		CharacterClass intToClass(int class_);
 		Race intToRace(int race_);
+		static void printClasses();
+		static void printRaces();
 		virtual void longPrint() override;
 		static void CreateMenu(EntityList<Character>* List);
 		
@@ -51,8 +53,10 @@ class Character : public Entity{
 		Race race_;
 		int level_;
 		AbilityScores scores_;
-		std::vector<Item*> items_;
-		std::vector<Spell> spells_;
+		EntityList<Item*>* items_;
+		EntityList<Spell*>* spells_;
+		//std::vector<Item*> items_;
+		//std::vector<Spell> spells_;
 		int gold_;
 
 

@@ -3,26 +3,26 @@ Character::Character(){}
 Character::~Character(){}
 Character::Character(
                     std::string player_name, std::string name, int id, CharacterClass character_class,
-                    Race race, int level, AbilityScores ability_scores, std::vector<Item> item_inventory,
-                    std::vector<Spell> spell_inventory, int gold_count){
-    player_name = player_name;
+                    Race race, int level, AbilityScores ability_scores, EntityList<Item*> *item_inventory,
+                    EntityList<Spell*> *spell_inventory, int gold_count){
+    player_ = player_name;
     setName(name);
     setID(id);
-    character_class = character_class;
-    race = race;
-    level = level;
-    ability_scores = ability_scores;
-    item_inventory = item_inventory;
-    spell_inventory = spell_inventory;
-    gold_count = gold_count;
+    class_ = character_class;
+    race_ = race;
+    level_ = level;
+    scores_ = ability_scores;
+    items_ = item_inventory;
+    spells_ = spell_inventory;
+    gold_ = gold_count;
 }
 std::string Character::getPlayer() const{return player_;}
 CharacterClass Character::getClass() const{return class_;}
 Race Character::getRace() const{return race_;}
 int Character::getLevel() const{return level_;}
 AbilityScores Character::getScores() const{return scores_;}
-std::vector<Item*> Character::getItems() const{return items_;}
-std::vector<Spell> Character::getSpells() const{return spells_;}
+EntityList<Item*>* Character::getItems() const{return items_;}
+EntityList<Spell*>* Character::getSpells() const{return spells_;}
 int Character::getGold() const{return gold_;}
 
 void Character::longPrint()
@@ -118,11 +118,11 @@ std::string Character::raceToString(Race race){
 
 std::string Character::classToString(CharacterClass characterClass){
     switch (characterClass){   
-        case PALADIN: return "Palagin";
+        case PALADIN: return "Paladin";
         case FIGHTER: return "Fighter";
         case ROGUE: return "Rogue";
         case CLERIC: return "Cleric";
-        case RANGER: return "Range";
+        case RANGER: return "Ranger";
         case WIZARD: return "Wizard";
         default : return "UNKNOWN"; break;
     }
@@ -175,5 +175,55 @@ Race intToRace(int race_)
         case 4: return GNOME;
         default : return HUMAN; break;
     }
+}
+
+void Character::printClasses()
+{
+    std::cout << "0. Paladin" << std::endl;
+    std::cout << "1. Fighter" << std::endl;
+    std::cout << "2. Rogue" << std::endl;
+    std::cout << "3. Cleric" << std::endl;
+    std::cout << "4. Ranger" << std::endl;
+    std::cout << "5. Wizard" << std::endl;
+}
+
+void Character::printRaces()
+{
+    std::cout << "0. Elf" << std::endl;
+    std::cout << "1. Human" << std::endl;
+    std::cout << "2. Dwarf" << std::endl;
+    std::cout << "3. Half Orc" << std::endl;
+    std::cout << "4. Gnome" << std::endl;
+}
+
+void Character::CreateMenu(EntityList<Character>* list)
+{
+    std::string player;
+    std::string name;
+    int id;
+    int tempClass;
+    int race;
+    int level;
+    AbilityScores tempScores;
+    std::vector<Item*> newItems;
+    std::vector<Spell> newSpells;
+    int gold;
+    std::cout << std::endl << "Please Enter the Character name: ";
+    std::cin >> name;
+    std::cout << std::endl << "Please Enter the Player name: ";  
+    std::cin >> player;
+    std::cout << std::endl << "Please Enter the Character ID: ";
+    std::cin >> id;
+    std::cout << std::endl;
+    printClasses();
+    std::cout << std::endl << "Please Enter the Character Class: ";
+    std::cin >> tempClass;
+    std::cout << std::endl;
+    printRaces();
+    std::cout << std::endl << "Please Enter the Character Race: ";
+    std::cin >> race;
+    std::cout << std::endl << "Please Enter the Character's Gold Count: ";
+    std::cin >> gold;
+
 }
 

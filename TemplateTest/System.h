@@ -8,7 +8,7 @@ enum MenuModeType {CHARACTER, ITEM, SPELL};
 class System{
     private:
         EntityList<Item*>* itemList;
-        EntityList<Character*> characterList;
+        EntityList<Character*>* characterList;
         //EntityList<Spell*> spellList;
         MenuModeType menuMode;
         std::string menuModeString;

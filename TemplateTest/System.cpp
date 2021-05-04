@@ -2,6 +2,7 @@
 
 System::System(){
     itemList = new EntityList<Item*>();
+    characterList = new EntityList<Character*>();
 }
 
 System::~System(){
