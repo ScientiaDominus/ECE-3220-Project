@@ -8,8 +8,7 @@ Armor::Armor(std::string name, std::string damage, double weight, int itemID, in
 }
 Armor::~Armor(){}
 
-std::string Armor::to_string()
-{
+std::string Armor::to_string(){
     std::stringstream myStream;
 
     myStream << "NAME: " << getName() << std::endl; 

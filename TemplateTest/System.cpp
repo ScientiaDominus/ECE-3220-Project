@@ -12,7 +12,6 @@ System::~System(){
 void System::StartMenu(){
     bool continueOption = true;
     do{
-    
         std::cout << "Main Menu. Pick and Option Below" << std::endl;
         std::cout << "\t1) Character\n\t2) Item\n\t3) Spell\n\t4) Exit" << std::endl;
         int response;

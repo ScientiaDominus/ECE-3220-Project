@@ -21,6 +21,9 @@ class Entity{
         }
         std::string getName(){return name;}
         int getID(){return ID;}
+        virtual std::string toExportString() =0;
+        
+
 };
 
 #endif
