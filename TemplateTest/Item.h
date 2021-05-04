@@ -36,7 +36,7 @@ class Item : public Entity{
         
         //these are needed in each class
         static void CreateMenu(EntityList<Item*>* list);
-        virtual void EditMenu(EntityList<Item *>* list);
+        //virtual void EditMenu(EntityList<Item *>* list);
         virtual void longPrint();
         virtual std::string toExportString();
         virtual std::string to_string();
