@@ -2,6 +2,7 @@
 #include <iostream>
 
 AbilityScores::AbilityScores(){}
+AbilityScores::~AbilityScores(){}
 AbilityScores::AbilityScores(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma){
     this->strength = strength;
     this->dexterity = dexterity;
@@ -10,13 +11,13 @@ AbilityScores::AbilityScores(int strength, int dexterity, int constitution, int 
     this->wisdom = wisdom;
     this->charisma = charisma;
 }
-AbilityScores::~AbilityScores(){}
+/*AbilityScores::~AbilityScores(){}
 int AbilityScores::getStrength(){return strength;}
 int AbilityScores::getDexterity(){return dexterity;}
 int AbilityScores::getConstitution(){return constitution;}
 int AbilityScores::getIntelligence(){return intelligence;}
 int AbilityScores::getWisdom(){return wisdom;}
-int AbilityScores::getCharisma(){return charisma;}
+int AbilityScores::getCharisma(){return charisma;}*/
 
 int AbilityScores::getStrength(){return strength;}
 int AbilityScores::getDexterity(){return dexterity;}

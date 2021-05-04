@@ -17,10 +17,10 @@ void System::StartMenu(){
         int response;
         std::cin >> response;
         switch (response){
-            // case 1:
-            //     changeMenuMode(CHARACTER);
-            //     EntityMenu<Item>(characterList);
-            //     break;
+             case 1:
+                 changeMenuMode(CHARACTER);
+                 EntityMenu<Character>(characterList);
+                 break;
             case 2:
                 changeMenuMode(ITEM);
                 EntityMenu<Item>(itemList);
