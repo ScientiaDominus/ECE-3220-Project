@@ -20,7 +20,7 @@ class Character : public Entity{
 		Character();
 		// A constructor that initializes all the elements within a character object
 		Character(std::string player_name, std::string name, int id, CharacterClass character_class,
-                    Race race, int level, AbilityScores ability_scores, EntityList<Item*> *item_inventory,
+                    Race race, int level, AbilityScores *ability_scores, EntityList<Item*> *item_inventory,
                     EntityList<Spell*> *spell_inventory, int gold_count);
 		
 		//Getter functions for all elements
@@ -28,7 +28,7 @@ class Character : public Entity{
 		CharacterClass getClass() const;
 		Race getRace() const;
 		int getLevel() const;
-		AbilityScores getScores() const;
+		AbilityScores* getScores() const;
 		EntityList<Item*>* getItems() const;
 		EntityList<Spell*>*  getSpells() const;
 		int getGold() const;
@@ -38,7 +38,7 @@ class Character : public Entity{
 		void setClass(CharacterClass newClass);
 		void setRace(Race race);
 		void setLevel(int level);
-		void setScores(AbilityScores scores);
+		void setScores(AbilityScores *scores);
 		void setItems(EntityList<Item*>* items);
 		void setSpells(EntityList<Spell*>* spells);
 		void setGold(int gold);
@@ -73,7 +73,7 @@ class Character : public Entity{
 		CharacterClass class_;
 		Race race_;
 		int level_;
-		AbilityScores scores_;
+		AbilityScores *scores_;
 		EntityList<Item*>* items_;
 		EntityList<Spell*>* spells_;
 		//std::vector<Item*> items_;
