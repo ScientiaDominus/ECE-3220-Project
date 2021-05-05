@@ -1,6 +1,7 @@
 #ifndef ENTITYLIST_H
 #define ENTITYLIST_H
 #include <vector>
+#include <sstream>
 #include <string>
 
 template<typename T>
@@ -17,10 +18,19 @@ class EntityList{
             }
         }
 
+        std::string exportListToString(){
+            typename std::vector<T>::iterator i;
+            stringstream outstring;
+            for(i = entityVector.begin(); i < entityVector.end(); i++){
+                outstring << (*i)->toExportString();
+            }
+            return outstring.str();
+        }
+
         void addEntity(T entity){
             entityVector.push_back(entity);
         }
-
+        
         T searchForEntityByID(int ID){
             typename std::vector<T>::iterator i;
             for(i = entityVector.begin(); i < entityVector.end(); i++){
@@ -51,6 +61,10 @@ class EntityList{
             }
             stringListOfIDs = "List End\n";
             return stringListOfIDs;
+        }
+
+        std::vector<T> getVector(){
+            return entityVector;
         }
 
 

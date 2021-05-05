@@ -1,12 +1,17 @@
 #include "System.h"
 
+System *System::instance = nullptr;
+
 System::System(){
-    itemList = new EntityList<Item*>();
-    characterList = new EntityList<Character*>();
+    this->itemList = new EntityList<Item*>();
+    this->characterList = new EntityList<Character*>();
+    this->spellList = new EntityList<Spell*>();
 }
 
 System::~System(){
     delete itemList;
+    delete characterList;
+    delete spellList;
 }
 
 void System::StartMenu(){
@@ -25,10 +30,10 @@ void System::StartMenu(){
                 changeMenuMode(ITEM);
                 EntityMenu<Item>(itemList);
                 break;
-            // case 3:
-            //     changeMenuMode(SPELL);
-            //     EntityMenu<Item>(spellList);
-            //     break;
+            case 3:
+                changeMenuMode(SPELL);
+                EntityMenu<Spell>(spellList);
+                break;
         
             default:
                 continueOption = false;
@@ -58,7 +63,7 @@ void System::EntityMenu(EntityList<E*>* list){
 }
 
 template<typename E>
-    void System::ViewEditMenu(EntityList<E>* list){
+void System::ViewEditMenu(EntityList<E>* list){
         std::cout << "Welcome to the View/Edit " << menuModeString << " Menu\nPlease select an option below" << std::endl;
         std::cout << "\t1) View List of Existing " << menuModeString << std::endl;
         std::cout << "\t2) Look up " << menuModeString << std::endl;
@@ -80,61 +85,61 @@ template<typename E>
         }
     }
 
-    template<typename E>
-    void System::SearchListMenu(EntityList<E>* list){
-        std::cout << "You've selected to look up an existing " << menuModeString << "\nPlease Select an option below." << std::endl;
-        std::cout << "\tSearch " << menuModeString << " by ID\n\t2) Search " << menuModeString << "by Name\n\t3) Exit" << std::endl;
-        E entity;
-        int response;
-        std::cin >> response;
-        int ID;
-        std::string name;
-        switch (response){
-            case 1:
-                std::cout << "Enter the ID: ";
-                std::cin >> ID;
-                entity = list->searchForEntityByID(ID);
-                break;
-            case 2:
-                std::cout << "Enter the name: ";
-                std::cin >> name;
-                entity = list->searchForEntityByName(name);
-                break;
-            default:
-                return;
-        }
-
-        std::cout << "View or Edit?" << std::endl;
-        std::cout << "\t1)View" << std::endl;
-        std::cout << "\t2)Edit" << std::endl;
-        std::cout << "\t3)Return" << std::endl;
-        std::cin >> response;
-        switch(response){
-            case 1:
-                entity->longPrint();
-                break;
-            case 2:
-                //entity->EditMenu();
-                break;
-            default:
-                return;
-        }
-
+template<typename E>
+void System::SearchListMenu(EntityList<E>* list){
+    std::cout << "You've selected to look up an existing " << menuModeString << "\nPlease Select an option below." << std::endl;
+    std::cout << "\tSearch " << menuModeString << " by ID\n\t2) Search " << menuModeString << "by Name\n\t3) Exit" << std::endl;
+    E entity;
+    int response;
+    std::cin >> response;
+    int ID;
+    std::string name;
+    switch (response){
+        case 1:
+            std::cout << "Enter the ID: ";
+            std::cin >> ID;
+            entity = list->searchForEntityByID(ID);
+            break;
+        case 2:
+            std::cout << "Enter the name: ";
+            std::cin >> name;
+            entity = list->searchForEntityByName(name);
+            break;
+        default:
+            return;
     }
 
-    void System::changeMenuMode(MenuModeType menuMode){
-        this->menuMode = menuMode;
-        switch (this->menuMode){
-            case CHARACTER:
-                menuModeString = "Character";
-                break;
-            case ITEM:
-                menuModeString = "Item";
-                break;
-            case SPELL:
-                menuModeString = "Spell";
-            default:
-                menuModeString = "";
-                break;
-        }
+    std::cout << "View or Edit?" << std::endl;
+    std::cout << "\t1)View" << std::endl;
+    std::cout << "\t2)Edit" << std::endl;
+    std::cout << "\t3)Return" << std::endl;
+    std::cin >> response;
+    switch(response){
+        case 1:
+            entity->longPrint();
+            break;
+        case 2:
+            entity->EditMenu();
+            break;
+        default:
+            return;
     }
+
+}
+
+void System::changeMenuMode(MenuModeType menuMode){
+    this->menuMode = menuMode;
+    switch (this->menuMode){
+        case CHARACTER:
+            menuModeString = "Character";
+            break;
+        case ITEM:
+            menuModeString = "Item";
+            break;
+        case SPELL:
+            menuModeString = "Spell";
+        default:
+            menuModeString = "";
+            break;
+    }
+}

@@ -29,7 +29,7 @@ class Weapon : public Item
         void longPrint() override;
 
         static void CreateMenu(EntityList<Item*>* list);
-        void EditMenu();
+        void EditMenu() override;
 
     
 };
