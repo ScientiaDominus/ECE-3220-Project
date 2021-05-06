@@ -28,6 +28,14 @@ class Character : public Entity{
 		EntityList<Item*>* getItems() const;
 		EntityList<Spell*>*  getSpells() const;
 		int getGold() const;
+		void setPlayer(std::string player);
+		void setClass(CharacterClass newClass);
+		void setRace(Race race);
+		void setLevel(int level);
+		void setScores(AbilityScores scores);
+		void setItems(EntityList<Item*>* items);
+		void setSpells(EntityList<Spell*>* spells);
+		void setGold(int gold);
 		std::string toExportString();
 		std::string itemsToExport();
 		std::string spellsToExport();

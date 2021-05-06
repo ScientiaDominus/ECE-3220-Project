@@ -11,7 +11,7 @@ class System{
         static System *instance; 
         EntityList<Item*>* itemList;
         EntityList<Character*>* characterList;
-        EntityList<Spell*> spellList;
+        EntityList<Spell*>* spellList;
         MenuModeType menuMode;
         std::string menuModeString;
 
