@@ -25,10 +25,10 @@ void System::StartMenu(){
                 changeMenuMode(ITEM);
                 EntityMenu<Item>(itemList);
                 break;
-            // case 3:
-            //     changeMenuMode(SPELL);
-            //     EntityMenu<Item>(spellList);
-            //     break;
+            case 3:
+                changeMenuMode(SPELL);
+                EntityMenu<Spell>(spellList);
+                break;
         
             default:
                 continueOption = false;
@@ -114,7 +114,7 @@ template<typename E>
                 entity->longPrint();
                 break;
             case 2:
-                //entity->EditMenu();
+                entity->EditMenu();
                 break;
             default:
                 return;

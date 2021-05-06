@@ -15,6 +15,12 @@ class AbilityScores{
         int getIntelligence();
         int getWisdom();
         int getCharisma();
+        void setStrength(int strength);
+        void setDexterity(int dexterity);
+        void setConstitution(int constitution);
+        void setIntelligence(int intelligence);
+        void setWisdom(int wisdom);
+        void setCharisma(int charisma);
         std::string toExportString();
         std::string toString();
         ~AbilityScores();

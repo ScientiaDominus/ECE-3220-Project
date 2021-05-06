@@ -1,7 +1,7 @@
 #include "EntityList.h"
 #include "Character.h"
 #include "Item.h"
-#include "Spell.h"
+//#include "Spell.h"
 
 
 enum MenuModeType {CHARACTER, ITEM, SPELL};
@@ -11,7 +11,7 @@ class System{
         static System *instance; 
         EntityList<Item*>* itemList;
         EntityList<Character*>* characterList;
-        //EntityList<Spell*> spellList;
+        EntityList<Spell*> spellList;
         MenuModeType menuMode;
         std::string menuModeString;
 
@@ -30,9 +30,9 @@ class System{
         void addEntity(MenuModeType entityType, T entity);
 
         EntityList<Item*>* getItemList(){return itemList;}
-        //EntityList<Spell*>* getSpellList(){return spellList;} 
-        EntityList<CharacterList*>* getCharacterList(){return characterList;}
-        System* System::getInstance(){
+        EntityList<Spell*>* getSpellList(){return spellList;} 
+        EntityList<Character*>* getCharacterList(){return characterList;}
+        static System* System::getInstance(){
             if(!(instance)){
                 instance = new System;
             }
@@ -50,7 +50,7 @@ void System::addEntity(MenuModeType entityType, T entity){
             itemList->addEntity(entity);
             break;
         case SPELL:
-            //spellList->addEntity(entity);
+            spellList->addEntity(entity);
             break;
         default:
             break;

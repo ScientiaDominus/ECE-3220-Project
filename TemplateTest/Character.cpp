@@ -64,7 +64,7 @@ std::string Character::itemsToExport(){
     std::stringstream exportString; 
     exportString << "101010" << std::endl;
     std::vector<Item*>::iterator i;
-    for(i = items_.begin(); i != items_.end(); i++){
+    for(i = items_->getVector().begin(); i != items_->getVector().end(); i++){
         exportString << (*i)->getID() << std::endl;
     }
     exportString << "010101" << std::endl;
@@ -76,7 +76,7 @@ std::string Character::itemsToString()
    std::stringstream exportString; 
     exportString << "ITEM INVENTORY: " << std::endl;
     std::vector<Item*>::iterator i;
-    for(i = items_.begin(); i != items_.end(); i++){
+    for(i = items_->getVector().begin(); i != items_->getVector().end(); i++){
         exportString << (*i)->to_string() << std::endl;
     }
     exportString << "END ITEM INVENTORY: " << std::endl;
@@ -87,7 +87,7 @@ std::string Character::spellsToExport(){
     std::stringstream exportString;
     exportString << "111111" << std::endl;
     std::vector<Spell>::iterator i;
-    for(i = spells_.begin(); i != spells_.end(); i++){
+    for(i = spells_->getVector().begin(); i != spells_->getVector().end(); i++){
         exportString << i->get_spellID() << std::endl;
     }
     exportString << "000000";
@@ -98,7 +98,7 @@ std::string Character::spellsToString(){
     std::stringstream exportString;
     exportString << "SPELL INVENTORY: " << std::endl;
     std::vector<Spell>::iterator i;
-    for(i = spells_.begin(); i != spells_.end(); i++){
+    for(i = spells_->getVector().begin(); i != spells_->getVector().end(); i++){
         exportString << i->to_string() << std::endl;
     }
     exportString << "END SPELL INVENTORY: ";
@@ -198,16 +198,17 @@ void Character::printRaces()
 
 void Character::CreateMenu(EntityList<Character>* list)
 {
-    std::string player;
-    std::string name;
-    int id;
-    int tempClass;
-    int race;
-    int level;
+    std::string player = "";
+    std::string name = "";
+    int id = 0;
+    int tempClass = 0;
+    int race = 0;
+    int level = 0;
+    int tempScore = 0;
     AbilityScores tempScores;
-    std::vector<Item*> newItems;
-    std::vector<Spell> newSpells;
-    int gold;
+    EntityList<Item*> newItems;
+    EntityList<Spell> newSpells;
+    int gold = 0;
     std::cout << std::endl << "Please Enter the Character name: ";
     std::cin >> name;
     std::cout << std::endl << "Please Enter the Player name: ";  
@@ -218,6 +219,31 @@ void Character::CreateMenu(EntityList<Character>* list)
     printClasses();
     std::cout << std::endl << "Please Enter the Character Class: ";
     std::cin >> tempClass;
+    std::cout << std::endl;
+    std::cout << tempScores.toString();
+    std::cout << "Please enter your strength: "; 
+    std::cin >> tempScore;
+    tempScores.setStrength(tempScore);
+    std::cout << std::endl;
+    std::cout << "Please enter your dexterity: "; 
+    std::cin >> tempScore;
+    tempScores.setDexterity(tempScore);
+    std::cout << std::endl;
+    std::cout << "Please enter your constitution: "; 
+    std::cin >> tempScore;
+    tempScores.setConstitution(tempScore);
+    std::cout << std::endl;
+    std::cout << "Please enter your intelligence: "; 
+    std::cin >> tempScore;
+    tempScores.setIntelligence(tempScore);
+    std::cout << std::endl;
+    std::cout << "Please enter your wisdom: "; 
+    std::cin >> tempScore;
+    tempScores.setWisdom(tempScore);
+    std::cout << std::endl;
+    std::cout << "Please enter your charisma: "; 
+    std::cin >> tempScore;
+    tempScores.setCharisma(tempScore);
     std::cout << std::endl;
     printRaces();
     std::cout << std::endl << "Please Enter the Character Race: ";
@@ -237,13 +263,13 @@ void Character::CreateMenu(EntityList<Character>* list)
         std::cout << std::endl;
         if(System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
         {
-            newItems.emplace_back(System::getInstance()->getItemList()->searchForEntityByID(input));
+            newItems.getVector().emplace_back(System::getInstance()->getItemList()->searchForEntityByID(input));
         }
         else
         {
             input = 1;
         }
-    }while(input < 1 || input != -1)
+    }while(input < 1 || input != -1);
     std::cout << "Here is a list of the spells you can choose from: " << std::endl;
     std::vector<Item*>::iterator iter2;
     for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
@@ -257,12 +283,18 @@ void Character::CreateMenu(EntityList<Character>* list)
         std::cout << std::endl;
         if(System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
         {
-            newSpells.emplace_back(System::getInstance()->getSpellList()->searchForEntityByID(input));
+            newSpells.getVector().emplace_back(System::getInstance()->getSpellList()->searchForEntityByID(input));
         }
         else
         {
             input = 1;
         }
-    }while(input < 1 || input != -1)
+    }while(input < 1 || input != -1);
+    Character *temp = new Character(player, name, id, temp->intToClass(tempClass), temp->intToRace(race), level, tempScores, newItems, newSpells, gold); 
+    System::getInstance()->getCharacterList()->getVector().emplace_back(temp);
 }
 
+void Character::EditMenu()
+{
+
+}
