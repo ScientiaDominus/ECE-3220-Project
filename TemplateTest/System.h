@@ -1,7 +1,7 @@
 #include "EntityList.h"
 #include "Character.h"
 #include "Item.h"
-//#include "Spell.h"
+#include "Spell.h"
 
 
 enum MenuModeType {CHARACTER, ITEM, SPELL};

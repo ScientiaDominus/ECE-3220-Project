@@ -10,7 +10,7 @@
 #include "CharacterClass.h"
 #include "Race.h"
 #include "AbilityScores.h"
-//#include "Spell.h"
+#include "Spell.h"
 #include "System.h"
 
 

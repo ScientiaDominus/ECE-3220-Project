@@ -126,7 +126,7 @@ std::string Character::spellsToExport(){
     exportString << "111111" << std::endl;
     std::vector<Spell*>::iterator i;
     for(i = spells_->getVector().begin(); i != spells_->getVector().end(); i++){
-        exportString << i->get_spellID() << std::endl;
+        exportString << (*i)->get_spellID() << std::endl;
     }
     exportString << "000000";
     return exportString.str();
@@ -137,7 +137,7 @@ std::string Character::spellsToString(){
     exportString << "SPELL INVENTORY: " << std::endl;
     std::vector<Spell*>::iterator i;
     for(i = spells_->getVector().begin(); i != spells_->getVector().end(); i++){
-        exportString << i->to_string() << std::endl;
+        exportString << (*i)->to_string() << std::endl;
     }
     exportString << "END SPELL INVENTORY: ";
     return exportString.str();
@@ -313,7 +313,7 @@ void Character::CreateMenu(EntityList<Character>* list)
     std::vector<Spell*>::iterator iter2;
     for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
     {
-        std::cout << (*iter2)->to_ShortString();
+        (*iter2)->shortPrint();
     }
     input = 0;
     do{
@@ -329,7 +329,7 @@ void Character::CreateMenu(EntityList<Character>* list)
             input = 1;
         }
     }while(input < 1 || input != -1);
-    Character *temp = new Character(player, name, id, temp->intToClass(tempClass), temp->intToRace(race), level, tempScores, newItems, newSpells, gold); 
+    Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, tempScores, &newItems, &newSpells, gold); 
     System::getInstance()->getCharacterList()->getVector().emplace_back(temp);
 }
 
@@ -430,14 +430,14 @@ void Character::EditMenu()
             else
             {
                 input = 1;
-            }
+        }
         }
     }while(input < 1 || input != -1);
     std::cout << "Here is a list of your spells: " << std::endl;
     std::vector<Spell*>::iterator iter2;
     for(iter2 = getSpells()->getVector().begin(); iter2 < getSpells()->getVector().end(); iter2++)
     {
-        std::cout << (*iter2)->to_ShortString();
+        (*iter2)->shortPrint();
     }
     input = 1;
     do{
@@ -454,7 +454,7 @@ void Character::EditMenu()
     std::cout << "Here are the spells you can add to your inventory: " << std::endl;
     for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
     {
-        std::cout << (*iter2)->to_ShortString();
+        (*iter2)->shortPrint();
     }
     input = 1;
     do{
