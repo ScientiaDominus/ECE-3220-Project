@@ -20,10 +20,7 @@ class EntityList{
         void addEntity(T entity){
             entityVector.push_back(entity);
         }
-        void removeEntity(T entity){
-            entityVector.erase(entity);
-        }
-
+        
         T searchForEntityByID(int ID){
             typename std::vector<T>::iterator i;
             for(i = entityVector.begin(); i < entityVector.end(); i++){
