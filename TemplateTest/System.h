@@ -6,6 +6,7 @@ enum MenuModeType {CHARACTER, ITEM, SPELL};
 
 class System{
     private:
+        static System *instance; 
         EntityList<Item*>* itemList;
         //EntityList<Character*> characterList;
         //EntityList<Spell*> spellList;
@@ -26,8 +27,15 @@ class System{
         template<typename T>
         void addEntity(MenuModeType entityType, T entity);
 
-        //Entity EditMenu();
-        //CreateMenu();
+        EntityList<Item*>* getItemList(){return itemList;}
+        //EntityList<Spell*>* getSpellList(){return spellList;} 
+        //EntityList<CharacterList*>* getCharacterList(){return characterList;}
+        System* System::getInstance(){
+            if(!(instance)){
+                instance = new System;
+            }
+            return instance;
+        }
 };
 
 template<typename T>
