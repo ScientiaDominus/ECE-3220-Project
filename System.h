@@ -12,7 +12,7 @@
 
 class System{
     private:
-        static System *instance; 
+        static System* instance; 
         std::vector<Item*> itemVector;
         std::vector<Spell> spellVector;
         std::vector<Character> characterVector;
@@ -49,7 +49,7 @@ class System{
         void deleteSpell(std::string name);
         void deleteItem(std::string name);
 
-        static System* getInstance();
+        static System& getInstance();
         void exportCharactersToFile(std::string spellFilePath);
         void exportItemsToFile(std::string spellFilePath);
         void exportSpellsToFile(std::string spellFilePath);

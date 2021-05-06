@@ -1,4 +1,5 @@
 #include "EntityList.h"
+#include "Character.h"
 #include "Item.h"
 
 
@@ -8,7 +9,7 @@ class System{
     private:
         static System *instance; 
         EntityList<Item*>* itemList;
-        //EntityList<Character*> characterList;
+        EntityList<Character*>* characterList;
         //EntityList<Spell*> spellList;
         MenuModeType menuMode;
         std::string menuModeString;

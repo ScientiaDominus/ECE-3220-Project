@@ -13,7 +13,7 @@ Item::Item(std::string name, std::string damage, Type itemType, double weight, i
 {
     name_ = name;
     damage_ = damage;
-    itemType_ = OBJECT;
+    itemType_ = itemType;
     weight_ = weight;
     itemID_ = itemID;
     price_ =  price;
@@ -110,12 +110,15 @@ std::string Item::itemTypeToString()
 {
     switch(itemType_)
     {
-        case OBJECT:
-            return std::string("Object");
-        case ARMOR:
-            return std::string("Armor");
         case WEAPON:
             return std::string("Weapon");
+            break;
+        case ARMOR:
+            return std::string("Armor");
+            break;
+        case OBJECT:
+            return std::string("Object");
+            break;
         default:
             return std::string("ERROR: ITEMTYPE IS UNDEFINED");
     }
@@ -126,12 +129,16 @@ Type Item::intToType(int type)
     {
         case 0:
             return WEAPON;
+            break;
         case 1:
             return ARMOR;
+            break;
         case 2:
             return OBJECT;
+            break;
         default:
             return OBJECT;
+            break;
     }
 }
 std::string Item::to_ShortString()
