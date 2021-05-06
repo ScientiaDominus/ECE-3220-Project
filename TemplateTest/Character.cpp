@@ -224,6 +224,45 @@ void Character::CreateMenu(EntityList<Character>* list)
     std::cin >> race;
     std::cout << std::endl << "Please Enter the Character's Gold Count: ";
     std::cin >> gold;
-
+    std::cout << "Here is a list of the items you can choose from: " << std::endl;
+    std::vector<Item*>::iterator iter;
+    for(iter = System::getInstance()->getItemList()->getVector().begin(); iter < System::getInstance()->getItemList()->getVector().end(); iter++)
+    {
+        std::cout << (*iter)->to_ShortString();
+    }
+    int input = 0;
+    do{
+        std::cout << "Enter the ID of the item you'd like to add to your inventory: " << std::endl;
+        std::cin >> input;
+        std::cout << std::endl;
+        if(System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
+        {
+            newItems.emplace_back(System::getInstance()->getItemList()->searchForEntityByID(input));
+        }
+        else
+        {
+            input = 1;
+        }
+    }while(input < 1 || input != -1)
+    std::cout << "Here is a list of the spells you can choose from: " << std::endl;
+    std::vector<Item*>::iterator iter2;
+    for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
+    {
+        std::cout << (*iter2)->to_ShortString();
+    }
+    input = 0;
+    do{
+        std::cout << "Enter the ID of the item you'd like to add to your inventory: " << std::endl;
+        std::cin >> input;
+        std::cout << std::endl;
+        if(System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
+        {
+            newSpells.emplace_back(System::getInstance()->getSpellList()->searchForEntityByID(input));
+        }
+        else
+        {
+            input = 1;
+        }
+    }while(input < 1 || input != -1)
 }
 

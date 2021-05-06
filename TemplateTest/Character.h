@@ -11,6 +11,7 @@
 #include "Race.h"
 #include "AbilityScores.h"
 #include "Spell.h"
+#include "System.h"
 
 
 class Character : public Entity{

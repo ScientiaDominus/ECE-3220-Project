@@ -1,6 +1,7 @@
 #include "EntityList.h"
 #include "Character.h"
 #include "Item.h"
+#include "Spell.h"
 
 
 enum MenuModeType {CHARACTER, ITEM, SPELL};
@@ -30,7 +31,7 @@ class System{
 
         EntityList<Item*>* getItemList(){return itemList;}
         //EntityList<Spell*>* getSpellList(){return spellList;} 
-        //EntityList<CharacterList*>* getCharacterList(){return characterList;}
+        EntityList<CharacterList*>* getCharacterList(){return characterList;}
         System* System::getInstance(){
             if(!(instance)){
                 instance = new System;
@@ -43,7 +44,7 @@ template<typename T>
 void System::addEntity(MenuModeType entityType, T entity){
     switch(entityType){
         case CHARACTER:
-            //characterList->addEntity(entity);
+            characterList->addEntity(entity);
             break;
         case ITEM:
             itemList->addEntity(entity);
