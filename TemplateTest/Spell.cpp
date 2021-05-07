@@ -6,8 +6,8 @@ Spell::Spell(){
 }
 //parameterized constructor
 Spell::Spell(std::string spellName, int spellID, std::string description, int castingTime, int range, int duration){
-    spellName_=spellName;
-    spellID_=spellID;
+    setName(spellName);
+    setID(spellID);
     description_=description;
     castingTime_=castingTime;
     range_=range;
@@ -45,12 +45,12 @@ int Spell::get_duration() const{
     return duration_;
 }
 
-void Spell::set_spellName(std::string spellName){
+/*void Spell::set_spellName(std::string spellName){
     spellName_=spellName;
 }
 void Spell::set_spellID(int spellID){
     spellID_=spellID;
-}
+}*/
 void Spell::set_description(std::string description){
     description_=description;
 }
@@ -98,7 +98,7 @@ std::string Spell::to_string()
 {
     std::stringstream outStream;
     outStream << "NAME: " << getName() << std::endl;
-    outStream << "ID: " << get_spellID() << std::endl;
+    outStream << "ID: " << getID() << std::endl;
     outStream << "CASTING TIME: " << get_castingTime() << std::endl;
     outStream << "RANGE: " << get_range() << std::endl;
     outStream << "DURATION: " << get_duration() << std::endl;
@@ -107,12 +107,10 @@ std::string Spell::to_string()
 }
 
 std::string Spell::to_simpleString(){
-    char buff[100];
-    const char *name = spellName_.c_str();
-    sprintf(buff, "Name: %s ID: %d", name, spellID_);
-    std::string returnString = buff;
-    return returnString;
-    
+    std::stringstream outStream;
+    outStream << "NAME: " << getName() << std::endl;
+    outStream << "ID: " << getID() << std::endl;
+    return outStream.str();
 }
 
 void Spell::CreateMenu(EntityList<Spell*>* list){
@@ -160,8 +158,8 @@ void Spell::EditMenu(){
     std::string description;
     getline(std::cin, description);
 
-    set_spellName(spellName);
-    set_spellID(spellID);
+    setName(spellName);
+    setID(spellID);
     set_description(description);
     set_castingTime(castingTime);
     set_range(range);
