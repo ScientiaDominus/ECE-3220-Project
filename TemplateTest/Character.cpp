@@ -204,6 +204,7 @@ CharacterClass Character::intToClass(int class_){
         default : return PALADIN; break;
     }
 }
+
 Race Character::intToRace(int race_){
     switch (race_){   
         case 0: return ELF;
@@ -305,10 +306,6 @@ void Character::CreateMenu(EntityList<Character*>* list){
         if(System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
         {
             newItems.addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
-        }
-        else
-        {
-            input = 1;
         }
     }while(input < 1 || input != -1);
     std::cout << "Here is a list of the spells you can choose from: " << std::endl;
@@ -432,10 +429,6 @@ void Character::EditMenu(){
             {
                 getItems()->addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
             }
-            else
-            {
-                input = 1;
-        }
         }
     }while(input < 1 || input != -1);
     std::cout << "Here is a list of your spells: " << std::endl;
