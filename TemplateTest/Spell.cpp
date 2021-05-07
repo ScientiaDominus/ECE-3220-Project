@@ -1,4 +1,5 @@
 #include "Spell.h"
+#include <sstream>
 
 //default constructor
 Spell::Spell(){
@@ -6,8 +7,10 @@ Spell::Spell(){
 }
 //parameterized constructor
 Spell::Spell(std::string spellName, int spellID, std::string description, int castingTime, int range, int duration){
-    spellName_=spellName;
-    spellID_=spellID;
+    this->setName(spellName);
+    this->setID(spellID);
+    spellName_= spellName;
+    spellID_= spellID;
     description_=description;
     castingTime_=castingTime;
     range_=range;
@@ -45,12 +48,12 @@ int Spell::get_duration() const{
     return duration_;
 }
 
-void Spell::set_spellName(std::string spellName){
+/*void Spell::set_spellName(std::string spellName){
     spellName_=spellName;
 }
 void Spell::set_spellID(int spellID){
     spellID_=spellID;
-}
+}*/
 void Spell::set_description(std::string description){
     description_=description;
 }
@@ -64,7 +67,7 @@ void Spell::set_duration(int duration){
     duration_=duration;
 }
 
-std::string Spell::to_string(){
+/*std::string Spell::to_string(){
     char buff[1000];
     const char *name = spellName_.c_str();
     const char *description = description_.c_str();
@@ -72,29 +75,51 @@ std::string Spell::to_string(){
     std::string returnString = buff;
     return returnString;
     
-}
+}*/
 
-std::string Spell::toExportString(){
+/*std::string Spell::toExportString(){
     char buff[1000];
     const char *name = spellName_.c_str();
     const char *description = description_.c_str();
     sprintf(buff, "%s\n%d\n%d\n%d\n%d\n%s\n", name, spellID_, castingTime_, range_, duration_, description);
     std::string exportString = buff;
     return exportString;
+}*/
+
+std::string Spell::toExportString(){
+    std::stringstream exportString;
+    exportString << getName() << std::endl;
+    exportString << get_spellID() << std::endl;
+    exportString << get_castingTime() << std::endl;
+    exportString << get_range() << std::endl;
+    exportString << get_duration() << std::endl;
+    exportString << get_description() << std::endl;
+    return exportString.str();
+}
+
+std::string Spell::to_string()
+{
+    std::stringstream outStream;
+    outStream << "NAME: " << getName() << std::endl;
+    outStream << "ID: " << getID() << std::endl;
+    outStream << "CASTING TIME: " << get_castingTime() << std::endl;
+    outStream << "RANGE: " << get_range() << std::endl;
+    outStream << "DURATION: " << get_duration() << std::endl;
+    outStream << "DESCRIPTION: " << get_description() << std::endl;
+    return outStream.str();
 }
 
 std::string Spell::to_simpleString(){
-    char buff[100];
-    const char *name = spellName_.c_str();
-    sprintf(buff, "Name: %s ID: %d", name, spellID_);
-    std::string returnString = buff;
-    return returnString;
-    
+    std::stringstream outStream;
+    outStream << "NAME: " << getName() << std::endl;
+    outStream << "ID: " << getID() << std::endl;
+    return outStream.str();
 }
 
 void Spell::CreateMenu(EntityList<Spell*>* list){
     std::cout << "Please type in the name of the spell you would like to add\n";
     std::string spellName;
+    getline(std::cin, spellName); //clears buffer
     getline(std::cin, spellName);
     std::cout << "Please type an integer to represent the Spell ID\n";
     int spellID;
@@ -110,17 +135,21 @@ void Spell::CreateMenu(EntityList<Spell*>* list){
     std::cin >> duration;
     std::cout << "Finally, please type a short description of the spell";
     std::string description;
+    getline(std::cin, description); //clears buffer
     getline(std::cin, description);
 
-    Spell *temp = new Spell(spellName, spellID, description, castingTime, range, duration);
-    std::cout << "Your new spell is:\n" << temp->to_string() << std::endl;
+
+    Spell* temp = new Spell(spellName, spellID, description, castingTime, range, duration);
+    //std::cout << "Your new spell is:\n" << temp->to_string() << std::endl;
+
     list->addEntity(temp);
 }
 
 void Spell::EditMenu(){
     std::cout << "Enter the new name of the spell\n";
     std::string spellName;
-    getline(std::cin, spellName);
+    getline(std::cin, spellName); //clears buffer
+    getline(std::cin, spellName); 
     std::cout << "Enter the new spell ID\n";
     int spellID;
     std::cin >> spellID;
@@ -135,10 +164,11 @@ void Spell::EditMenu(){
     std::cin >> duration;
     std::cout << "Finally, please enter the new description of the spell";
     std::string description;
+    getline(std::cin, description); //clears buffer
     getline(std::cin, description);
 
-    set_spellName(spellName);
-    set_spellID(spellID);
+    setName(spellName);
+    setID(spellID);
     set_description(description);
     set_castingTime(castingTime);
     set_range(range);

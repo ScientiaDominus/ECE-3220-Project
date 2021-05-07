@@ -11,7 +11,7 @@ enum MenuModeType {CHARACTER, ITEM, SPELL};
 class System{
     private:
         System();
-        ~System();
+
         static System *instance; 
         EntityList<Item*>* itemList;
         EntityList<Character*>* characterList;
@@ -20,8 +20,8 @@ class System{
         std::string menuModeString;
 
     public:
-        //System();
-        //~System();
+
+        ~System();
         void StartMenu();
         template<typename E>
         void EntityMenu(EntityList<E*>* list);
