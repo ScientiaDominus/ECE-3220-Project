@@ -168,7 +168,7 @@ std::string Character::classToString(CharacterClass characterClass){
     }
 }
 
-int classToInt(CharacterClass class_)
+int Character::classToInt(CharacterClass class_)
 {
     switch(class_)
     {
@@ -181,7 +181,7 @@ int classToInt(CharacterClass class_)
         default : return -1; break;
     }
 }
-int raceToInt(Race race_)
+int Character::raceToInt(Race race_)
 {
     switch (race_){   
         case ELF: return 0;
@@ -192,7 +192,7 @@ int raceToInt(Race race_)
         default : return -1; break;
     }
 }
-CharacterClass intToClass(int class_)
+CharacterClass Character::intToClass(int class_)
 {
     switch(class_)
     {
@@ -205,7 +205,7 @@ CharacterClass intToClass(int class_)
         default : return PALADIN; break;
     }
 }
-Race intToRace(int race_)
+Race Character::intToRace(int race_)
 {
     switch (race_){   
         case 0: return ELF;
