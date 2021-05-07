@@ -311,10 +311,6 @@ void Character::CreateMenu(EntityList<Character*>* list)
         {
             newItems.addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
         }
-        else
-        {
-            input = 1;
-        }
     }while(input < 1 || input != -1);
     std::cout << "Here is a list of the spells you can choose from: " << std::endl;
     std::vector<Spell*>::iterator iter2;
@@ -438,10 +434,6 @@ void Character::EditMenu()
             {
                 getItems()->addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
             }
-            else
-            {
-                input = 1;
-        }
         }
     }while(input < 1 || input != -1);
     std::cout << "Here is a list of your spells: " << std::endl;
