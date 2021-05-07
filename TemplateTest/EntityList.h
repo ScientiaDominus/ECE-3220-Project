@@ -20,7 +20,7 @@ class EntityList{
         void addEntity(T entity){
             entityVector.push_back(entity);
         }
-
+        
         T searchForEntityByID(int ID){
             typename std::vector<T>::iterator i;
             for(i = entityVector.begin(); i < entityVector.end(); i++){
@@ -40,6 +40,21 @@ class EntityList{
                 }    
             }
             return nullptr;
+        }
+
+        std::string getStringListOfIDs(){
+            std::string stringListOfIDs = "List Start\n";
+            typename std::vector<T>::iterator i;
+            for(i = entityVector.begin(); i < entityVector.end(); i++){
+                stringListOfIDs += std::to_string((*i)->getID()) + "\n";
+              
+            }
+            stringListOfIDs = "List End\n";
+            return stringListOfIDs;
+        }
+
+        std::vector<T> getVector(){
+            return entityVector;
         }
 
 

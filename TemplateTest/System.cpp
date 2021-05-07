@@ -1,11 +1,17 @@
 #include "System.h"
 
+System *System::instance = nullptr;
+
 System::System(){
-    itemList = new EntityList<Item*>();
+    this->itemList = new EntityList<Item*>();
+    this->characterList = new EntityList<Character*>();
+    this->spellList = new EntityList<Spell*>();
 }
 
 System::~System(){
     delete itemList;
+    delete characterList;
+    delete spellList;
 }
 
 void System::StartMenu(){
@@ -16,18 +22,18 @@ void System::StartMenu(){
         int response;
         std::cin >> response;
         switch (response){
-            // case 1:
-            //     changeMenuMode(CHARACTER);
-            //     EntityMenu<Item>(characterList);
-            //     break;
+             case 1:
+                 changeMenuMode(CHARACTER);
+                 EntityMenu<Character>(characterList);
+                 break;
             case 2:
                 changeMenuMode(ITEM);
                 EntityMenu<Item>(itemList);
                 break;
-            // case 3:
-            //     changeMenuMode(SPELL);
-            //     EntityMenu<Item>(spellList);
-            //     break;
+            case 3:
+                changeMenuMode(SPELL);
+                EntityMenu<Spell>(spellList);
+                break;
         
             default:
                 continueOption = false;
@@ -113,7 +119,7 @@ template<typename E>
                 entity->longPrint();
                 break;
             case 2:
-                //entity->EditMenu();
+                entity->EditMenu();
                 break;
             default:
                 return;

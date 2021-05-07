@@ -75,17 +75,17 @@ void Armor::CreateMenu(EntityList<Item*>* list){
     int armorTypeInt;
     ArmorType armorType;
     
-    std::cout << "Please enter the Weapon's name: ";
+    std::cout << "Please enter the Armor's name: ";
     std::cin >> name;
-    std::cout << "Please enter the Weapon's ID: ";
+    std::cout << "Please enter the Armor's ID: ";
     std::cin >> ID;
-    std::cout << "Please enter the damage description of your Weapon: "<< std::endl;
+    std::cout << "Please enter the damage description of your Armor: "<< std::endl;
     std::cin >> damage;
-    std::cout << "Please enter your Weapon's weight: " << std::endl;
+    std::cout << "Please enter your Armor's weight: " << std::endl;
     std::cin >> weight;
-    std::cout << "Please enter your Weapon's price" << std::endl;
+    std::cout << "Please enter your Armor's price" << std::endl;
     std::cin >> price;
-    std::cout << "Please enter the number corresponding to your desired Weapon's Damage Type:" << std::endl;
+    std::cout << "Please enter the number corresponding to your desired Armor's Type:" << std::endl;
     std::cout << "\t1) Light" << std::endl;
     std::cout << "\t2) Medium" << std::endl;
     std::cout << "\t3) Heavy" << std::endl;

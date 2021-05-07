@@ -13,47 +13,53 @@ void System::itemVectorFromFile(std::string filepath)
     readFile.open(filepath);
     while(!readFile.eof())
     {
-        int type;
+        std::string type;
         std::string name;
         std::string damage;
-        int dmgtype;
-        int armortype;
-        double weight;
-        int id;
-        int range;
-        int price;
+        std::string dmgtype;
+        std::string armortype;
+        std::string weight;
+        std::string id;
+        std::string range;
+        std::string price;
 
         Weapon temp1 = Weapon();
         Armor temp2 = Armor();
         Item temp3 = Item();
-        
-        readFile >> type;
-        switch(type)
+        std::cout << "Here again\n";
+        getline(readFile, type);
+        switch(stoi(type))
         {
             case 0:
-                readFile >> name;
-                readFile >> damage;
-                readFile >> dmgtype;
-                readFile >> range;
-                readFile >> weight;
-                readFile >> id;
-                readFile >> price;
-                itemVector.emplace_back(new Weapon(name, damage, weight, id, price, temp1.intToType(dmgtype), range));
+                getline(readFile,name);
+                getline(readFile, damage);
+                getline(readFile, dmgtype);
+                getline(readFile, range);
+                getline(readFile, weight);
+                getline(readFile, id);
+                getline(readFile, price);
+                itemVector.emplace_back(new Weapon(name, damage, stod(weight), stoi(id), stoi(price), temp1.intToType(stoi(dmgtype)), stoi(range)));
+                break;
             case 1:
-                readFile >> name;
-                readFile >> damage;
-                readFile >> armortype;
-                readFile >> weight;
-                readFile >> id;
-                readFile >> price;
-                itemVector.emplace_back(new Armor(name, damage, weight, id, price, temp2.intToType(armortype)));
+                getline(readFile,name);
+                getline(readFile, damage);
+                getline(readFile, armortype);
+                getline(readFile, weight);
+                getline(readFile, id);
+                getline(readFile, price);
+                std::cout << "Made it this far\n";
+                itemVector.emplace_back(new Armor(name, damage, stod(weight), stoi(id), stoi(price), temp2.intToType(stoi(armortype))));
+                break;
             case 2:
-                readFile >> name;
-                readFile >> damage;
-                readFile >> weight;
-                readFile >> id;
-                readFile >> price;
-                itemVector.emplace_back(new Item(name, damage, temp3.intToType(type), weight, id, price));
+                getline(readFile,name);
+                getline(readFile, damage);
+                getline(readFile, weight);
+                getline(readFile, id);
+                getline(readFile, price);
+                itemVector.emplace_back(new Item(name, damage, temp3.intToType(stoi(type)), stod(weight), stoi(id), stoi(price)));
+                break;
+            default:
+                break;
         }
     }
     readFile.close();
@@ -63,7 +69,7 @@ void System::printItemDetailedList()
     std::vector<Item*>::iterator iter;
     for(iter=itemVector.begin(); iter != itemVector.end(); iter++)
     {
-        (*iter)->to_string();
+        std::cout << (*iter)->to_string();
     }
 }
 void System::printItemShortList()
@@ -71,7 +77,7 @@ void System::printItemShortList()
     std::vector<Item*>::iterator iter;
     for(iter=itemVector.begin(); iter != itemVector.end(); iter++)
     {
-        (*iter)->to_ShortString();
+        std::cout << (*iter)->to_ShortString();
     }
 }
 void System::createItem()
@@ -100,11 +106,9 @@ void System::createItem()
         {
             case 1:
                 std::cout << "You have chosen to create a weapon! Excellent!" << std::endl;
-                do{
-                    std::cout << "Please enter its name (string): ";
-                    std::cin >> itemName;
-                    std::cout << std::endl;
-                }while(getItem(itemName));
+                std::cout << "Please enter its name (string): ";
+                std::cin >> itemName;
+                std::cout << std::endl;
                 std::cout << "Please enter its damage (string): ";
                 std::cin >> itemDmg;
                 std::cout << std::endl;
@@ -123,45 +127,53 @@ void System::createItem()
                 std::cout << "Please enter its weight (double): ";
                 std::cin >> itemWght;
                 std::cout << std::endl;
-                do{
-                    std::cout << "Please enter its unique ID (integer): ";
-                    std::cin >> itemID;
-                    std::cout << std::endl;
-                }while(getItemByID(itemID));
+                std::cout << "Please enter its unique ID (integer): ";
+                std::cin >> itemID;
+                std::cout << std::endl;
                 std::cout << "Please enter its price (integer): ";
                 std::cin >> itemPrice;
                 std::cout << std::endl;
+                if(getItem(itemName) != nullptr || getItemByID(itemID) != nullptr)
+                {
+                    std::cout << "An item of this name or ID already exists. Please try again.\n";
+                    break;
+                }
                 itemVector.emplace_back(new Weapon(itemName, itemDmg, itemWght, itemID, itemPrice, weapon.intToType(itemDmgType), itemRng));
-                break;
+                //break;
             case 2:
                 std::cout << "You have chosen to create a piece of armor! Excellent!" << std::endl;
-                do{
+                //do{
                     std::cout << "Please enter its name (string): ";
                     std::cin >> itemName;
                     std::cout << std::endl;
-                }while(getItem(itemName));
+                //}while(getItem(itemName));
                 std::cout << "Please enter its damage (string): ";
                 std::cin >> itemDmg;
                 std::cout << std::endl;
                 std::cout << "Please enter its weight (double): ";
                 std::cin >> itemWght;
                 std::cout << std::endl;
-                do{
+                //do{
                     std::cout << "Please enter its unique ID (integer): ";
                     std::cin >> itemID;
                     std::cout << std::endl;
-                }while(getItemByID(itemID));
+                //}while(getItemByID(itemID));
                 std::cout << "Please enter its price (integer): ";
                 std::cin >> itemPrice;
+                if(getItem(itemName) != nullptr || getItemByID(itemID) != nullptr)
+                {
+                    std::cout << "An item of this name or ID already exists. Please try again.\n";
+                    break;
+                }
                 itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
-                break;
+                //break;
             case 3:
                 std::cout << "You have chosen to create a piece of armor! Excellent!" << std::endl;
-                do{
+                //do{
                     std::cout << "Please enter its name (string): ";
                     std::cin >> itemName;
                     std::cout << std::endl;
-                }while(getItem(itemName));
+                //}while(getItem(itemName));
                 std::cout << "Please enter its damage (string): ";
                 std::cin >> itemDmg;
                 std::cout << std::endl;
@@ -174,15 +186,21 @@ void System::createItem()
                 std::cout << "Please enter its weight (double): ";
                 std::cin >> itemWght;
                 std::cout << std::endl;
-                do{
+                //do{
                     std::cout << "Please enter its unique ID (integer): ";
                     std::cin >> itemID;
                     std::cout << std::endl;
-                }while(getItemByID(itemID));
+                //}while(getItemByID(itemID));
                 std::cout << "Please enter its price (integer): ";
                 std::cin >> itemPrice;
+                if(getItem(itemName) != nullptr || getItemByID(itemID) != nullptr)
+                {
+                    std::cout << "An item of this name or ID already exists. Please try again.\n";
+                    break;
+                }
+                std::cout << "Thanks for creating an item!\n";
                 itemVector.emplace_back(new Armor(itemName, itemDmg, itemWght, itemID, itemPrice, armor.intToType(itemArmorType)));
-                break;
+                //break;
             default:
                 break;
         }
@@ -231,16 +249,16 @@ void System::editItem()
                 std::cout << "Please Enter the ID of the item you want to view (integer): ";
                 std::cin >> inputID;
                 std::cout << std::endl;
-                (getItemByID(inputID))->to_string();
+                std::cout << (getItemByID(inputID))->to_string();
+                break;
             case 2:
                 printItemShortList();
                 std::cout << "Please Enter the ID of the item you want to edit (integer): ";
                 std::cin >> inputID;
                 std::cout << std::endl;
                 (getItemByID(inputID))->edit();
-            case 3:
                 break;
-            default:
+            case 3:
                 break;
         }
     }while(input > 3 || input < 1);
@@ -386,7 +404,7 @@ Item* System::getItem(std::string name)
     catch(std::string& e)
     {
         std::cerr << e << std::endl;
-        return (new Item());
+        return nullptr;
     }
 }
 
@@ -451,7 +469,7 @@ Item* System::getItemByID(int itemID)
     catch(std::string& e)
     {
         std::cerr << e << std::endl;
-        return (new Item());
+        return (nullptr);
     }
 }
 
@@ -548,11 +566,12 @@ void System::deleteSpell(std::string name)
     }
 }
 
-System* System::getInstance()
+System& System::getInstance()
 {
-    if(!(instance)){
+    static System instance;
+    /*if(!(&instance)){
         instance = new System;
-    }
+    }*/
     return instance;
 }
 
@@ -598,6 +617,7 @@ void System::standardSystemExportToFiles(){
 void System::MenuStart(){
     displayApplicationWelcomeMessage();
     bool menuContinue = true;
+    itemVectorFromFile("items.txt");
 
     do{
         displayMainMenu();
