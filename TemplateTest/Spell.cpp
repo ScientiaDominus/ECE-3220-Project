@@ -64,7 +64,7 @@ void Spell::set_duration(int duration){
     duration_=duration;
 }
 
-std::string Spell::to_string(){
+/*std::string Spell::to_string(){
     char buff[1000];
     const char *name = spellName_.c_str();
     const char *description = description_.c_str();
@@ -72,15 +72,38 @@ std::string Spell::to_string(){
     std::string returnString = buff;
     return returnString;
     
-}
+}*/
 
-std::string Spell::toExportString(){
+/*std::string Spell::toExportString(){
     char buff[1000];
     const char *name = spellName_.c_str();
     const char *description = description_.c_str();
     sprintf(buff, "%s\n%d\n%d\n%d\n%d\n%s\n", name, spellID_, castingTime_, range_, duration_, description);
     std::string exportString = buff;
     return exportString;
+}*/
+
+std::string Spell::toExportString(){
+    std::stringstream exportString;
+    exportString << getName() << std::endl;
+    exportString << get_spellID() << std::endl;
+    exportString << get_castingTime() << std::endl;
+    exportString << get_range() << std::endl;
+    exportString << get_duration << std::endl;
+    exportString << get_description() << std::endl;
+    return exportString.str();
+}
+
+std::string Spell::to_string()
+{
+    std::stringstream outStream;
+    outStream << "NAME: " << getName() << std::endl;
+    outStream << "ID: " << get_spellID() << std::endl;
+    outStream << "CASTING TIME: " << get_castingTime() << std::endl;
+    outStream << "RANGE: " << get_range() << std::endl;
+    outStream << "DURATION: " << get_duration() << std::endl;
+    outStream << "DESCRIPTION: " << get_description() << std::endl;
+    return outStream.str();
 }
 
 std::string Spell::to_simpleString(){
