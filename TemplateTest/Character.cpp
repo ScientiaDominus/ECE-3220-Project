@@ -192,10 +192,9 @@ int Character::raceToInt(Race race_)
         default : return -1; break;
     }
 }
-CharacterClass Character::intToClass(int class_)
-{
-    switch(class_)
-    {
+
+CharacterClass Character::intToClass(int class_){
+    switch(class_){
         case 0: return PALADIN;
         case 1: return FIGHTER;
         case 2: return ROGUE;
@@ -205,8 +204,8 @@ CharacterClass Character::intToClass(int class_)
         default : return PALADIN; break;
     }
 }
-Race Character::intToRace(int race_)
-{
+
+Race Character::intToRace(int race_){
     switch (race_){   
         case 0: return ELF;
         case 1: return HUMAN;
@@ -217,8 +216,7 @@ Race Character::intToRace(int race_)
     }
 }
 
-void Character::printClasses()
-{
+void Character::printClasses(){
     std::cout << "0. Paladin" << std::endl;
     std::cout << "1. Fighter" << std::endl;
     std::cout << "2. Rogue" << std::endl;
@@ -227,8 +225,7 @@ void Character::printClasses()
     std::cout << "5. Wizard" << std::endl;
 }
 
-void Character::printRaces()
-{
+void Character::printRaces(){
     std::cout << "0. Elf" << std::endl;
     std::cout << "1. Human" << std::endl;
     std::cout << "2. Dwarf" << std::endl;
@@ -236,8 +233,7 @@ void Character::printRaces()
     std::cout << "4. Gnome" << std::endl;
 }
 
-void Character::CreateMenu(EntityList<Character*>* list)
-{
+void Character::CreateMenu(EntityList<Character*>* list){
     std::string player = "";
     std::string name = "";
     int id = 0;
@@ -336,8 +332,7 @@ void Character::CreateMenu(EntityList<Character*>* list)
     list->addEntity(temp);
 }
 
-void Character::EditMenu()
-{
+void Character::EditMenu(){
     std::string player = "";
     std::string name = "";
     int id = 0;

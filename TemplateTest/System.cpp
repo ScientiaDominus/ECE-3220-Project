@@ -1,5 +1,7 @@
 #include "System.h"
 
+System *System::instance = nullptr;
+
 System::System(){
     this->itemList = new EntityList<Item*>();
     this->characterList = new EntityList<Character*>();

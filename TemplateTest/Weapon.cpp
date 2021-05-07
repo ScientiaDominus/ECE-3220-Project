@@ -110,41 +110,43 @@ void Weapon::CreateMenu(EntityList<Item*>* list){
     list->addEntity(temp);
 }
 
-// void Weapon::EditMenu(){
-//     this->longPrint();
-//     std::string name;
-//     int ID;
-//     std::string damage;
-//     Type itemType = WEAPON;
-//     double weight;
-//     int price;
-//     DMGType dmgType;
-//     int range;
-    
-//     std::cout << std::endl;
-//     std::cin >> name;
-//     std::cout << std::endl;
-//     std::cin >> name;
-//     std::cout << std::endl;
-//     std::cin >> name;
-//     std::cout << std::endl;
-//     std::cin >> name;
-//     std::cout << std::endl;
-//     std::cin >> name;
-//     std::cout << std::endl;
-//     std::cin >> name;
-//     std::cout << std::endl;
-//     std::cin >> name;
-//     std::cout << std::endl;
-//     std::cin >> name;
+void Weapon::EditMenu(){
+    std::string name;
+    std::string damage;
+    double weight;
+    int itemID;
+    int price;
+    int dmgTypeInt;
+    int range;
+    std::cout << "Here is the Weapon's current information:\n" << to_string() << std::endl;
+    std::cout << "Please enter the Weapon's name";
+    std::getline(std::cin, name);
+    std::cout << "Please enter the Weapon's damage";
+    std::getline(std::cin, damage);
+    std::cout << "Please enter the Weapon's weight";
+    std::cin >> weight;
+    std::cout << "Please enter the Weapon's ID";
+    std::cin >> itemID;
+    std::cout << "Please enter the Weapon's price";
+    std::cin >> price;
+    std::cout << "Please enter the number corresponding to your desired Weapon's Damage Type:" << std::endl;
+    std::cout << "\t1) Fire" << std::endl;
+    std::cout << "\t2) Cold" << std::endl;
+    std::cout << "\t3) Lightning" << std::endl;
+    std::cout << "\t4) Acid" << std::endl;
+    std::cout << "\t5) Slashing" << std::endl;
+    std::cout << "\t6) Poison" << std::endl;
+    std::cout << "\t7) Slashing" << std::endl;
+    std::cin >> dmgTypeInt;
+    std::cout << "Please enter your Weapon's range" << std::endl;
+    std::cin >> range;
 
-//     setName(name);
-//     setID(ID);
-//     setDamage(damage);
-//     setItemType(itemType);
-//     setWeight(weight);
-//     setPrice(price);
-//     this->type = dmgType;
-//     this->range = range;
-
-// }
+    this->setName(name);
+    this->setID(itemID);
+    this->setItemType(WEAPON);
+    this->setWeight(weight);
+    this->setDamage(damage);
+    this->setPrice(price);
+    this->type = intToType(dmgTypeInt);
+    this->range = range;
+}
