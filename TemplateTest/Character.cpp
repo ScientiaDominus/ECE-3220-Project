@@ -242,8 +242,8 @@ void Character::CreateMenu(EntityList<Character*>* list){
     int level = 0;
     int tempScore = 0;
     AbilityScores tempScores;
-    EntityList<Item*> newItems;
-    EntityList<Spell*> newSpells;
+    EntityList<Item*>* newItems;
+    EntityList<Spell*>* newSpells;
     int gold = 0;
     std::cout << std::endl << "Please Enter the Character name: ";
     std::cin >> name;
@@ -294,8 +294,8 @@ void Character::CreateMenu(EntityList<Character*>* list){
     /*std::vector<Item*>::iterator iter;
     for(iter = System::getInstance()->getItemList()->getVector().begin(); iter < System::getInstance()->getItemList()->getVector().end(); iter++)
     {
-        (*iter)->shortPrint()
-        std::cout << (*iter)->to_ShortString();
+        (*iter)->shortPrint();
+        //std::cout << (*iter)->to_ShortString();
     }*/
     int input = 0;
     do{
@@ -305,26 +305,30 @@ void Character::CreateMenu(EntityList<Character*>* list){
         std::cout << std::endl;
         if(System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
         {
-            newItems.addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
+            newItems->addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
         }
     }while(input >= 0 || input != -1);
     std::cout << "Here is a list of the spells you can choose from: " << std::endl;
-    std::vector<Spell*>::iterator iter2;
+    System::getInstance()->getSpellList()->printList();
+    /*std::vector<Spell*>::iterator iter2;
     for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
     {
         (*iter2)->shortPrint();
-    }
+    }*/
     input = 0;
     do{
         std::cout << "Enter the ID of the spell you'd like to add to your inventory: " << std::endl;
+        std::cout << "Enter -1 if you'd like to continue without changes: ";
         std::cin >> input;
         std::cout << std::endl;
         if(System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
         {
-            newSpells.addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
+            newSpells->addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
         }
     }while(input >= 0 || input != -1);
-    Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, tempScores, &newItems, &newSpells, gold); 
+    Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, tempScores, newItems, newSpells, gold);
+    temp->setItems(newItems); 
+    temp->setSpells(newSpells);
     list->addEntity(temp);
 }
 
@@ -391,11 +395,12 @@ void Character::EditMenu(){
     std::cin >> gold;
     this->setGold(gold);
     std::cout << "Here is a list of the items you have: " << std::endl;
+    getItems()->printList();
     std::vector<Item*>::iterator iter;
-    for(iter = getItems()->getVector().begin(); iter < getItems()->getVector().end(); iter++)
+    /*for(iter = getItems()->getVector().begin(); iter < getItems()->getVector().end(); iter++)
     {
         (*iter)->shortPrint();
-    }
+    }*/
     int input = 1;
     do{
         std::cout << "Enter the ID of the item you'd like to remove from your inventory: " << std::endl;

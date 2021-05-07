@@ -14,11 +14,12 @@ int main(){
     Weapon *item7 = new Weapon("Diamond Sword", "Takes 10 lifepoints with every landed swing", 20, 2, 1000, SLASHING, 1);
     armorList.addEntity(item7);
 
-    armorList.printList();
+    //armorList.printList();
 
-    System system = System();
-    system.addEntity<Item*>(ITEM, item6);
-    system.addEntity<Item*>(ITEM, item7);
-    system.StartMenu();
-    std::cout << "hello is this working";
+    System* system = System::getInstance();
+    system->addEntity<Item*>(ITEM, item6);
+    system->addEntity<Item*>(ITEM, item7);
+    system->getItemList()->printList();
+    system->StartMenu();
+    //std::cout << "hello is this working";
 }
