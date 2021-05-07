@@ -307,7 +307,7 @@ void Character::CreateMenu(EntityList<Character*>* list){
         {
             newItems.addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
         }
-    }while(input < 1 || input != -1);
+    }while(input >= 0 || input != -1);
     std::cout << "Here is a list of the spells you can choose from: " << std::endl;
     std::vector<Spell*>::iterator iter2;
     for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
@@ -316,18 +316,14 @@ void Character::CreateMenu(EntityList<Character*>* list){
     }
     input = 0;
     do{
-        std::cout << "Enter the ID of the item you'd like to add to your inventory: " << std::endl;
+        std::cout << "Enter the ID of the spell you'd like to add to your inventory: " << std::endl;
         std::cin >> input;
         std::cout << std::endl;
         if(System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
         {
             newSpells.addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
         }
-        else
-        {
-            input = 1;
-        }
-    }while(input < 1 || input != -1);
+    }while(input >= 0 || input != -1);
     Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, tempScores, &newItems, &newSpells, gold); 
     list->addEntity(temp);
 }
@@ -411,7 +407,7 @@ void Character::EditMenu(){
             for(iter = getItems()->getVector().begin(); iter < getItems()->getVector().end(); iter++)
                 getItems()->getVector().erase(iter);
         }
-    }while(input < 1 || input != -1);
+    }while(input >= 0 || input != -1);
     std::cout << "These are the items you can add: " << std::endl;
     for(iter = System::getInstance()->getItemList()->getVector().begin(); iter < System::getInstance()->getItemList()->getVector().end(); iter++)
     {
@@ -430,7 +426,7 @@ void Character::EditMenu(){
                 getItems()->addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
             }
         }
-    }while(input < 1 || input != -1);
+    }while(input >= 0 || input != -1);
     std::cout << "Here is a list of your spells: " << std::endl;
     std::vector<Spell*>::iterator iter2;
     for(iter2 = getSpells()->getVector().begin(); iter2 < getSpells()->getVector().end(); iter2++)
@@ -448,7 +444,7 @@ void Character::EditMenu(){
             for(iter2 = getSpells()->getVector().begin(); iter2 < getSpells()->getVector().end(); iter2++)
                 getSpells()->getVector().erase(iter2);
         }
-    }while(input < 1 || input != -1);
+    }while(input >= 0 || input != -1);
     std::cout << "Here are the spells you can add to your inventory: " << std::endl;
     for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
     {
@@ -466,10 +462,6 @@ void Character::EditMenu(){
             {
                 getSpells()->addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
             }
-            else
-            {
-                input = 1;
-            }
         }
-    }while(input < 1 || input != -1);
+    }while(input >= 0 || input != -1);
 }
