@@ -42,17 +42,19 @@ class System{
         }
 };
 
+
+
 template<typename T>
 void System::addEntity(MenuModeType entityType, T entity){
     switch(entityType){
         case CHARACTER:
-            characterList->addEntity(entity);
+            characterList->addEntity((Character*)entity);
             break;
         case ITEM:
-            itemList->addEntity(entity);
+            itemList->addEntity((Item*)entity);
             break;
         case SPELL:
-            spellList->addEntity(entity);
+            spellList->addEntity((Spell*)entity);
             break;
         default:
             break;

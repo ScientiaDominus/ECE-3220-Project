@@ -86,3 +86,29 @@ void Item::CreateMenu(EntityList<Item*>* list){
             return;
     }
 }
+
+void Item::EditMenu(){
+    std::string name;
+    std::string damage;
+    double weight;
+    int itemID;
+    int price;
+    std::cout << "Here is the items current information:\n" << to_string() << std::endl;
+    std::cout << "Please enter the Item's name";
+    std::getline(std::cin, name);
+    std::cout << "Please enter the Item's damage";
+    std::getline(std::cin, damage);
+    std::cout << "Please enter the Item's weight";
+    std::cin >> weight;
+    std::cout << "Please enter the Item's ID";
+    std::cin >> itemID;
+    std::cout << "Please enter the Item's price";
+    std::cin >> price;
+    
+    this->setName(name);
+    this->setID(itemID);
+    this->itemType = OBJECT;
+    this->weight = weight;
+    this->damage = damage;
+    this->price = price;
+}
