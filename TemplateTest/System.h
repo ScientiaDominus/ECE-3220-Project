@@ -1,3 +1,5 @@
+#ifndef SYSTEM_H
+#define SYSTEM_H
 #include "EntityList.h"
 #include "Character.h"
 #include "Item.h"
@@ -32,7 +34,7 @@ class System{
         EntityList<Item*>* getItemList(){return itemList;}
         EntityList<Spell*>* getSpellList(){return spellList;} 
         EntityList<Character*>* getCharacterList(){return characterList;}
-        static System* System::getInstance(){
+        static System* getInstance(){
             if(!(instance)){
                 instance = new System;
             }
@@ -56,3 +58,4 @@ void System::addEntity(MenuModeType entityType, T entity){
             break;
     }
 }
+#endif

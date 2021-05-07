@@ -1,12 +1,15 @@
 #include "System.h"
 
 System::System(){
-    itemList = new EntityList<Item*>();
-    characterList = new EntityList<Character*>();
+    this->itemList = new EntityList<Item*>();
+    this->characterList = new EntityList<Character*>();
+    this->spellList = new EntityList<Spell*>();
 }
 
 System::~System(){
     delete itemList;
+    delete characterList;
+    delete spellList;
 }
 
 void System::StartMenu(){

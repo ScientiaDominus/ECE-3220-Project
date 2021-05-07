@@ -1,4 +1,6 @@
 #include "Character.h"
+#include "System.h"
+
 Character::Character(){}
 Character::~Character(){}
 Character::Character(
@@ -234,7 +236,7 @@ void Character::printRaces()
     std::cout << "4. Gnome" << std::endl;
 }
 
-void Character::CreateMenu(EntityList<Character>* list)
+void Character::CreateMenu(EntityList<Character*>* list)
 {
     std::string player = "";
     std::string name = "";
@@ -253,6 +255,9 @@ void Character::CreateMenu(EntityList<Character>* list)
     std::cin >> player;
     std::cout << std::endl << "Please Enter the Character ID: ";
     std::cin >> id;
+    std::cout << std::endl;
+    std::cout << std::endl << "Please Enter the Character level: ";
+    std::cin >> level;
     std::cout << std::endl;
     printClasses();
     std::cout << std::endl << "Please Enter the Character Class: ";
@@ -289,11 +294,13 @@ void Character::CreateMenu(EntityList<Character>* list)
     std::cout << std::endl << "Please Enter the Character's Gold Count: ";
     std::cin >> gold;
     std::cout << "Here is a list of the items you can choose from: " << std::endl;
-    std::vector<Item*>::iterator iter;
+    System::getInstance()->getItemList()->printList();
+    /*std::vector<Item*>::iterator iter;
     for(iter = System::getInstance()->getItemList()->getVector().begin(); iter < System::getInstance()->getItemList()->getVector().end(); iter++)
     {
+        (*iter)->shortPrint()
         std::cout << (*iter)->to_ShortString();
-    }
+    }*/
     int input = 0;
     do{
         std::cout << "Enter the ID of the item you'd like to add to your inventory: " << std::endl;
@@ -302,7 +309,7 @@ void Character::CreateMenu(EntityList<Character>* list)
         std::cout << std::endl;
         if(System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
         {
-            newItems.getVector().emplace_back(System::getInstance()->getItemList()->searchForEntityByID(input));
+            newItems.addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
         }
         else
         {
@@ -322,7 +329,7 @@ void Character::CreateMenu(EntityList<Character>* list)
         std::cout << std::endl;
         if(System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
         {
-            newSpells.getVector().emplace_back(System::getInstance()->getSpellList()->searchForEntityByID(input));
+            newSpells.addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
         }
         else
         {
@@ -330,7 +337,7 @@ void Character::CreateMenu(EntityList<Character>* list)
         }
     }while(input < 1 || input != -1);
     Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, tempScores, &newItems, &newSpells, gold); 
-    System::getInstance()->getCharacterList()->getVector().emplace_back(temp);
+    list->addEntity(temp);
 }
 
 void Character::EditMenu()
@@ -354,6 +361,10 @@ void Character::EditMenu()
     std::cout << std::endl << "Please Enter the Character ID: ";
     std::cin >> id;
     this->setID(id);
+    std::cout << std::endl;
+    std::cout << std::endl << "Please Enter the Character level: ";
+    std::cin >> level;
+    this->setLevel(level);
     std::cout << std::endl;
     printClasses();
     std::cout << std::endl << "Please Enter the Character Class: ";
@@ -396,7 +407,7 @@ void Character::EditMenu()
     std::vector<Item*>::iterator iter;
     for(iter = getItems()->getVector().begin(); iter < getItems()->getVector().end(); iter++)
     {
-        std::cout << (*iter)->to_ShortString();
+        (*iter)->shortPrint();
     }
     int input = 1;
     do{
@@ -413,7 +424,7 @@ void Character::EditMenu()
     std::cout << "These are the items you can add: " << std::endl;
     for(iter = System::getInstance()->getItemList()->getVector().begin(); iter < System::getInstance()->getItemList()->getVector().end(); iter++)
     {
-        std::cout << (*iter)->to_ShortString();
+        (*iter)->shortPrint();
     }
     input = 1;
     do{

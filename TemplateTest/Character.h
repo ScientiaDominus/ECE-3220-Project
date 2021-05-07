@@ -6,12 +6,13 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include "Entity.h"
+#include "EntityList.h"
 #include "Item.h"
 #include "CharacterClass.h"
 #include "Race.h"
 #include "AbilityScores.h"
 #include "Spell.h"
-#include "System.h"
 
 
 class Character : public Entity{
@@ -51,7 +52,7 @@ class Character : public Entity{
 		static void printClasses();
 		static void printRaces();
 		virtual void longPrint() override;
-		static void CreateMenu(EntityList<Character>* List);
+		static void CreateMenu(EntityList<Character*>* List);
 		void EditMenu();
 		
 		~Character();
