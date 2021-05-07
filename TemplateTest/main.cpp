@@ -15,10 +15,10 @@ int main(){
     armorList.addEntity(item7);
 
     armorList.printList();
-
-    System system = System();
-    system.addEntity<Item*>(ITEM, item6);
-    system.addEntity<Item*>(ITEM, item7);
-    system.StartMenu();
-    std::cout << "hello is this working";
+    Spell *item8 = new Spell("Hi", 1, "descripyion", 1, 1, 1);
+    System* system = System::getInstance();
+    system->addEntity<Item*>(ITEM, item6);
+    system->addEntity<Item*>(ITEM, item7);
+    system->addEntity<Spell*>(SPELL, item8);
+    system->StartMenu();
 }

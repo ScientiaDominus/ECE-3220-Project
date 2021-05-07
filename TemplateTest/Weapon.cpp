@@ -120,8 +120,10 @@ void Weapon::EditMenu(){
     int range;
     std::cout << "Here is the Weapon's current information:\n" << to_string() << std::endl;
     std::cout << "Please enter the Weapon's name";
+    std::getline(std::cin, name); //clears buffer
     std::getline(std::cin, name);
     std::cout << "Please enter the Weapon's damage";
+    std::getline(std::cin, damage); //clears buffer
     std::getline(std::cin, damage);
     std::cout << "Please enter the Weapon's weight";
     std::cin >> weight;
@@ -130,13 +132,13 @@ void Weapon::EditMenu(){
     std::cout << "Please enter the Weapon's price";
     std::cin >> price;
     std::cout << "Please enter the number corresponding to your desired Weapon's Damage Type:" << std::endl;
-    std::cout << "\t1) Fire" << std::endl;
-    std::cout << "\t2) Cold" << std::endl;
-    std::cout << "\t3) Lightning" << std::endl;
-    std::cout << "\t4) Acid" << std::endl;
-    std::cout << "\t5) Slashing" << std::endl;
-    std::cout << "\t6) Poison" << std::endl;
-    std::cout << "\t7) Slashing" << std::endl;
+    std::cout << "\t0) Fire" << std::endl;
+    std::cout << "\t1) Cold" << std::endl;
+    std::cout << "\t2) Lightning" << std::endl;
+    std::cout << "\t3) Acid" << std::endl;
+    std::cout << "\t4) Slashing" << std::endl;
+    std::cout << "\t5) Poison" << std::endl;
+    std::cout << "\t6) Slashing" << std::endl;
     std::cin >> dmgTypeInt;
     std::cout << "Please enter your Weapon's range" << std::endl;
     std::cin >> range;

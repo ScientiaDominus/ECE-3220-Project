@@ -6,8 +6,10 @@ Spell::Spell(){
 }
 //parameterized constructor
 Spell::Spell(std::string spellName, int spellID, std::string description, int castingTime, int range, int duration){
-    spellName_=spellName;
-    spellID_=spellID;
+    this->setName(spellName);
+    this->setID(spellID);
+    spellName_= spellName;
+    spellID_= spellID;
     description_=description;
     castingTime_=castingTime;
     range_=range;
@@ -95,6 +97,7 @@ std::string Spell::to_simpleString(){
 void Spell::CreateMenu(EntityList<Spell*>* list){
     std::cout << "Please type in the name of the spell you would like to add\n";
     std::string spellName;
+    getline(std::cin, spellName); //clears buffer
     getline(std::cin, spellName);
     std::cout << "Please type an integer to represent the Spell ID\n";
     int spellID;
@@ -110,17 +113,19 @@ void Spell::CreateMenu(EntityList<Spell*>* list){
     std::cin >> duration;
     std::cout << "Finally, please type a short description of the spell";
     std::string description;
+    getline(std::cin, description); //clears buffer
     getline(std::cin, description);
 
     Spell* temp = new Spell(spellName, spellID, description, castingTime, range, duration);
-    std::cout << "Your new spell is:\n" << temp->to_string() << std::endl;
+    //std::cout << "Your new spell is:\n" << temp->to_string() << std::endl;
     list->addEntity(temp);
 }
 
 void Spell::EditMenu(){
     std::cout << "Enter the new name of the spell\n";
     std::string spellName;
-    getline(std::cin, spellName);
+    getline(std::cin, spellName); //clears buffer
+    getline(std::cin, spellName); 
     std::cout << "Enter the new spell ID\n";
     int spellID;
     std::cin >> spellID;
@@ -135,6 +140,7 @@ void Spell::EditMenu(){
     std::cin >> duration;
     std::cout << "Finally, please enter the new description of the spell";
     std::string description;
+    getline(std::cin, description); //clears buffer
     getline(std::cin, description);
 
     set_spellName(spellName);
