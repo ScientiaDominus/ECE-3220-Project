@@ -31,6 +31,8 @@ class System{
         template<typename T>
         void addEntity(MenuModeType entityType, T entity);
 
+        void importEntityLists();
+        Item* readItemFromFile(std::ifstream& file, int id);
         EntityList<Item*>* getItemList(){return itemList;}
         EntityList<Spell*>* getSpellList(){return spellList;} 
         EntityList<Character*>* getCharacterList(){return characterList;}

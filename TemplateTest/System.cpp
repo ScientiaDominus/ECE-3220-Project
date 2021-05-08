@@ -1,4 +1,7 @@
 #include "System.h"
+#include "Weapon.h"
+#include "Armor.h"
+#include <fstream>
 
 System *System::instance = nullptr;
 
@@ -7,13 +10,11 @@ System::System(){
     this->characterList = new EntityList<Character*>();
     this->spellList = new EntityList<Spell*>();
 }
-
 System::~System(){
     delete itemList;
     delete characterList;
     delete spellList;
 }
-
 void System::StartMenu(){
     bool continueOption = true;
     do{
@@ -41,6 +42,17 @@ void System::StartMenu(){
     }while(continueOption == true);
 }
 
+void System::importEntityLists(){
+    std::ifstream myFile("EntityListExport.txt");
+    int id;
+    while(myFile >> id){
+        Item *item = readItemFromFile(myFile, id);
+        if(item != NULL){
+            itemList->addEntity(item);
+        }
+    }
+}
+
 template<typename E>
 void System::EntityMenu(EntityList<E*>* list){
     std::cout << "Welcome to the " << menuModeString << " Entity Menu\nPlease select an option below" << std::endl;
@@ -61,7 +73,6 @@ void System::EntityMenu(EntityList<E*>* list){
             return;
     }
 }
-
 template<typename E>
 void System::ViewEditMenu(EntityList<E>* list){
         std::cout << "Welcome to the View/Edit " << menuModeString << " Menu\nPlease select an option below" << std::endl;
@@ -84,7 +95,6 @@ void System::ViewEditMenu(EntityList<E>* list){
             break;
         }
     }
-
 template<typename E>
 void System::SearchListMenu(EntityList<E>* list){
     std::cout << "You've selected to look up an existing " << menuModeString << "\nPlease Select an option below." << std::endl;
@@ -142,5 +152,41 @@ void System::changeMenuMode(MenuModeType menuMode){
         default:
             menuModeString = "";
             break;
+    }
+}
+
+Item* System::readItemFromFile(std::ifstream& file, int id){
+    std::string itemName;
+    std::string damage;
+    double weight;
+    int price;
+    std::string itemTypeString;
+    std::getline(file, itemName); //clear buffer
+    std::getline(file, itemName);
+    std::getline(file, damage);
+    file >> weight;
+    file >> price;
+    std::getline(file, itemTypeString); //clear buffer
+    std::getline(file, itemTypeString);
+    if(itemTypeString.compare("OBJECT")){
+        Item* item = new Item(itemName, damage, OBJECT, weight, id, price);
+        return item;
+    } else if(itemTypeString.compare("WEAPON")){
+        int damageTypeInt;
+        int range;
+        file >> damageTypeInt;
+        DMGType dmgType = Weapon::intToType(damageTypeInt);
+        file >> range;
+        Weapon* weapon = new Weapon(itemName, damage, weight, id, price, dmgType, range);
+        return weapon;
+    } else if(itemTypeString.compare("ARMOR")){
+        int armorTypeInt;
+        file >> armorTypeInt;
+        ArmorType ArmorType = Armor::intToType(armorTypeInt);
+        Armor* armor = new Armor(itemName, damage, weight, id, price, ArmorType);
+        return armor;
+    } else{
+        std::cout << "Error Reading Item" << std::endl;
+        return NULL;
     }
 }

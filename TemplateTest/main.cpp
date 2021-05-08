@@ -20,5 +20,6 @@ int main(){
     system->addEntity<Item*>(ITEM, item6);
     system->addEntity<Item*>(ITEM, item7);
     system->addEntity<Spell*>(SPELL, item8);
+    system->importEntityLists();
     system->StartMenu();
 }
