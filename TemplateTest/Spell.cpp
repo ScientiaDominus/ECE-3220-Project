@@ -9,12 +9,10 @@ Spell::Spell(){
 Spell::Spell(std::string spellName, int spellID, std::string description, int castingTime, int range, int duration){
     this->setName(spellName);
     this->setID(spellID);
-    spellName_= spellName;
-    spellID_= spellID;
-    description_=description;
-    castingTime_=castingTime;
-    range_=range;
-    duration_=duration;
+    description_ = description;
+    castingTime_ = castingTime;
+    range_ = range;
+    duration_ = duration;
 }
 //copy constructor
 Spell::Spell(const Spell &spell){
@@ -25,16 +23,11 @@ Spell::Spell(const Spell &spell){
     range_=spell.get_range();
     duration_=spell.get_duration();
 }
+//destructor
 Spell::~Spell(){
 }
 
 //getters and setters
-std::string Spell::get_spellName() const{
-    return spellName_;
-}
-int Spell::get_spellID() const{
-    return spellID_;
-}
 std::string Spell::get_description() const{
     return description_;
 }
@@ -48,12 +41,6 @@ int Spell::get_duration() const{
     return duration_;
 }
 
-/*void Spell::set_spellName(std::string spellName){
-    spellName_=spellName;
-}
-void Spell::set_spellID(int spellID){
-    spellID_=spellID;
-}*/
 void Spell::set_description(std::string description){
     description_=description;
 }
@@ -67,29 +54,11 @@ void Spell::set_duration(int duration){
     duration_=duration;
 }
 
-/*std::string Spell::to_string(){
-    char buff[1000];
-    const char *name = spellName_.c_str();
-    const char *description = description_.c_str();
-    sprintf(buff, "%s\n     Spell ID: %d\n      Casting Time: %d action\n      Range: %d feet\n     Duration: %d\n      Description: %s\n", name, spellID_, castingTime_, range_, duration_, description);
-    std::string returnString = buff;
-    return returnString;
-    
-}*/
-
-/*std::string Spell::toExportString(){
-    char buff[1000];
-    const char *name = spellName_.c_str();
-    const char *description = description_.c_str();
-    sprintf(buff, "%s\n%d\n%d\n%d\n%d\n%s\n", name, spellID_, castingTime_, range_, duration_, description);
-    std::string exportString = buff;
-    return exportString;
-}*/
 
 std::string Spell::toExportString(){
     std::stringstream exportString;
     exportString << getName() << std::endl;
-    exportString << get_spellID() << std::endl;
+    exportString << getID() << std::endl;
     exportString << get_castingTime() << std::endl;
     exportString << get_range() << std::endl;
     exportString << get_duration() << std::endl;
@@ -97,8 +66,7 @@ std::string Spell::toExportString(){
     return exportString.str();
 }
 
-std::string Spell::to_string()
-{
+std::string Spell::to_string(){
     std::stringstream outStream;
     outStream << "NAME: " << getName() << std::endl;
     outStream << "ID: " << getID() << std::endl;
@@ -106,13 +74,6 @@ std::string Spell::to_string()
     outStream << "RANGE: " << get_range() << std::endl;
     outStream << "DURATION: " << get_duration() << std::endl;
     outStream << "DESCRIPTION: " << get_description() << std::endl;
-    return outStream.str();
-}
-
-std::string Spell::to_simpleString(){
-    std::stringstream outStream;
-    outStream << "NAME: " << getName() << std::endl;
-    outStream << "ID: " << getID() << std::endl;
     return outStream.str();
 }
 
@@ -147,7 +108,7 @@ void Spell::EditMenu(){
     std::cout << "Enter the new name of the spell\n";
     std::string spellName;
     getline(std::cin, spellName); //clears buffer
-    getline(std::cin, spellName); 
+    getline(std::cin, spellName);
     std::cout << "Enter the new spell ID\n";
     int spellID;
     std::cin >> spellID;
@@ -160,7 +121,7 @@ void Spell::EditMenu(){
     std::cout << "Enter the new duration of the spell. This is in terms of hours.\n";
     int duration;
     std::cin >> duration;
-    std::cout << "Finally, please enter the new description of the spell";
+    std::cout << "Finally, please enter the new description of the spell\n";
     std::string description;
     getline(std::cin, description); //clears buffer
     getline(std::cin, description);
