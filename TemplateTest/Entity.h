@@ -19,8 +19,8 @@ class Entity{
         void setID(int ID){
             this->ID = ID;
         }
-        std::string getName(){return name;}
-        int getID(){return ID;}
+        std::string getName() const {return name;}
+        int getID() const {return ID;}
         virtual std::string toExportString() =0;
         
 

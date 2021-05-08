@@ -16,8 +16,8 @@ Spell::Spell(std::string spellName, int spellID, std::string description, int ca
 }
 //copy constructor
 Spell::Spell(const Spell &spell){
-    spellName_=spell.get_spellName();
-    spellID_=spell.get_spellID();
+    spellName_= spell.getName();
+    spellID_= spell.getID();
     description_=spell.get_description();
     castingTime_=spell.get_castingTime();
     range_=spell.get_range();
