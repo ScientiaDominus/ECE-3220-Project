@@ -40,7 +40,7 @@ std::string Item::toExportString(){
 
 }
 std::string Item::itemTypeToString(){
-    switch(itemType){
+    switch(getItemType()){
         case OBJECT:
             return "Object";
         case ARMOR:

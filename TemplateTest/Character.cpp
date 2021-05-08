@@ -311,60 +311,46 @@ void Character::CreateMenu(EntityList<Character *> *list)
     int race = 0;
     int level = 0;
     int tempScore = 0;
-    AbilityScores tempScores;
+    AbilityScores *tempScores = new AbilityScores(0,0,0,0,0,0);
     EntityList<Item *> *newItems = new EntityList<Item *>();
     EntityList<Spell *> *newSpells = new EntityList<Spell *>();
     int gold = 0;
-    std::cout << std::endl
-              << "Please Enter the Character name: ";
-    std::cin >> name;
-    std::cout << std::endl
-              << "Please Enter the Player name: ";
-    std::cin >> player;
-    std::cout << std::endl
-              << "Please Enter the Character ID: ";
+    std::cout << "Please Enter the Character name: ";
+    getline(std::cin, name);
+    getline(std::cin, name);
+    std::cout    << "Please Enter the Player name: ";
+    getline(std::cin, player);
+    std::cout << "Please Enter the Character ID: ";
     std::cin >> id;
-    std::cout << std::endl;
-    std::cout << std::endl
-              << "Please Enter the Character level: ";
+    std::cout << "Please Enter the Character level: ";
     std::cin >> level;
-    std::cout << std::endl;
     printClasses();
-    std::cout << std::endl
-              << "Please Enter the Character Class: ";
+    std::cout << "Please Enter the Character Class: ";
     std::cin >> tempClass;
-    std::cout << std::endl;
-    std::cout << tempScores.toString();
+    std::cout << tempScores->toString();
     std::cout << "Please enter your strength: ";
     std::cin >> tempScore;
-    tempScores.setStrength(tempScore);
+    tempScores->setStrength(tempScore);
     std::cout << std::endl;
     std::cout << "Please enter your dexterity: ";
     std::cin >> tempScore;
-    tempScores.setDexterity(tempScore);
-    std::cout << std::endl;
-    std::cout << "Please enter your constitution: ";
+    tempScores->setDexterity(tempScore);
+    std::cout << "Please enter  constitution: ";
     std::cin >> tempScore;
-    tempScores.setConstitution(tempScore);
-    std::cout << std::endl;
+    tempScores->setConstitution(tempScore);
     std::cout << "Please enter your intelligence: ";
     std::cin >> tempScore;
-    tempScores.setIntelligence(tempScore);
-    std::cout << std::endl;
+    tempScores->setIntelligence(tempScore);
     std::cout << "Please enter your wisdom: ";
     std::cin >> tempScore;
-    tempScores.setWisdom(tempScore);
-    std::cout << std::endl;
+    tempScores->setWisdom(tempScore);
     std::cout << "Please enter your charisma: ";
     std::cin >> tempScore;
-    tempScores.setCharisma(tempScore);
-    std::cout << std::endl;
+    tempScores->setCharisma(tempScore);
     printRaces();
-    std::cout << std::endl
-              << "Please Enter the Character Race: ";
+    std::cout << "Please Enter the Character Race: ";
     std::cin >> race;
-    std::cout << std::endl
-              << "Please Enter the Character's Gold Count: ";
+    std::cout << "Please Enter the Character's Gold Count: ";
     std::cin >> gold;
     std::cout << "Here is a list of the items you can choose from: " << std::endl;
     System::getInstance()->getItemList()->printList();
@@ -380,7 +366,6 @@ void Character::CreateMenu(EntityList<Character *> *list)
         std::cout << "Enter the ID of the item you'd like to add to your inventory: " << std::endl;
         std::cout << "Enter -1 if you'd like to continue without changes: ";
         std::cin >> input;
-        std::cout << std::endl;
         if (System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
         {
             newItems->addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
@@ -399,15 +384,18 @@ void Character::CreateMenu(EntityList<Character *> *list)
         std::cout << "Enter the ID of the spell you'd like to add to your inventory: " << std::endl;
         std::cout << "Enter -1 if you'd like to continue without changes: ";
         std::cin >> input;
-        std::cout << std::endl;
         if (System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
         {
             newSpells->addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
         }
     } while (input >= 0 || input != -1);
-    Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, tempScores, newItems, newSpells, gold);
+    Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, *tempScores, newItems, newSpells, gold);
     temp->setItems(newItems);
     temp->setSpells(newSpells);
+    temp->setScores(*tempScores);
+    delete newItems;
+    delete newSpells;
+    delete tempScores;
     list->addEntity(temp);
 }
 
@@ -423,16 +411,14 @@ void Character::EditMenu()
     EntityList<Item *> newItems;
     EntityList<Spell *> newSpells;
     int gold = 0;
-    std::cout << std::endl
-              << "Please Enter the Character name: ";
-    std::cin >> name;
+    std::cout << "Please Enter the Character name: ";
+    getline(std::cin, name);
+    getline(std::cin, name);
     this->setName(name);
-    std::cout << std::endl
-              << "Please Enter the Player name: ";
-    std::cin >> player;
+    std::cout << std::endl << "Please Enter the Player name: ";
+    getline(std::cin, player);
     this->setPlayer(player);
-    std::cout << std::endl
-              << "Please Enter the Character ID: ";
+    std::cout << std::endl << "Please Enter the Character ID: ";
     std::cin >> id;
     this->setID(id);
     std::cout << std::endl;
@@ -442,28 +428,22 @@ void Character::EditMenu()
     this->setLevel(level);
     std::cout << std::endl;
     printClasses();
-    std::cout << std::endl
-              << "Please Enter the Character Class: ";
+    std::cout << std::endl << "Please Enter the Character Class: ";
     std::cin >> tempClass;
     this->setClass(intToClass(tempClass));
-    std::cout << std::endl;
     std::cout << scores_.toString();
     std::cout << "Please enter your strength: ";
     std::cin >> tempScore;
     this->scores_.setStrength(tempScore);
-    std::cout << std::endl;
     std::cout << "Please enter your dexterity: ";
     std::cin >> tempScore;
     this->scores_.setDexterity(tempScore);
-    std::cout << std::endl;
     std::cout << "Please enter your constitution: ";
     std::cin >> tempScore;
     this->scores_.setConstitution(tempScore);
-    std::cout << std::endl;
     std::cout << "Please enter your intelligence: ";
     std::cin >> tempScore;
     this->scores_.setIntelligence(tempScore);
-    std::cout << std::endl;
     std::cout << "Please enter your wisdom: ";
     std::cin >> tempScore;
     this->scores_.setWisdom(tempScore);
@@ -471,19 +451,16 @@ void Character::EditMenu()
     std::cout << "Please enter your charisma: ";
     std::cin >> tempScore;
     this->scores_.setCharisma(tempScore);
-    std::cout << std::endl;
     printRaces();
-    std::cout << std::endl
-              << "Please Enter the Character Race: ";
+    std::cout << "Please Enter the Character Race: ";
     std::cin >> race;
     this->setRace(intToRace(race));
-    std::cout << std::endl
-              << "Please Enter the Character's Gold Count: ";
+    std::cout << "Please Enter the Character's Gold Count: ";
     std::cin >> gold;
     this->setGold(gold);
     std::cout << "Here is a list of the items you have: " << std::endl;
     getItems()->printList();
-    std::vector<Item *>::iterator iter;
+    //std::vector<Item *>::iterator iter;
 
     //getItems()->printList();
     // for(iter = getItems()->getVector().begin(); iter < getItems()->getVector().end(); iter++)
@@ -528,7 +505,7 @@ void Character::EditMenu()
         }
     } while (input >= 0 || input != -1);
     std::cout << "Here is a list of your spells: " << std::endl;
-    std::vector<Spell *>::iterator iter2;
+    //std::vector<Spell *>::iterator iter2;
     // for (iter2 = getSpells()->getVector().begin(); iter2 < getSpells()->getVector().end(); iter2++)
     // {
     //     (*iter2)->shortPrint();
