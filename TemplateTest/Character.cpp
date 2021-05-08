@@ -291,12 +291,6 @@ void Character::CreateMenu(EntityList<Character*>* list){
     std::cin >> gold;
     std::cout << "Here is a list of the items you can choose from: " << std::endl;
     System::getInstance()->getItemList()->printList();
-    /*std::vector<Item*>::iterator iter;
-    for(iter = System::getInstance()->getItemList()->getVector().begin(); iter < System::getInstance()->getItemList()->getVector().end(); iter++)
-    {
-        (*iter)->shortPrint()
-        std::cout << (*iter)->to_ShortString();
-    }*/
     int input = 0;
     do{
         std::cout << "Enter the ID of the item you'd like to add to your inventory: " << std::endl;
@@ -308,13 +302,9 @@ void Character::CreateMenu(EntityList<Character*>* list){
             newItems.addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
         }
     }while(input >= 0 || input != -1);
+    
     std::cout << "Here is a list of the spells you can choose from: " << std::endl;
     System::getInstance()->getSpellList()->printList();
-    // std::vector<Spell*>::iterator iter2;
-    // for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
-    // {
-    //     (*iter2)->shortPrint();
-    // }
     input = 0;
     do{
         std::cout << "Enter the ID of the spell you'd like to add to your inventory: " << std::endl;
@@ -394,10 +384,6 @@ void Character::EditMenu(){
     std::cout << "Here is a list of the items you have: " << std::endl;
     std::vector<Item*>::iterator iter;
     getItems()->printList();
-    // for(iter = getItems()->getVector().begin(); iter < getItems()->getVector().end(); iter++)
-    // {
-    //     (*iter)->shortPrint();
-    // }
     int input = 1;
     do{
         std::cout << "Enter the ID of the item you'd like to remove from your inventory: " << std::endl;
@@ -414,10 +400,6 @@ void Character::EditMenu(){
     } while(input >= 0 || input != -1);
     std::cout << "These are the items you can add: " << std::endl;
     getSpells()->printList();
-    // for(iter = System::getInstance()->getItemList()->getVector().begin(); iter < System::getInstance()->getItemList()->getVector().end(); iter++)
-    // {
-    //     (*iter)->shortPrint();
-    // }
     input = 1;
     do{
         std::cout << "Enter the ID of the item you'd like to add to your inventory: " << std::endl;

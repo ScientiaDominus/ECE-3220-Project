@@ -8,6 +8,8 @@ Armor::Armor(std::string name, std::string damage, double weight, int itemID, in
 }
 Armor::~Armor(){}
 
+ArmorType Armor::getArmorType() const{return armorType;}
+
 std::string Armor::to_string(){
     std::stringstream myStream;
 
@@ -64,7 +66,6 @@ ArmorType Armor::intToType(int type){
 void Armor::longPrint(){
     std::cout << to_string();
 }
-
 void Armor::CreateMenu(EntityList<Item*>* list){
     std::string name;
     int ID;
@@ -95,11 +96,42 @@ void Armor::CreateMenu(EntityList<Item*>* list){
     Armor* temp = new Armor(name, damage, weight, ID, price, armorType);
     list->addEntity(temp);
 }
-
 void Armor::EditMenu(){
-    this->longPrint();
-    //gathers info from user
-    //alters calling object
+    std::string name;
+    std::string damage;
+    double weight;
+    int itemID;
+    int price;
+    int armorTypeInt;
+    std::cout << "Here is the Armor's current information:\n" << to_string() << std::endl;
+    std::cout << "Please enter the Armor's name";
+    std::getline(std::cin, name); //clears buffer
+    std::getline(std::cin, name);
+    std::cout << "Please enter the Armor's damage";
+    std::getline(std::cin, damage); //clears buffer
+    std::getline(std::cin, damage);
+    std::cout << "Please enter the Armor's weight";
+    std::cin >> weight;
+    std::cout << "Please enter the Armor's ID";
+    std::cin >> itemID;
+    std::cout << "Please enter the Armor's price";
+    std::cin >> price;
+    std::cout << "Please enter the number corresponding to your desired Armor Type:" << std::endl;
+    std::cout << "\t0) Fire" << std::endl;
+    std::cout << "\t1) Cold" << std::endl;
+    std::cout << "\t2) Lightning" << std::endl;
+    std::cout << "\t3) Acid" << std::endl;
+    std::cout << "\t4) Slashing" << std::endl;
+    std::cout << "\t5) Poison" << std::endl;
+    std::cout << "\t6) Slashing" << std::endl;
+    std::cin >> armorTypeInt;
+
+    this->setName(name);
+    this->setID(itemID);
+    this->setItemType(ARMOR);
+    this->setWeight(weight);
+    this->setDamage(damage);
+    this->setPrice(price);
+    this->armorType = intToType(armorTypeInt);
 }
 
-ArmorType Armor::getArmorType() const{return armorType;}

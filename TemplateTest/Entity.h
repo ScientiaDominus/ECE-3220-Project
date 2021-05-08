@@ -11,8 +11,8 @@ class Entity{
         //getters and setters
         void setName(std::string name);
         void setID(int ID);
-        std::string getName();
-        int getID();
+        std::string getName() const;
+        int getID() const;
 
         //prints Name and ID of the entity
         void shortPrint();

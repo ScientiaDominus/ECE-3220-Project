@@ -2,6 +2,7 @@
 #define ARMOR_H
 #include "Item.h"
 #include "EntityList.h"
+#include "Entity.h"
 #include <string>
 
 enum ArmorType {LIGHT, MEDIUM, HEAVY};

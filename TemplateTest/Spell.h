@@ -50,9 +50,6 @@ class Spell: public Entity{
         int range_;
         int duration_;
 
-        
-        
-
 };
 
 

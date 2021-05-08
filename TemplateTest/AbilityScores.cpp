@@ -36,8 +36,7 @@ std::string AbilityScores::toExportString() {
     exportString << getCharisma() << std::endl;
     return exportString.str();
 }
-std::string AbilityScores::toString()
-{
+std::string AbilityScores::toString(){
    std::stringstream exportString; 
     exportString << "STRENGTH: " << getStrength() << std::endl;
     exportString << "DEXTERITY: " << getDexterity() << std::endl;
