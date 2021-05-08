@@ -43,7 +43,7 @@ void System::StartMenu(){
 
 template<typename E>
 void System::EntityMenu(EntityList<E*>* list){
-    std::cout << "Welcome to the " << menuModeString << " Entity Menu\nPlease select and option below" << std::endl;
+    std::cout << "Welcome to the " << menuModeString << " Entity Menu\nPlease select an option below" << std::endl;
     std::cout << "\t1) View/Edit Existing " << menuModeString << std::endl;
     std::cout << "\t2) Create New " << menuModeString << std::endl;
     std::cout << "\t3) Exit" << std::endl;
@@ -138,6 +138,7 @@ void System::changeMenuMode(MenuModeType menuMode){
             break;
         case SPELL:
             menuModeString = "Spell";
+            break;
         default:
             menuModeString = "";
             break;

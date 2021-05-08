@@ -42,8 +42,6 @@ class System{
         }
 };
 
-
-
 template<typename T>
 void System::addEntity(MenuModeType entityType, T entity){
     switch(entityType){
