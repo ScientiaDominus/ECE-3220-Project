@@ -128,7 +128,7 @@ std::string Character::spellsToExport(){
     exportString << "111111" << std::endl;
     std::vector<Spell*>::iterator i;
     for(i = spells_->getVector().begin(); i != spells_->getVector().end(); i++){
-        exportString << (*i)->get_spellID() << std::endl;
+        exportString << (*i)->getID() << std::endl;
     }
     exportString << "000000";
     return exportString.str();
