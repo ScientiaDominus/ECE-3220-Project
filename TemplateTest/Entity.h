@@ -8,22 +8,18 @@ class Entity{
         std::string name;
         int ID;
     public:
-        virtual void longPrint() =0;
-        void shortPrint(){
-            std::cout << "Name: " << getName() << std::endl;
-            std::cout << "ID: " << getID() << "\n" << std::endl;
-        }
-        void setName(std::string name){
-            this->name = name;
-        }
-        void setID(int ID){
-            this->ID = ID;
-        }
-        std::string getName() const {return name;}
-        int getID() const {return ID;}
-        virtual std::string toExportString() =0;
-        
+        //getters and setters
+        void setName(std::string name);
+        void setID(int ID);
+        std::string getName();
+        int getID();
 
+        //prints Name and ID of the entity
+        void shortPrint();
+        
+        //pure virtuals for child classes to impliment
+        virtual void longPrint() =0;
+        virtual std::string toExportString() =0;
 };
 
 #endif
