@@ -34,6 +34,7 @@ class System{
         void importEntityLists();
         Item* readItemFromFile(std::ifstream& file, int id);
         Spell* readSpellFromFile(std::ifstream& file, int id);
+        Character* readCharacterFromFile(std::ifstream& file, int id);
         EntityList<Item*>* getItemList(){return itemList;}
         EntityList<Spell*>* getSpellList(){return spellList;} 
         EntityList<Character*>* getCharacterList(){return characterList;}

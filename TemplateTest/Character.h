@@ -66,8 +66,6 @@ class Character : public Entity{
 		AbilityScores scores_;
 		EntityList<Item*>* items_;
 		EntityList<Spell*>* spells_;
-		//std::vector<Item*> items_;
-		//std::vector<Spell> spells_;
 		int gold_;
 
 

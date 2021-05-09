@@ -72,6 +72,7 @@ void Character::longPrint()
 
 std::string Character::toExportString(){
     std::stringstream exportString;
+    exportString << getID() << std::endl;
     exportString << getName() << std::endl;
     exportString << getPlayer() << std::endl;
     exportString << classToInt(getClass()) << std::endl;
@@ -102,12 +103,11 @@ std::string Character::to_string()
 
 std::string Character::itemsToExport(){
     std::stringstream exportString; 
-    exportString << "101010" << std::endl;
     std::vector<Item*>::iterator i;
     for(i = items_->getVector().begin(); i != items_->getVector().end(); i++){
         exportString << (*i)->getID() << std::endl;
     }
-    exportString << "010101" << std::endl;
+    exportString << "-1" << std::endl;
     return exportString.str();
 }
 

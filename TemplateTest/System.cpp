@@ -213,3 +213,47 @@ Spell* System::readSpellFromFile(std::ifstream& file, int id){
     Spell *spell = new Spell(spellName, id, description, castingTime, range, duration);
     return spell;
 }
+
+Character* System::readCharacterFromFile(std::ifstream& file, int id){
+    std::string characterName;
+    std::string playerName;
+    int classInt;
+    int raceInt;
+    int level;
+    int strength;
+    int dexterity;
+    int constitution;
+    int intelligence;
+    int wisdom;
+    int charisma;
+    EntityList<Item*>* itemList = new EntityList<Item*>();
+    EntityList<Spell*>* spellList = new EntityList<Spell*>();
+    int goldCount;
+    std::getline(file, characterName); //clears buffer
+    std::getline(file, characterName);
+    std::getline(file, playerName);
+    file >> classInt;
+    file >> raceInt;
+    file >> level;
+    int itemID;
+    file >> itemID;
+    while(itemID != -1){
+        Item *item = itemList->searchForEntityByID(itemID);
+        if(!item){
+            itemList->addEntity(item);
+        } else{
+            std::cout << "Item with ID " << itemID << " could not be found in your system, was not added to Character" << std::endl;
+        }
+    }
+    int spellID;
+    file >> spellID;
+    while(spellID != -1){
+        Spell *spell = spellList->searchForEntityByID(spellID);
+        if(!spell){
+            spellList->addEntity(spell);
+        } else{
+            std::cout << "Spell with ID " << itemID << " could not be found in your system, was not added to Character" << std::endl;
+        }
+    }
+    Character* character = new Character(playerName, characterName, id,);
+}
