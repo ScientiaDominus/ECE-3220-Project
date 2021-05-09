@@ -16,6 +16,7 @@ class Spell: public Entity{
         Spell(std::string, int, std::string, int, int, int);
         //copy constructor
         Spell(const Spell &spell);
+        //default destructor
         ~Spell();
 
         //getters and setters
@@ -33,12 +34,18 @@ class Spell: public Entity{
         void set_range(int);
         void set_duration(int);
 
+        //returns a readable string for a Spell object
         std::string to_string();
+        //returns a string to be printed to a file
         virtual std::string toExportString();
+        //returns a string with the name and ID of the Spell
         virtual std::string to_simpleString();
 
+        //prints a menu to create a new Spell
         static void CreateMenu(EntityList<Spell*>* list);
+        //prints a menu to edit an existing spell
         virtual void EditMenu();
+        //prints the spell to_string()
         virtual void longPrint();
 
     private:
