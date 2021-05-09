@@ -99,8 +99,10 @@ void Spell::CreateMenu(EntityList<Spell*>* list){
     getline(std::cin, description); //clears buffer
     getline(std::cin, description);
 
+
     Spell* temp = new Spell(spellName, spellID, description, castingTime, range, duration);
     //std::cout << "Your new spell is:\n" << temp->to_string() << std::endl;
+
     list->addEntity(temp);
 }
 

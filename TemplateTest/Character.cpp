@@ -1,12 +1,13 @@
 #include "Character.h"
 #include "System.h"
 
-Character::Character(){}
-Character::~Character(){}
+Character::Character() {}
+Character::~Character() {}
 Character::Character(
-                    std::string player_name, std::string name, int id, CharacterClass character_class,
-                    Race race, int level, AbilityScores ability_scores, EntityList<Item*> *item_inventory,
-                    EntityList<Spell*> *spell_inventory, int gold_count){
+    std::string player_name, std::string name, int id, CharacterClass character_class,
+    Race race, int level, AbilityScores* ability_scores, EntityList<Item *> *item_inventory,
+    EntityList<Spell *> *spell_inventory, int gold_count)
+{
     player_ = player_name;
     setName(name);
     setID(id);
@@ -18,14 +19,14 @@ Character::Character(
     spells_ = spell_inventory;
     gold_ = gold_count;
 }
-std::string Character::getPlayer() const{return player_;}
-CharacterClass Character::getClass() const{return class_;}
-Race Character::getRace() const{return race_;}
-int Character::getLevel() const{return level_;}
-AbilityScores Character::getScores() const{return scores_;}
-EntityList<Item*>* Character::getItems() const{return items_;}
-EntityList<Spell*>* Character::getSpells() const{return spells_;}
-int Character::getGold() const{return gold_;}
+std::string Character::getPlayer() const { return player_; }
+CharacterClass Character::getClass() const { return class_; }
+Race Character::getRace() const { return race_; }
+int Character::getLevel() const { return level_; }
+AbilityScores* Character::getScores() const { return scores_; }
+EntityList<Item *> *Character::getItems() const { return items_; }
+EntityList<Spell *> *Character::getSpells() const { return spells_; }
+int Character::getGold() const { return gold_; }
 
 void Character::setPlayer(std::string player)
 {
@@ -52,11 +53,11 @@ void Character::setScores(AbilityScores scores)
     scores_.setWisdom(scores.getWisdom());
     scores_.setCharisma(scores.getCharisma());
 }
-void Character::setItems(EntityList<Item*>* items)
+void Character::setItems(EntityList<Item *> *items)
 {
     items_->getVector() = items->getVector();
 }
-void Character::setSpells(EntityList<Spell*>* spells)
+void Character::setSpells(EntityList<Spell *> *spells)
 {
     spells_->getVector() = spells->getVector();
 }
@@ -70,7 +71,8 @@ void Character::longPrint()
     std::cout << to_string();
 }
 
-std::string Character::toExportString(){
+std::string Character::toExportString()
+{
     std::stringstream exportString;
     exportString << getID() << std::endl;
     exportString << getName() << std::endl;
@@ -96,10 +98,11 @@ std::string Character::to_string()
     outStream << "LEVEL: " << getLevel() << std::endl;
     outStream << "ABILITY SCORES: " << std::endl;
     outStream << scores_.toString();
-    outStream << itemsToString();
-    outStream << spellsToString();
+    //outStream << itemsToString();
+    //outStream << spellsToString();
     return outStream.str();
 }
+
 
 std::string Character::itemsToExport(){
     std::stringstream exportString; 
@@ -108,115 +111,178 @@ std::string Character::itemsToExport(){
         exportString << (*i)->getID() << std::endl;
     }
     exportString << "-1" << std::endl;
+
     return exportString.str();
 }
 
 std::string Character::itemsToString()
 {
-   std::stringstream exportString; 
-    exportString << "ITEM INVENTORY: " << std::endl;
-    std::vector<Item*>::iterator i;
-    for(i = items_->getVector().begin(); i != items_->getVector().end(); i++){
-        exportString << (*i)->to_string() << std::endl;
-    }
-    exportString << "END ITEM INVENTORY: " << std::endl;
-    return exportString.str(); 
-}
-
-std::string Character::spellsToExport(){
     std::stringstream exportString;
-    exportString << "111111" << std::endl;
-    std::vector<Spell*>::iterator i;
-    for(i = spells_->getVector().begin(); i != spells_->getVector().end(); i++){
-        exportString << (*i)->getID() << std::endl;
-    }
-    exportString << "000000";
+    exportString << "ITEM INVENTORY: " << std::endl;
+    std::vector<Item *>::iterator i;
+    // for (i = items_->getVector().begin(); i != items_->getVector().end(); i++)
+    // {
+    //     exportString << (*i)->to_string() << std::endl;
+    // }
+    exportString << getItems()->exportListToString();
+    exportString << "END ITEM INVENTORY: " << std::endl;
     return exportString.str();
 }
 
-std::string Character::spellsToString(){
+std::string Character::spellsToExport()
+{
+    std::stringstream exportString;
+    // std::vector<Spell *>::iterator i;
+    // for (i = spells_->getVector().begin(); i != spells_->getVector().end(); i++)
+    // {
+    //     exportString << (*i)->get_spellID() << std::endl;
+    // }
+    exportString << getSpells()->getStringListOfIDs();
+    exportString << "-1";
+    return exportString.str();
+}
+
+std::string Character::spellsToString()
+{
     std::stringstream exportString;
     exportString << "SPELL INVENTORY: " << std::endl;
-    std::vector<Spell*>::iterator i;
-    for(i = spells_->getVector().begin(); i != spells_->getVector().end(); i++){
-        exportString << (*i)->to_string() << std::endl;
-    }
+    std::vector<Spell *>::iterator i;
+    // for (i = spells_->getVector().begin(); i != spells_->getVector().end(); i++)
+    // {
+    //     exportString << (*i)->to_string() << std::endl;
+    // }
+    exportString << getSpells()->getStringListOfIDs();
     exportString << "END SPELL INVENTORY: ";
     return exportString.str();
 }
 
-std::string Character::raceToString(Race race){
-    switch (race){   
-        case ELF: return "Elf";
-        case HUMAN: return "Human";
-        case DWARF: return "Dwarf";
-        case HALF_ORC: return "Half Orc";
-        case GNOME: return "Gnome";
-        default : return ""; break;
+std::string Character::raceToString(Race race)
+{
+    switch (race)
+    {
+    case ELF:
+        return "Elf";
+    case HUMAN:
+        return "Human";
+    case DWARF:
+        return "Dwarf";
+    case HALF_ORC:
+        return "Half Orc";
+    case GNOME:
+        return "Gnome";
+    default:
+        return "";
+        break;
     }
 }
 
-std::string Character::classToString(CharacterClass characterClass){
-    switch (characterClass){   
-        case PALADIN: return "Paladin";
-        case FIGHTER: return "Fighter";
-        case ROGUE: return "Rogue";
-        case CLERIC: return "Cleric";
-        case RANGER: return "Ranger";
-        case WIZARD: return "Wizard";
-        default : return "UNKNOWN"; break;
+std::string Character::classToString(CharacterClass characterClass)
+{
+    switch (characterClass)
+    {
+    case PALADIN:
+        return "Paladin";
+    case FIGHTER:
+        return "Fighter";
+    case ROGUE:
+        return "Rogue";
+    case CLERIC:
+        return "Cleric";
+    case RANGER:
+        return "Ranger";
+    case WIZARD:
+        return "Wizard";
+    default:
+        return "UNKNOWN";
+        break;
     }
 }
 
 int Character::classToInt(CharacterClass class_)
 {
-    switch(class_)
+    switch (class_)
     {
-        case PALADIN: return 0;
-        case FIGHTER: return 1;
-        case ROGUE: return 2;
-        case CLERIC: return 3;
-        case RANGER: return 4;
-        case WIZARD: return 5;
-        default : return -1; break;
+    case PALADIN:
+        return 0;
+    case FIGHTER:
+        return 1;
+    case ROGUE:
+        return 2;
+    case CLERIC:
+        return 3;
+    case RANGER:
+        return 4;
+    case WIZARD:
+        return 5;
+    default:
+        return -1;
+        break;
     }
 }
 int Character::raceToInt(Race race_)
 {
-    switch (race_){   
-        case ELF: return 0;
-        case HUMAN: return 1;
-        case DWARF: return 2;
-        case HALF_ORC: return 3;
-        case GNOME: return 4;
-        default : return -1; break;
+    switch (race_)
+    {
+    case ELF:
+        return 0;
+    case HUMAN:
+        return 1;
+    case DWARF:
+        return 2;
+    case HALF_ORC:
+        return 3;
+    case GNOME:
+        return 4;
+    default:
+        return -1;
+        break;
     }
 }
 
-CharacterClass Character::intToClass(int class_){
-    switch(class_){
-        case 0: return PALADIN;
-        case 1: return FIGHTER;
-        case 2: return ROGUE;
-        case 3: return CLERIC;
-        case 4: return RANGER;
-        case 5: return WIZARD;
-        default : return PALADIN; break;
+CharacterClass Character::intToClass(int class_)
+{
+    switch (class_)
+    {
+    case 0:
+        return PALADIN;
+    case 1:
+        return FIGHTER;
+    case 2:
+        return ROGUE;
+    case 3:
+        return CLERIC;
+    case 4:
+        return RANGER;
+    case 5:
+        return WIZARD;
+    default:
+        return PALADIN;
+        break;
     }
 }
 
-Race Character::intToRace(int race_){
-    switch (race_){   
-        case 0: return ELF;
-        case 1: return HUMAN;
-        case 2: return DWARF;
-        case 3: return HALF_ORC;
-        case 4: return GNOME;
-        default : return HUMAN; break;
+Race Character::intToRace(int race_)
+{
+    switch (race_)
+    {
+    case 0:
+        return ELF;
+    case 1:
+        return HUMAN;
+    case 2:
+        return DWARF;
+    case 3:
+        return HALF_ORC;
+    case 4:
+        return GNOME;
+    default:
+        return HUMAN;
+        break;
     }
 }
 
-void Character::printClasses(){
+void Character::printClasses()
+{
     std::cout << "0. Paladin" << std::endl;
     std::cout << "1. Fighter" << std::endl;
     std::cout << "2. Rogue" << std::endl;
@@ -225,7 +291,8 @@ void Character::printClasses(){
     std::cout << "5. Wizard" << std::endl;
 }
 
-void Character::printRaces(){
+void Character::printRaces()
+{
     std::cout << "0. Elf" << std::endl;
     std::cout << "1. Human" << std::endl;
     std::cout << "2. Dwarf" << std::endl;
@@ -233,7 +300,8 @@ void Character::printRaces(){
     std::cout << "4. Gnome" << std::endl;
 }
 
-void Character::CreateMenu(EntityList<Character*>* list){
+void Character::CreateMenu(EntityList<Character *> *list)
+{
     std::string player = "";
     std::string name = "";
     int id = 0;
@@ -241,85 +309,106 @@ void Character::CreateMenu(EntityList<Character*>* list){
     int race = 0;
     int level = 0;
     int tempScore = 0;
-    AbilityScores tempScores;
-    EntityList<Item*> newItems;
-    EntityList<Spell*> newSpells;
+    AbilityScores *tempScores = new AbilityScores(0,0,0,0,0,0);
+    EntityList<Item *> *newItems = new EntityList<Item *>();
+    EntityList<Spell *> *newSpells = new EntityList<Spell *>();
     int gold = 0;
-    std::cout << std::endl << "Please Enter the Character name: ";
-    std::cin >> name;
-    std::cout << std::endl << "Please Enter the Player name: ";  
-    std::cin >> player;
-    std::cout << std::endl << "Please Enter the Character ID: ";
+    std::cout << "Please Enter the Character name: ";
+    getline(std::cin, name);
+    getline(std::cin, name);
+    std::cout    << "Please Enter the Player name: ";
+    getline(std::cin, player);
+    std::cout << "Please Enter the Character ID: ";
     std::cin >> id;
-    std::cout << std::endl;
-    std::cout << std::endl << "Please Enter the Character level: ";
+    std::cout << "Please Enter the Character level: ";
     std::cin >> level;
-    std::cout << std::endl;
     printClasses();
-    std::cout << std::endl << "Please Enter the Character Class: ";
+    std::cout << "Please Enter the Character Class: ";
     std::cin >> tempClass;
-    std::cout << std::endl;
-    std::cout << tempScores.toString();
-    std::cout << "Please enter your strength: "; 
+    std::cout << tempScores->toString();
+    std::cout << "Please enter your strength: ";
     std::cin >> tempScore;
-    tempScores.setStrength(tempScore);
+    tempScores->setStrength(tempScore);
     std::cout << std::endl;
-    std::cout << "Please enter your dexterity: "; 
+    std::cout << "Please enter your dexterity: ";
     std::cin >> tempScore;
-    tempScores.setDexterity(tempScore);
-    std::cout << std::endl;
-    std::cout << "Please enter your constitution: "; 
+    tempScores->setDexterity(tempScore);
+    std::cout << "Please enter  constitution: ";
     std::cin >> tempScore;
-    tempScores.setConstitution(tempScore);
-    std::cout << std::endl;
-    std::cout << "Please enter your intelligence: "; 
+    tempScores->setConstitution(tempScore);
+    std::cout << "Please enter your intelligence: ";
     std::cin >> tempScore;
-    tempScores.setIntelligence(tempScore);
-    std::cout << std::endl;
-    std::cout << "Please enter your wisdom: "; 
+    tempScores->setIntelligence(tempScore);
+    std::cout << "Please enter your wisdom: ";
     std::cin >> tempScore;
-    tempScores.setWisdom(tempScore);
-    std::cout << std::endl;
-    std::cout << "Please enter your charisma: "; 
+    tempScores->setWisdom(tempScore);
+    std::cout << "Please enter your charisma: ";
     std::cin >> tempScore;
-    tempScores.setCharisma(tempScore);
-    std::cout << std::endl;
+    tempScores->setCharisma(tempScore);
     printRaces();
-    std::cout << std::endl << "Please Enter the Character Race: ";
+    std::cout << "Please Enter the Character Race: ";
     std::cin >> race;
-    std::cout << std::endl << "Please Enter the Character's Gold Count: ";
+    std::cout << "Please Enter the Character's Gold Count: ";
     std::cin >> gold;
     std::cout << "Here is a list of the items you can choose from: " << std::endl;
     System::getInstance()->getItemList()->printList();
+<<<<<<< HEAD
+=======
+    /*std::vector<Item*>::iterator iter;
+    for(iter = System::getInstance()->getItemList()->getVector().begin(); iter < System::getInstance()->getItemList()->getVector().end(); iter++)
+    {
+        (*iter)->shortPrint();
+        //std::cout << (*iter)->to_ShortString();
+    }*/
+>>>>>>> 0a9f588b212103cf5c540a4f2d6c79c98ee6acdb
     int input = 0;
-    do{
+    do
+    {
         std::cout << "Enter the ID of the item you'd like to add to your inventory: " << std::endl;
         std::cout << "Enter -1 if you'd like to continue without changes: ";
         std::cin >> input;
-        std::cout << std::endl;
-        if(System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
+        if (System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
         {
-            newItems.addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
+            newItems->addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
         }
+<<<<<<< HEAD
     }while(input >= 0 || input != -1);
     
     std::cout << "Here is a list of the spells you can choose from: " << std::endl;
     System::getInstance()->getSpellList()->printList();
+=======
+    } while (input >= 0 || input != -1);
+    std::cout << "Here is a list of the spells you can choose from: " << std::endl;
+    System::getInstance()->getSpellList()->printList();
+    /*std::vector<Spell*>::iterator iter2;
+    for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
+    {
+        (*iter2)->shortPrint();
+    }*/
+>>>>>>> 0a9f588b212103cf5c540a4f2d6c79c98ee6acdb
     input = 0;
-    do{
+    do
+    {
         std::cout << "Enter the ID of the spell you'd like to add to your inventory: " << std::endl;
+        std::cout << "Enter -1 if you'd like to continue without changes: ";
         std::cin >> input;
-        std::cout << std::endl;
-        if(System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
+        if (System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
         {
-            newSpells.addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
+            newSpells->addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
         }
-    }while(input >= 0 || input != -1);
-    Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, tempScores, &newItems, &newSpells, gold); 
+    } while (input >= 0 || input != -1);
+    Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, *tempScores, newItems, newSpells, gold);
+    temp->setItems(newItems);
+    temp->setSpells(newSpells);
+    temp->setScores(*tempScores);
+    delete newItems;
+    delete newSpells;
+    delete tempScores;
     list->addEntity(temp);
 }
 
-void Character::EditMenu(){
+void Character::EditMenu()
+{
     std::string player = "";
     std::string name = "";
     int id = 0;
@@ -327,20 +416,22 @@ void Character::EditMenu(){
     int race = 0;
     int level = 0;
     int tempScore = 0;
-    EntityList<Item*> newItems;
-    EntityList<Spell*> newSpells;
+    EntityList<Item *> newItems;
+    EntityList<Spell *> newSpells;
     int gold = 0;
-    std::cout << std::endl << "Please Enter the Character name: ";
-    std::cin >> name;
+    std::cout << "Please Enter the Character name: ";
+    getline(std::cin, name);
+    getline(std::cin, name);
     this->setName(name);
-    std::cout << std::endl << "Please Enter the Player name: ";  
-    std::cin >> player;
+    std::cout << std::endl << "Please Enter the Player name: ";
+    getline(std::cin, player);
     this->setPlayer(player);
     std::cout << std::endl << "Please Enter the Character ID: ";
     std::cin >> id;
     this->setID(id);
     std::cout << std::endl;
-    std::cout << std::endl << "Please Enter the Character level: ";
+    std::cout << std::endl
+              << "Please Enter the Character level: ";
     std::cin >> level;
     this->setLevel(level);
     std::cout << std::endl;
@@ -348,107 +439,125 @@ void Character::EditMenu(){
     std::cout << std::endl << "Please Enter the Character Class: ";
     std::cin >> tempClass;
     this->setClass(intToClass(tempClass));
-    std::cout << std::endl;
     std::cout << scores_.toString();
-    std::cout << "Please enter your strength: "; 
+    std::cout << "Please enter your strength: ";
     std::cin >> tempScore;
     this->scores_.setStrength(tempScore);
-    std::cout << std::endl;
-    std::cout << "Please enter your dexterity: "; 
+    std::cout << "Please enter your dexterity: ";
     std::cin >> tempScore;
     this->scores_.setDexterity(tempScore);
-    std::cout << std::endl;
-    std::cout << "Please enter your constitution: "; 
+    std::cout << "Please enter your constitution: ";
     std::cin >> tempScore;
     this->scores_.setConstitution(tempScore);
-    std::cout << std::endl;
-    std::cout << "Please enter your intelligence: "; 
+    std::cout << "Please enter your intelligence: ";
     std::cin >> tempScore;
     this->scores_.setIntelligence(tempScore);
-    std::cout << std::endl;
-    std::cout << "Please enter your wisdom: "; 
+    std::cout << "Please enter your wisdom: ";
     std::cin >> tempScore;
     this->scores_.setWisdom(tempScore);
     std::cout << std::endl;
-    std::cout << "Please enter your charisma: "; 
+    std::cout << "Please enter your charisma: ";
     std::cin >> tempScore;
     this->scores_.setCharisma(tempScore);
-    std::cout << std::endl;
     printRaces();
-    std::cout << std::endl << "Please Enter the Character Race: ";
+    std::cout << "Please Enter the Character Race: ";
     std::cin >> race;
     this->setRace(intToRace(race));
-    std::cout << std::endl << "Please Enter the Character's Gold Count: ";
+    std::cout << "Please Enter the Character's Gold Count: ";
     std::cin >> gold;
     this->setGold(gold);
     std::cout << "Here is a list of the items you have: " << std::endl;
-    std::vector<Item*>::iterator iter;
     getItems()->printList();
+<<<<<<< HEAD
+=======
+    //std::vector<Item *>::iterator iter;
+
+    //getItems()->printList();
+    // for(iter = getItems()->getVector().begin(); iter < getItems()->getVector().end(); iter++)
+    // {
+    //     (*iter)->shortPrint();
+    // }
+>>>>>>> 0a9f588b212103cf5c540a4f2d6c79c98ee6acdb
     int input = 1;
-    do{
-        std::cout << "Enter the ID of the item you'd like to remove from your inventory: " << std::endl;
-        std::cout << "Enter -1 if you'd like to continue without changes: ";
-        std::cin >> input;
-        std::cout << std::endl;
-        if(input != -1)
-        {
-            for(iter = getItems()->getVector().begin(); iter < getItems()->getVector().end(); iter++)
-                if((*iter)->getID() == input){
-                    getItems()->getVector().erase(iter);
-                }  
-        }
-    } while(input >= 0 || input != -1);
+    // do
+    // {
+    //     std::cout << "Enter the ID of the item you'd like to remove from your inventory: " << std::endl;
+    //     std::cout << "Enter -1 if you'd like to continue without changes: ";
+    //     std::cin >> input;
+    //     std::cout << std::endl;
+    //     if (input != -1)
+    //     {
+    //         for (iter = getItems()->getVector().begin(); iter < getItems()->getVector().end(); iter++)
+    //             if ((*iter)->getID() == input)
+    //             {
+    //                 getItems()->getVector().erase(iter);
+    //             }
+    //     }
+    // } while (input >= 0 || input != -1);
     std::cout << "These are the items you can add: " << std::endl;
+<<<<<<< HEAD
     getSpells()->printList();
+=======
+    System::getInstance()->getItemList()->printList();
+    // for(iter = System::getInstance()->getItemList()->getVector().begin(); iter < System::getInstance()->getItemList()->getVector().end(); iter++)
+    // {
+    //     (*iter)->shortPrint();
+    // }
+>>>>>>> 0a9f588b212103cf5c540a4f2d6c79c98ee6acdb
     input = 1;
-    do{
+    do
+    {
         std::cout << "Enter the ID of the item you'd like to add to your inventory: " << std::endl;
         std::cout << "Enter -1 if you'd like to continue without changes: ";
         std::cin >> input;
         std::cout << std::endl;
-        if(input != -1)
+        if (input != -1)
         {
-            if(System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
+            if (System::getInstance()->getItemList()->searchForEntityByID(input) != nullptr)
             {
                 getItems()->addEntity(System::getInstance()->getItemList()->searchForEntityByID(input));
             }
         }
-    }while(input >= 0 || input != -1);
+    } while (input >= 0 || input != -1);
     std::cout << "Here is a list of your spells: " << std::endl;
-    std::vector<Spell*>::iterator iter2;
-    for(iter2 = getSpells()->getVector().begin(); iter2 < getSpells()->getVector().end(); iter2++)
-    {
-        (*iter2)->shortPrint();
-    }
+    //std::vector<Spell *>::iterator iter2;
+    // for (iter2 = getSpells()->getVector().begin(); iter2 < getSpells()->getVector().end(); iter2++)
+    // {
+    //     (*iter2)->shortPrint();
+    // }
+    getSpells()->printList();
     input = 1;
-    do{
-        std::cout << "Enter the ID of the spell you'd like to remove from your inventory: " << std::endl;
-        std::cout << "Enter -1 if you'd like to continue without changes: ";
-        std::cin >> input;
-        std::cout << std::endl;
-        if(input != -1)
-        {
-            for(iter2 = getSpells()->getVector().begin(); iter2 < getSpells()->getVector().end(); iter2++)
-                getSpells()->getVector().erase(iter2);
-        }
-    }while(input >= 0 || input != -1);
+    // do
+    // {
+    //     std::cout << "Enter the ID of the spell you'd like to remove from your inventory: " << std::endl;
+    //     std::cout << "Enter -1 if you'd like to continue without changes: ";
+    //     std::cin >> input;
+    //     std::cout << std::endl;
+    //     if (input != -1)
+    //     {
+    //         for (iter2 = getSpells()->getVector().begin(); iter2 < getSpells()->getVector().end(); iter2++)
+    //             getSpells()->getVector().erase(iter2);
+    //     }
+    // } while (input >= 0 || input != -1);
     std::cout << "Here are the spells you can add to your inventory: " << std::endl;
-    for(iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
-    {
-        (*iter2)->shortPrint();
-    }
+    // for (iter2 = System::getInstance()->getSpellList()->getVector().begin(); iter2 < System::getInstance()->getSpellList()->getVector().end(); iter2++)
+    // {
+    //     (*iter2)->shortPrint();
+    // }
+    System::getInstance()->getSpellList()->printList();
     input = 1;
-    do{
+    do
+    {
         std::cout << "Enter the ID of the spell you'd like to add to your inventory: " << std::endl;
         std::cout << "Enter -1 if you'd like to continue without changes: ";
         std::cin >> input;
         std::cout << std::endl;
-        if(input != -1)
+        if (input != -1)
         {
-            if(System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
+            if (System::getInstance()->getSpellList()->searchForEntityByID(input) != nullptr)
             {
                 getSpells()->addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
             }
         }
-    }while(input >= 0 || input != -1);
+    } while (input >= 0 || input != -1);
 }

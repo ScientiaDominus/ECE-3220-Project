@@ -14,6 +14,7 @@ int main(){
     Weapon *item7 = new Weapon("Diamond Sword", "Takes 10 lifepoints with every landed swing", 20, 2, 1000, SLASHING, 1);
     armorList.addEntity(item7);
 
+
     armorList.printList();
     Spell *item8 = new Spell("Hi", 1, "descripyion", 1, 1, 1);
     System* system = System::getInstance();
@@ -22,4 +23,5 @@ int main(){
     system->addEntity<Spell*>(SPELL, item8);
     system->importEntityLists();
     system->StartMenu();
+
 }

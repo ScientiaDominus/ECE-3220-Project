@@ -59,6 +59,14 @@ void System::importEntityLists(){
             spellList->addEntity(spell);
         }
     }
+
+    std::ifstream characterFile("CharacterListExport.txt");
+    while(characterFile >> id){
+        Character *character = readCharacterFromFile(characterFile, id);
+        if(character != NULL){
+            characterList->addEntity(character);
+        }
+    }
 }
 
 template<typename E>
@@ -226,8 +234,8 @@ Character* System::readCharacterFromFile(std::ifstream& file, int id){
     int intelligence;
     int wisdom;
     int charisma;
-    EntityList<Item*>* itemList = new EntityList<Item*>();
-    EntityList<Spell*>* spellList = new EntityList<Spell*>();
+    EntityList<Item*>* itemInventory = new EntityList<Item*>();
+    EntityList<Spell*>* spellInventory = new EntityList<Spell*>();
     int goldCount;
     std::getline(file, characterName); //clears buffer
     std::getline(file, characterName);
@@ -235,12 +243,18 @@ Character* System::readCharacterFromFile(std::ifstream& file, int id){
     file >> classInt;
     file >> raceInt;
     file >> level;
+    file >> strength;
+    file >> dexterity;
+    file >> constitution;
+    file >> intelligence;
+    file >> wisdom;
+    file >> charisma;
     int itemID;
     file >> itemID;
     while(itemID != -1){
         Item *item = itemList->searchForEntityByID(itemID);
         if(!item){
-            itemList->addEntity(item);
+            itemInventory->addEntity(item);
         } else{
             std::cout << "Item with ID " << itemID << " could not be found in your system, was not added to Character" << std::endl;
         }
@@ -250,10 +264,15 @@ Character* System::readCharacterFromFile(std::ifstream& file, int id){
     while(spellID != -1){
         Spell *spell = spellList->searchForEntityByID(spellID);
         if(!spell){
-            spellList->addEntity(spell);
+            spellInventory->addEntity(spell);
         } else{
             std::cout << "Spell with ID " << itemID << " could not be found in your system, was not added to Character" << std::endl;
         }
     }
-    Character* character = new Character(playerName, characterName, id,);
+    file >> goldCount;
+    CharacterClass characterClass = Character::intToClass(classInt);
+    Race race = Character::intToRace(raceInt);
+    AbilityScores* abilityScores = new AbilityScores(strength, dexterity, constitution, intelligence, wisdom, charisma);
+    Character* character = new Character(playerName, characterName, id, characterClass, race, level, abilityScores, itemInventory, spellInventory, goldCount);
+    return character;
 }
