@@ -9,8 +9,6 @@ Spell::Spell(){
 Spell::Spell(std::string spellName, int spellID, std::string description, int castingTime, int range, int duration){
     this->setName(spellName);
     this->setID(spellID);
-    spellName_= spellName;
-    spellID_= spellID;
     description_=description;
     castingTime_=castingTime;
     range_=range;
@@ -25,6 +23,7 @@ Spell::Spell(const Spell &spell){
     range_=spell.get_range();
     duration_=spell.get_duration();
 }
+//destructor
 Spell::~Spell(){
 }
 
@@ -89,7 +88,7 @@ void Spell::set_duration(int duration){
 std::string Spell::toExportString(){
     std::stringstream exportString;
     exportString << getName() << std::endl;
-    exportString << get_spellID() << std::endl;
+    exportString << getID() << std::endl;
     exportString << get_castingTime() << std::endl;
     exportString << get_range() << std::endl;
     exportString << get_duration() << std::endl;
@@ -149,7 +148,7 @@ void Spell::EditMenu(){
     std::cout << "Enter the new name of the spell\n";
     std::string spellName;
     getline(std::cin, spellName); //clears buffer
-    getline(std::cin, spellName); 
+    getline(std::cin, spellName);
     std::cout << "Enter the new spell ID\n";
     int spellID;
     std::cin >> spellID;
@@ -162,7 +161,7 @@ void Spell::EditMenu(){
     std::cout << "Enter the new duration of the spell. This is in terms of hours.\n";
     int duration;
     std::cin >> duration;
-    std::cout << "Finally, please enter the new description of the spell";
+    std::cout << "Finally, please enter the new description of the spell\n";
     std::string description;
     getline(std::cin, description); //clears buffer
     getline(std::cin, description);
