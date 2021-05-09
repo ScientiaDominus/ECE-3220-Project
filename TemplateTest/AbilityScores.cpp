@@ -18,6 +18,7 @@ int AbilityScores::getConstitution(){return constitution;}
 int AbilityScores::getIntelligence(){return intelligence;}
 int AbilityScores::getWisdom(){return wisdom;}
 int AbilityScores::getCharisma(){return charisma;}
+
 void AbilityScores::setStrength(int strength){this->strength = strength;}
 void AbilityScores::setDexterity(int dexterity){this->dexterity = dexterity;}
 void AbilityScores::setConstitution(int constitution){this->constitution = constitution;}

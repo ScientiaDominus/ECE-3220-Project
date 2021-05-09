@@ -1,4 +1,5 @@
 #include "Spell.h"
+#include <sstream>
 
 //default constructor
 Spell::Spell(){
@@ -117,6 +118,7 @@ std::string Spell::to_simpleString(){
 void Spell::CreateMenu(EntityList<Spell*>* list){
     std::cout << "Please type in the name of the spell you would like to add\n";
     std::string spellName;
+    getline(std::cin, spellName); //clears buffer
     getline(std::cin, spellName);
     std::cout << "Please type an integer to represent the Spell ID\n";
     int spellID;
@@ -132,10 +134,13 @@ void Spell::CreateMenu(EntityList<Spell*>* list){
     std::cin >> duration;
     std::cout << "Finally, please type a short description of the spell";
     std::string description;
+    getline(std::cin, description); //clears buffer
     getline(std::cin, description);
 
+
     Spell* temp = new Spell(spellName, spellID, description, castingTime, range, duration);
-    std::cout << "Your new spell is:\n" << temp->to_string() << std::endl;
+    //std::cout << "Your new spell is:\n" << temp->to_string() << std::endl;
+
     list->addEntity(temp);
 }
 

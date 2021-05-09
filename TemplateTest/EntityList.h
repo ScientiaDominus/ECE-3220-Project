@@ -1,6 +1,7 @@
 #ifndef ENTITYLIST_H
 #define ENTITYLIST_H
 #include <vector>
+#include <sstream>
 #include <string>
 
 template<typename T>
@@ -15,6 +16,15 @@ class EntityList{
             for(i = entityVector.begin(); i < entityVector.end(); i++){
                 (*i)->shortPrint();
             }
+        }
+
+        std::string exportListToString(){
+            typename std::vector<T>::iterator i;
+            stringstream outstring;
+            for(i = entityVector.begin(); i < entityVector.end(); i++){
+                outstring << (*i)->toExportString();
+            }
+            return outstring.str();
         }
 
         void addEntity(T entity){
