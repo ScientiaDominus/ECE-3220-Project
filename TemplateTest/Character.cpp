@@ -111,7 +111,7 @@ std::string Character::itemsToExport()
     // {
     //     exportString << (*i)->getID() << std::endl;
     // }
-    exportString << getItems()->getStringListOfIDs();
+    exportString << getItems()->exportListToString();
     exportString << "010101" << std::endl;
     return exportString.str();
 }
@@ -125,7 +125,7 @@ std::string Character::itemsToString()
     // {
     //     exportString << (*i)->to_string() << std::endl;
     // }
-    exportString << getItems()->getStringListOfIDs();
+    exportString << getItems()->exportListToString();
     exportString << "END ITEM INVENTORY: " << std::endl;
     return exportString.str();
 }
