@@ -51,6 +51,14 @@ void System::importEntityLists(){
             itemList->addEntity(item);
         }
     }
+
+    std::ifstream spellFile("SpellListExport.txt");
+    while(spellFile >> id){
+        Spell *spell = readSpellFromFile(spellFile, id);
+        if(spell != NULL){
+            spellList->addEntity(spell);
+        }
+    }
 }
 
 template<typename E>
@@ -189,4 +197,19 @@ Item* System::readItemFromFile(std::ifstream& file, int id){
         std::cout << "Error Reading Item" << std::endl;
         return NULL;
     }
+}
+Spell* System::readSpellFromFile(std::ifstream& file, int id){
+    std::string spellName;
+    std::string description;
+    int castingTime;
+    int range;
+    int duration;
+    std::getline(file, spellName); //clears buffer
+    std::getline(file, spellName);
+    std::getline(file, description);
+    file >> castingTime;
+    file >> range;
+    file >> duration;
+    Spell *spell = new Spell(spellName, id, description, castingTime, range, duration);
+    return spell;
 }

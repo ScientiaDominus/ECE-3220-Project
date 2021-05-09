@@ -43,8 +43,6 @@ class Spell: public Entity{
         virtual void longPrint();
 
     private:
-        std::string spellName_;
-        int spellID_;
         std::string description_;
         int castingTime_;
         int range_;

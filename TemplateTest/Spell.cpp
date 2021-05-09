@@ -16,12 +16,12 @@ Spell::Spell(std::string spellName, int spellID, std::string description, int ca
 }
 //copy constructor
 Spell::Spell(const Spell &spell){
-    spellName_= spell.getName();
-    spellID_= spell.getID();
-    description_=spell.get_description();
-    castingTime_=spell.get_castingTime();
-    range_=spell.get_range();
-    duration_=spell.get_duration();
+    this->setName(spell.getName());
+    this->setID(spell.getID());
+    description_ = spell.get_description();
+    castingTime_ = spell.get_castingTime();
+    range_ = spell.get_range();
+    duration_ = spell.get_duration();
 }
 //destructor
 Spell::~Spell(){
