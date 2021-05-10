@@ -5,7 +5,7 @@ Character::Character() {}
 Character::~Character() {}
 Character::Character(
     std::string player_name, std::string name, int id, CharacterClass character_class,
-    Race race, int level, AbilityScores ability_scores, EntityList<Item *> *item_inventory,
+    Race race, int level, AbilityScores *ability_scores, EntityList<Item *> *item_inventory,
     EntityList<Spell *> *spell_inventory, int gold_count)
 {
     player_ = player_name;
@@ -23,7 +23,7 @@ std::string Character::getPlayer() const { return player_; }
 CharacterClass Character::getClass() const { return class_; }
 Race Character::getRace() const { return race_; }
 int Character::getLevel() const { return level_; }
-AbilityScores Character::getScores() const { return scores_; }
+AbilityScores* Character::getScores() const { return scores_; }
 EntityList<Item *> *Character::getItems() const { return items_; }
 EntityList<Spell *> *Character::getSpells() const { return spells_; }
 int Character::getGold() const { return gold_; }
@@ -44,14 +44,14 @@ void Character::setLevel(int level)
 {
     level_ = level;
 }
-void Character::setScores(AbilityScores scores)
+void Character::setScores(AbilityScores *scores)
 {
-    scores_.setStrength(scores.getStrength());
-    scores_.setDexterity(scores.getDexterity());
-    scores_.setConstitution(scores.getConstitution());
-    scores_.setIntelligence(scores.getIntelligence());
-    scores_.setWisdom(scores.getWisdom());
-    scores_.setCharisma(scores.getCharisma());
+    scores_->setStrength(scores->getStrength());
+    scores_->setDexterity(scores->getDexterity());
+    scores_->setConstitution(scores->getConstitution());
+    scores_->setIntelligence(scores->getIntelligence());
+    scores_->setWisdom(scores->getWisdom());
+    scores_->setCharisma(scores->getCharisma());
 }
 void Character::setItems(EntityList<Item *> *items)
 {
@@ -79,7 +79,7 @@ std::string Character::toExportString()
     exportString << classToInt(getClass()) << std::endl;
     exportString << raceToInt(getRace()) << std::endl;
     exportString << getLevel() << std::endl;
-    exportString << getScores().toExportString();
+    exportString << getScores()->toExportString();
     exportString << itemsToExport();
     exportString << spellsToExport();
     exportString << getGold() << std::endl;
@@ -96,7 +96,7 @@ std::string Character::to_string()
     outStream << "GOLD: " << getGold() << std::endl;
     outStream << "LEVEL: " << getLevel() << std::endl;
     outStream << "ABILITY SCORES: " << std::endl;
-    outStream << scores_.toString();
+    outStream << scores_->toString();
     //outStream << itemsToString();
     //outStream << spellsToString();
     return outStream.str();
@@ -389,10 +389,10 @@ void Character::CreateMenu(EntityList<Character *> *list)
             newSpells->addEntity(System::getInstance()->getSpellList()->searchForEntityByID(input));
         }
     } while (input >= 0 || input != -1);
-    Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, *tempScores, newItems, newSpells, gold);
+    Character *temp = new Character(player, name, id, (temp->intToClass(tempClass)), (temp->intToRace(race)), level, tempScores, newItems, newSpells, gold);
     temp->setItems(newItems);
     temp->setSpells(newSpells);
-    temp->setScores(*tempScores);
+    temp->setScores(tempScores);
     delete newItems;
     delete newSpells;
     delete tempScores;
@@ -431,26 +431,26 @@ void Character::EditMenu()
     std::cout << std::endl << "Please Enter the Character Class: ";
     std::cin >> tempClass;
     this->setClass(intToClass(tempClass));
-    std::cout << scores_.toString();
+    std::cout << scores_->toString();
     std::cout << "Please enter your strength: ";
     std::cin >> tempScore;
-    this->scores_.setStrength(tempScore);
+    this->scores_->setStrength(tempScore);
     std::cout << "Please enter your dexterity: ";
     std::cin >> tempScore;
-    this->scores_.setDexterity(tempScore);
+    this->scores_->setDexterity(tempScore);
     std::cout << "Please enter your constitution: ";
     std::cin >> tempScore;
-    this->scores_.setConstitution(tempScore);
+    this->scores_->setConstitution(tempScore);
     std::cout << "Please enter your intelligence: ";
     std::cin >> tempScore;
-    this->scores_.setIntelligence(tempScore);
+    this->scores_->setIntelligence(tempScore);
     std::cout << "Please enter your wisdom: ";
     std::cin >> tempScore;
-    this->scores_.setWisdom(tempScore);
+    this->scores_->setWisdom(tempScore);
     std::cout << std::endl;
     std::cout << "Please enter your charisma: ";
     std::cin >> tempScore;
-    this->scores_.setCharisma(tempScore);
+    this->scores_->setCharisma(tempScore);
     printRaces();
     std::cout << "Please Enter the Character Race: ";
     std::cin >> race;
