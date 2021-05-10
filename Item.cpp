@@ -1,153 +1,113 @@
 #include "Item.h"
+#include "Weapon.h"
+#include "Armor.h"
+#include "EntityList.h"
+#include <vector>
 
-Item::Item(){
-    name_ = std::string("UNKNOWN\n");
-    damage_ = std::string("UNKNOWN\n");
-    itemType_ = OBJECT;
-    weight_ = 0;
-    itemID_ = -1000;
-    price_ =  0;
-    std::cout << "Item Default Constructor Called." << std::endl;
+Item::Item(){}
+Item::~Item(){}
+Item::Item(std::string name, std::string damage, Type itemType, double weight, int itemID, int price){   
+    setName(name);
+    setID(itemID);
+    this->damage = damage;
+    this->itemType = itemType;
+    this->weight = weight;
+    this->price =  price;
 }
-Item::Item(std::string name, std::string damage, Type itemType, double weight, int itemID, int price)
-{
-    name_ = name;
-    damage_ = damage;
-    itemType_ = itemType;
-    weight_ = weight;
-    itemID_ = itemID;
-    price_ =  price;
-}
-Item::~Item(){
-    std::cout << "Item Default Destructor Called." << std::endl;
-}
-
-void Item::setName_(std::string name)
-{
-    name_ = name;
-}
-void Item::setDamage_(std::string damage)
-{
-    damage_ = damage;
-}
-void Item::setItemType_(Type type)
-{
-    itemType_ = type;
-}
-void Item::setWeight_(double weight)
-{
-    weight_ = weight;
-}
-void Item::setID_(int ID)
-{
-    itemID_ = ID;
-}
-void Item::setPrice_(int price)
-{
-    price_ = price;
-}
-void Item::edit()
-{
-    std::string name;
-    std::string damage;
-    double weight;
-    int id;
-    int price;
-    std::cout << this->to_string();
-    std::cout << "Enter the item name: ";
-    std::cin >> name;
-    std::cout << std::endl << "Enter the item's damage string (ex. 2d4): ";
-    std::cin >> damage;
-    std::cout << std::endl << "Enter the item's ID: ";
-    std::cin >> id;
-    std::cout << std::endl << "Enter the item's weight: ";
-    std::cin >> weight;
-    std::cout << std::endl << "Enter the item's price: ";
-    std::cin >> price;
-    setName_(name);
-    setDamage_(damage);
-    setID_(id);
-    setWeight_(weight);
-    setPrice_(price);
-}
-/*void Item::create()
-{
-    std::string name;
-    std::string damage;
-    double weight;
-    int id;
-    int price;
-}*/
-std::string Item::to_string()
-{
+std::string Item::to_string(){
     std::stringstream myStream;
 
-    myStream << "NAME: " << Name_() << std::endl; 
-    myStream << "DAMAGE: " << Damage_() << std::endl;
+    myStream << "NAME: " << getName() << std::endl; 
+    myStream << "DAMAGE: " << getDamage() << std::endl;
     myStream << "ITEMTYPE: " << itemTypeToString() << std::endl; //need an itemtype switch for proper string display.
-    myStream << "WEIGHT: " << Weight_() << std::endl;
-    myStream << "ID: " << ID_() << std::endl;
-    myStream << "PRICE: " << Price_() << std::endl; 
+    myStream << "WEIGHT: " << getWeight() << std::endl;
+    myStream << "ID: " << getID() << std::endl;
+    myStream << "PRICE: " << getPrice() << std::endl; 
 
     return myStream.str();
 }
-std::string Item::toExportString()
-{
+std::string Item::toExportString(){
     std::stringstream myStream;
 
-    myStream << ItemType_() << std::endl;
-    myStream << Name_() << std::endl;
-    myStream << Damage_() << std::endl;
-    myStream << Weight_() << std::endl;
-    myStream << ID_() << std::endl;
-    myStream << Price_() << std::endl;
+    myStream << getItemType() << std::endl;
+    myStream << getName() << std::endl;
+    myStream << getDamage() << std::endl;
+    myStream << getWeight() << std::endl;
+    myStream << getID() << std::endl;
+    myStream << getPrice() << std::endl;
 
     return myStream.str();
 
 }
-
-std::string Item::itemTypeToString()
-{
-    switch(itemType_)
-    {
-        case WEAPON:
-            return std::string("Weapon");
-            break;
-        case ARMOR:
-            return std::string("Armor");
-            break;
+std::string Item::itemTypeToString(){
+    switch(getItemType()){
         case OBJECT:
-            return std::string("Object");
-            break;
+            return "Object";
+        case ARMOR:
+            return "Armor";
+        case WEAPON:
+            return "Weapon";
         default:
-            return std::string("ERROR: ITEMTYPE IS UNDEFINED");
+            return "ERROR: ITEMTYPE IS UNDEFINED";
     }
 }
-Type Item::intToType(int type)
-{
-    switch(type)
-    {
+Type Item::intToType(int type){
+    switch(type){
         case 0:
             return WEAPON;
-            break;
         case 1:
             return ARMOR;
-            break;
         case 2:
             return OBJECT;
-            break;
         default:
             return OBJECT;
-            break;
     }
 }
-std::string Item::to_ShortString()
-{
-    std::stringstream myStream;
+void Item::longPrint(){
+    std::cout << to_string();
+}
 
-    myStream << "NAME: " << Name_() << std::endl; 
-    myStream << "ITEMTYPE: " << itemTypeToString() << std::endl;
-    myStream << "ID: " << ID_() << std::endl;
+void Item::CreateMenu(EntityList<Item*>* list){
+    std::cout << "Welcome to the Item Create Menu! Please select which item you'd like to create" << std::endl;
+    std::cout << "\t1) Weapon" << std::endl;
+    std::cout << "\t2) Armor" << std::endl;
+    std::cout << "\t3) Return" << std::endl;
+    int response;
+    std::cin >> response;
+    switch(response){
+        case 1:
+            Weapon::CreateMenu(list);
+            break;
+        case 2:
+            Armor::CreateMenu(list);
+            break;
+        case 3:
+            return;
+    }
+}
 
-    return myStream.str();
+void Item::EditMenu(){
+    std::string name;
+    std::string damage;
+    double weight;
+    int itemID;
+    int price;
+    std::cout << "Here is the items current information:\n" << to_string() << std::endl;
+    std::cout << "Please enter the Item's name";
+    std::getline(std::cin, name);
+    std::cout << "Please enter the Item's damage";
+    std::getline(std::cin, damage);
+    std::cout << "Please enter the Item's weight";
+    std::cin >> weight;
+    std::cout << "Please enter the Item's ID";
+    std::cin >> itemID;
+    std::cout << "Please enter the Item's price";
+    std::cin >> price;
+    
+    this->setName(name);
+    this->setID(itemID);
+    this->itemType = OBJECT;
+    this->weight = weight;
+    this->damage = damage;
+    this->price = price;
 }

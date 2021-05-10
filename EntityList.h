@@ -20,7 +20,7 @@ class EntityList{
 
         std::string exportListToString(){
             typename std::vector<T>::iterator i;
-            stringstream outstring;
+            std::stringstream outstring;
             for(i = entityVector.begin(); i < entityVector.end(); i++){
                 outstring << (*i)->toExportString();
             }
@@ -59,7 +59,7 @@ class EntityList{
                 stringListOfIDs += std::to_string((*i)->getID()) + "\n";
               
             }
-            stringListOfIDs = "List End\n";
+            stringListOfIDs += "List End\n";
             return stringListOfIDs;
         }
 

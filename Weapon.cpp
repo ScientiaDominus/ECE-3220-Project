@@ -1,48 +1,24 @@
 #include "Weapon.h"
+#include "EntityList.h"
 
-Weapon::Weapon(std::string name, std::string damage, double weight, int itemID, int price,  dmgType type, int range) : Item(name, damage, WEAPON, weight, itemID, price){
-            setDamageType_(type);
-            setRange_(range);
-            std::cout << "Weapon Constructor called" << std::endl;
-        }
-Weapon::Weapon(){
-    std::cout << "Weapon Default Constructor Called." << std::endl;
-}
-Weapon::~Weapon(){
-    std::cout << "Weapon Default Destructor Called." << std::endl;
-}
-
-void Weapon::setRange_(int range)
-{
-    range_ = range;
-}
-
-void Weapon::setDamageType_(dmgType type)
-{
-    type_ = type;
-}
-
-std::string Weapon::to_string()
-{
+std::string Weapon::to_string(){
     std::stringstream myStream;
 
-    myStream << "NAME: " << Name_() << std::endl; 
-    myStream << "DAMAGE: " << Damage_() << std::endl;
+    myStream << "NAME: " << getName() << std::endl; 
+    myStream << "DAMAGE: " << getDamage() << std::endl;
     myStream << "DAMAGETYPE: " << typeToString() << std::endl;
-    myStream << "RANGE: " << Range_() << std::endl;
+    myStream << "RANGE: " << getRange() << std::endl;
     myStream << "ITEMTYPE: " << itemTypeToString() << std::endl;
-    myStream << "WEIGHT: " << Weight_() << std::endl;
-    myStream << "ID: " << ID_() << std::endl;
-    myStream << "PRICE: " << Price_() << std::endl; 
+    myStream << "WEIGHT: " << getWeight() << std::endl;
+    myStream << "ID: " << getID() << std::endl;
+    myStream << "PRICE: " << getPrice() << std::endl; 
 
     return myStream.str();
 }
-std::string Weapon::typeToString()
-{
-    switch(type_)
-    {
-        case POISON:
 
+std::string Weapon::typeToString(){
+    switch(type){
+        case POISON:
             return std::string("Poison");
         case SLASHING:
             return std::string("Slashing");
@@ -59,25 +35,22 @@ std::string Weapon::typeToString()
     }
 }
 
-std::string Weapon::toExportString()
-{
+std::string Weapon::toExportString(){
     std::stringstream myStream;
-    myStream << ItemType_() << std::endl;
-    myStream << Name_() << std::endl;
-    myStream << Damage_() << std::endl;
-    myStream << DamageType_() << std::endl;
-    myStream << Range_() << std::endl;
-    myStream << Weight_() << std::endl;
-    myStream << ID_() << std::endl;
-    myStream << Price_() << std::endl;
+    myStream << getItemType() << std::endl;
+    myStream << getName() << std::endl;
+    myStream << getDamage() << std::endl;
+    myStream << getDamageType() << std::endl;
+    myStream << getRange() << std::endl;
+    myStream << getWeight() << std::endl;
+    myStream << getID() << std::endl;
+    myStream << getPrice() << std::endl;
 
     return myStream.str();
 }
 
-dmgType Weapon::intToType(int type)
-{
-    switch(type)
-    {
+DMGType Weapon::intToType(int type){
+    switch(type){
         case 0:
             return FIRE;
         case 1:
@@ -95,41 +68,87 @@ dmgType Weapon::intToType(int type)
     }
 }
 
-void Weapon::edit()
-{
-    std::string name = "";
-    std::string damage = "";
-    int dmgType = 0;
+void Weapon::longPrint(){
+    std::cout << to_string() << std::endl;
+}
+
+void Weapon::CreateMenu(EntityList<Item*>* list){
+    std::string name;
+    int ID = 0;
+    std::string damage;
+    //Type itemType = WEAPON;
     double weight = 0;
-    int id = 0;
     int price = 0;
+    int dmgTypeInt = 0;
+    DMGType dmgType = SLASHING;
     int range = 0;
-    std::cout << this->to_string();
-    std::cout << "Enter the item name: ";
+    
+    std::cout << "Please enter the Weapon's name: ";
     std::cin >> name;
-    std::cout << std::endl << "Enter the item's damage string (ex. 2d4): ";
+    std::cout << "Please enter the Weapon's ID: ";
+    std::cin >> ID;
+    std::cout << "Please enter the damage description of your Weapon: "<< std::endl;
     std::cin >> damage;
-    std::cout << std::endl << "0. FIRE" << std::endl;
-    std::cout << "1. COLD" << std::endl;
-    std::cout << "2. LIGHTNING" << std::endl;
-    std::cout << "3. ACID" << std::endl;
-    std::cout << "4. SLASHING" << std::endl;
-    std::cout << "5. POISON" << std::endl;
-    std::cout << "Enter the item's damage type (ex. 1,2,3,4,etc.): ";
-    std::cin >> dmgType;
-    std::cout << std::endl << "Enter the item's range in feet (ex. 20): ";
-    std::cin >> range;
-    std::cout << std::endl << "Enter the item's unique ID (ex. 423567): ";
-    std::cin >> id;
-    std::cout << std::endl << "Enter the item's weight (ex. 15.67): ";
+    std::cout << "Please enter your Weapon's weight: " << std::endl;
     std::cin >> weight;
-    std::cout << std::endl << "Enter the item's price in gold pieces(ex. 45): ";
+    std::cout << "Please enter your Weapon's price" << std::endl;
     std::cin >> price;
-    setName_(name);
-    setDamage_(damage);
-    setID_(id);
-    setRange_(range);
-    setDamageType_(this->intToType(dmgType));
-    setWeight_(weight);
-    setPrice_(price);
+    std::cout << "Please enter the number corresponding to your desired Weapon's Damage Type:" << std::endl;
+    std::cout << "\t1) Fire" << std::endl;
+    std::cout << "\t2) Cold" << std::endl;
+    std::cout << "\t3) Lightning" << std::endl;
+    std::cout << "\t4) Acid" << std::endl;
+    std::cout << "\t5) Slashing" << std::endl;
+    std::cout << "\t6) Poison" << std::endl;
+    std::cout << "\t7) Slashing" << std::endl;
+    std::cin >> dmgTypeInt;
+    dmgType = intToType(dmgTypeInt);
+    std::cout << "Please enter your Weapon's range" << std::endl;
+    std::cin >> range;
+
+    Weapon* temp = new Weapon(name, damage, weight, ID, price, dmgType, range);
+    list->addEntity(temp);
+}
+
+void Weapon::EditMenu(){
+    std::string name;
+    std::string damage;
+    double weight;
+    int itemID;
+    int price;
+    int dmgTypeInt;
+    int range;
+    std::cout << "Here is the Weapon's current information:\n" << to_string() << std::endl;
+    std::cout << "Please enter the Weapon's name";
+    std::getline(std::cin, name); //clears buffer
+    std::getline(std::cin, name);
+    std::cout << "Please enter the Weapon's damage";
+    std::getline(std::cin, damage); //clears buffer
+    std::getline(std::cin, damage);
+    std::cout << "Please enter the Weapon's weight";
+    std::cin >> weight;
+    std::cout << "Please enter the Weapon's ID";
+    std::cin >> itemID;
+    std::cout << "Please enter the Weapon's price";
+    std::cin >> price;
+    std::cout << "Please enter the number corresponding to your desired Weapon's Damage Type:" << std::endl;
+    std::cout << "\t0) Fire" << std::endl;
+    std::cout << "\t1) Cold" << std::endl;
+    std::cout << "\t2) Lightning" << std::endl;
+    std::cout << "\t3) Acid" << std::endl;
+    std::cout << "\t4) Slashing" << std::endl;
+    std::cout << "\t5) Poison" << std::endl;
+    std::cout << "\t6) Slashing" << std::endl;
+    std::cin >> dmgTypeInt;
+    std::cout << "Please enter your Weapon's range" << std::endl;
+    std::cin >> range;
+
+    this->setName(name);
+    this->setID(itemID);
+    this->setItemType(WEAPON);
+    this->setWeight(weight);
+    this->setDamage(damage);
+    this->setPrice(price);
+    this->type = intToType(dmgTypeInt);
+    this->range = range;
 }

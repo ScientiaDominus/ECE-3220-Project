@@ -1,7 +1,7 @@
 # Prerequisites
 *.d
 
-#stupid vscode bullshit
+#vscode
 *.vscode
 
 # Compiled Object files
@@ -33,3 +33,5 @@
 *.exe
 *.out
 *.app
+
+main
