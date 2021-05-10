@@ -35,3 +35,18 @@ This is extremely dangers, be careful picking it up
 WEAPON
 5
 8
+11223344
+Slicey Dicey Stabby Knifey
+ohhhh it'll getcha alright.
+12.34
+500
+WEAPON
+4
+5
+99887766
+Grabthar's Expanding Parachute Pants
+This puppy will expand with rapid force allowing for hasty escapes from medium to large tall buildings
+600.01
+30
+ARMOR
+2
