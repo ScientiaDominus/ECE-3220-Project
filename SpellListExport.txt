@@ -1,12 +1,36 @@
-5
+1
 Water Breathing
 This gives the user the ability to breath underwater
-2
-2
-2
+1
+0
+1
 43434343
 Magick Pencil
 This spell allows the caster to turn pencils to rubber at will!
 1
 10
 1
+2
+Fireball
+Shoot a fireball out of your hands dealing 2d6 Fire damage to all creatures in a 10 foot radius
+1
+20
+0
+3
+Acid Splash
+Hurl a bubble of acid dealing 1d6 acid damage to all creatures in a 5 foot radius
+1
+60
+0
+4
+Cure Wounds
+A creature you touch regains a number of hit points equal to 1d8
+1
+5
+0
+5
+Cone of Cold
+A blast of cold air erupts from your hands dealing 2d8 cold damage to everyone in a 60ft cone
+1
+0
+0
