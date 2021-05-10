@@ -37,18 +37,31 @@ std::string Weapon::typeToString(){
 
 std::string Weapon::toExportString(){
     std::stringstream myStream;
-    myStream << getItemType() << std::endl;
-    myStream << getName() << std::endl;
-    myStream << getDamage() << std::endl;
-    myStream << getDamageType() << std::endl;
-    myStream << getRange() << std::endl;
-    myStream << getWeight() << std::endl;
-    myStream << getID() << std::endl;
-    myStream << getPrice() << std::endl;
+    myStream << this->Item::toExportString();
+    myStream << std::endl;
+    myStream << dmgTypeToInt(getDamageType()) << std::endl;
+    myStream << getRange();
 
     return myStream.str();
 }
-
+int Weapon::dmgTypeToInt(DMGType dmgType){
+    switch(dmgType){
+        case FIRE:
+            return 0;
+        case COLD:
+            return 1;
+        case LIGHTNING:
+            return 2;
+        case ACID:
+            return 3;
+        case SLASHING:
+            return 4;
+        case POISON:
+            return 5;
+        default:
+            return 4;
+    }
+}
 DMGType Weapon::intToType(int type){
     switch(type){
         case 0:

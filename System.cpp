@@ -16,6 +16,7 @@ System::~System(){
     delete spellList;
 }
 void System::StartMenu(){
+    importEntityLists();
     bool continueOption = true;
     do{
         std::cout << "Main Menu. Pick and Option Below" << std::endl;
@@ -40,21 +41,28 @@ void System::StartMenu(){
                 continueOption = false;
         }
     }while(continueOption == true);
+
+    exportDataBase();
 }
 
 void System::importEntityLists(){
+    std::cout << "starting import" << std::endl;
     std::ifstream itemFile("ItemListExport.txt");
     int id;
     while(itemFile >> id){
+        std::cout << "starting item import" << std::endl;
         Item *item = readItemFromFile(itemFile, id);
         if(item != NULL){
+            std::cout << "adding Entity\n";
             itemList->addEntity(item);
+            std::cout << "done adding Entity\n";
         }
     }
     itemList->printList();
 
     std::ifstream spellFile("SpellListExport.txt");
     while(spellFile >> id){
+        std::cout << "starting spell import" << std::endl;
         Spell *spell = readSpellFromFile(spellFile, id);
         if(spell != NULL){
             spellList->addEntity(spell);
@@ -64,6 +72,7 @@ void System::importEntityLists(){
 
     std::ifstream characterFile("CharacterListExport.txt");
     while(characterFile >> id){
+        std::cout << "starting character import" << std::endl;
         Character *character = readCharacterFromFile(characterFile, id);
         if(character != NULL){
             characterList->addEntity(character);
@@ -136,22 +145,26 @@ void System::SearchListMenu(EntityList<E>* list){
         default:
             return;
     }
-
-    std::cout << "View or Edit?" << std::endl;
-    std::cout << "\t1)View" << std::endl;
-    std::cout << "\t2)Edit" << std::endl;
-    std::cout << "\t3)Return" << std::endl;
-    std::cin >> response;
-    switch(response){
-        case 1:
-            entity->longPrint();
-            break;
-        case 2:
-            entity->EditMenu();
-            break;
-        default:
-            return;
+    if(entity != nullptr){
+        std::cout << "View or Edit?" << std::endl;
+        std::cout << "\t1)View" << std::endl;
+        std::cout << "\t2)Edit" << std::endl;
+        std::cout << "\t3)Return" << std::endl;
+        std::cin >> response;
+        switch(response){
+            case 1:
+                entity->longPrint();
+                break;
+            case 2:
+                entity->EditMenu();
+                break;
+            default:
+                return;
+        }
+    } else{
+        std::cout << "Sorry we could not find a " << menuModeString << "with that information" << std::endl;
     }
+    
 
 }
 
@@ -188,7 +201,6 @@ Item* System::readItemFromFile(std::ifstream& file, int id){
     std::getline(file, itemTypeString);
     if(itemTypeString.compare("OBJECT") == 0){
         Item* item = new Item(itemName, damage, OBJECT, weight, id, price);
-        std::cout << item->to_string();
         return item;
     } else if(itemTypeString.compare("WEAPON") == 0){
         int damageTypeInt;
@@ -283,3 +295,22 @@ Character* System::readCharacterFromFile(std::ifstream& file, int id){
     character->setSpells(spellInventory);
     return character;
 }
+
+template<typename T>
+void System::exportEntityList(EntityList<T*>* list, std::string filename){
+    std::fstream file(filename);
+    std::vector<T*>* vector = list->getVector();
+    typename std::vector<T*>::iterator i = vector->begin();
+    file << (*i)->toExportString();
+    for(i += 1; i < vector->end(); i++){
+        file << "\n";
+        file << (*i)->toExportString();
+    }
+}
+
+void System::exportDataBase(){
+    exportEntityList<Item>(itemList, "ItemListExport.txt");
+    exportEntityList<Spell>(spellList, "SpellListExport.txt");
+    exportEntityList<Character>(characterList, "CharacterListExport.txt");
+}
+

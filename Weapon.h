@@ -27,7 +27,7 @@ class Weapon : public Item
         std::string to_string() override;
         std::string toExportString() override;
         void longPrint() override;
-
+        static int dmgTypeToInt(DMGType dmgType);
         static void CreateMenu(EntityList<Item*>* list);
         void EditMenu() override;
 

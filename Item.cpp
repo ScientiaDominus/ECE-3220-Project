@@ -29,13 +29,12 @@ std::string Item::to_string(){
 std::string Item::toExportString(){
     std::stringstream myStream;
 
-    myStream << getItemType() << std::endl;
+    myStream << getID() << std::endl;
     myStream << getName() << std::endl;
     myStream << getDamage() << std::endl;
     myStream << getWeight() << std::endl;
-    myStream << getID() << std::endl;
     myStream << getPrice() << std::endl;
-
+    myStream << itemTypeToConstantStyleString(getItemType());
     return myStream.str();
 
 }
@@ -66,7 +65,18 @@ Type Item::intToType(int type){
 void Item::longPrint(){
     std::cout << to_string();
 }
-
+std::string Item::itemTypeToConstantStyleString(Type itemType){
+    switch(itemType){
+        case OBJECT:
+            return "OBJECT";
+        case ARMOR:
+            return "ARMOR";
+        case WEAPON:
+            return "WEAPON";
+        default:
+            return "UNSPECIFIED";
+    }
+}
 void Item::CreateMenu(EntityList<Item*>* list){
     std::cout << "Welcome to the Item Create Menu! Please select which item you'd like to create" << std::endl;
     std::cout << "\t1) Weapon" << std::endl;

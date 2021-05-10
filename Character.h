@@ -16,6 +16,15 @@
 
 
 class Character : public Entity{
+	private:
+		std::string player_;
+		CharacterClass class_;
+		Race race_;
+		int level_;
+		AbilityScores* scores_;
+		EntityList<Item*>* items_;
+		EntityList<Spell*>* spells_;
+		int gold_;
 	public: 
 		Character();
 		// A constructor that initializes all the elements within a character object
@@ -47,8 +56,8 @@ class Character : public Entity{
 		std::string itemsToExport(); // This function is called by toExportString to convert the character's item inventory to a format acceptable for storage in a file.
 		std::string spellsToExport(); // this function is called by toExportString to convert the character's spell list to a format acceptable for storage in a file.
 
-		std::string classToString(CharacterClass characterClass); // this function converts a class enum to a printable string
-		std::string raceToString(Race race); // this converts a race enum to a printable string
+		static std::string classToString(CharacterClass characterClass); // this function converts a class enum to a printable string
+		static std::string raceToString(Race race); // this converts a race enum to a printable string
 		std::string to_string(); // this converts the character object into a printable string
 		std::string itemsToString(); // this converts the item inventory into a printable string
 		std::string spellsToString(); // this converts the spell inventory into a printable string 
@@ -66,17 +75,6 @@ class Character : public Entity{
 		void EditMenu(); // This function is another one used by the template class for menu functionality and editing the current character object
 		
 		~Character();
-
-
-	private:
-		std::string player_;
-		CharacterClass class_;
-		Race race_;
-		int level_;
-		AbilityScores* scores_;
-		EntityList<Item*>* items_;
-		EntityList<Spell*>* spells_;
-		int gold_;
 
 
 

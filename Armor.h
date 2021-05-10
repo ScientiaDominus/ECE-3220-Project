@@ -20,7 +20,8 @@ class Armor : public Item
         static ArmorType intToType(int type);
         std::string typeToString();
         ArmorType getArmorType() const;
-        
+        static int armorTypeToInt(ArmorType armorType);
+
         //inheritted from Item: String and Printing functions
         void longPrint() override;
         std::string toExportString() override;

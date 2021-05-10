@@ -26,18 +26,24 @@ std::string Armor::to_string(){
 
 std::string Armor::toExportString(){
     std::stringstream myStream;
-
-    myStream << getItemType() << std::endl;
-    myStream << getName() << std::endl;
-    myStream << getDamage() << std::endl;
-    myStream << getArmorType() << std::endl;
-    myStream << getWeight() << std::endl;
-    myStream << getID() << std::endl;
-    myStream << getPrice() << std::endl;
-
+    myStream << this->Item::toExportString();
+    myStream << std::endl;
+    myStream << armorTypeToInt(getArmorType());
     return myStream.str();
 }
 
+int Armor::armorTypeToInt(ArmorType armorType){
+    switch(armorType){
+        case LIGHT:
+            return 0;
+        case MEDIUM:
+            return 1;
+        case HEAVY:
+            return 2;
+        default:
+            return 1;
+    }
+}
 std::string Armor::typeToString(){
     switch(armorType){
         case LIGHT:

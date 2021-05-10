@@ -40,6 +40,9 @@ class System{
         EntityList<Item*>* getItemList(){return itemList;}
         EntityList<Spell*>* getSpellList(){return spellList;} 
         EntityList<Character*>* getCharacterList(){return characterList;}
+        template<typename T>
+        void exportEntityList(EntityList<T*>* list, std::string filename);
+        void exportDataBase();
         static System* getInstance(){
             if(!(instance)){
                 instance = new System;

@@ -28,7 +28,7 @@ class Item : public Entity{
         Type getItemType() const{return itemType;}
         double getWeight() const{return weight;}
         int getPrice() const{return price;}
-
+        static std::string itemTypeToConstantStyleString(Type itemType);
         std::string itemTypeToString();
         Type intToType(int type);
         std::string to_ShortString();
