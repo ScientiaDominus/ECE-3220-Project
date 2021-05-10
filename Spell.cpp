@@ -94,7 +94,7 @@ void Spell::CreateMenu(EntityList<Spell*>* list){
     std::cout << "Please type an integer for the duration of the spell. This is in terms of hours.\n";
     int duration;
     std::cin >> duration;
-    std::cout << "Finally, please type a short description of the spell";
+    std::cout << "Finally, please type a short description of the spell\n";
     std::string description;
     getline(std::cin, description); //clears buffer
     getline(std::cin, description);
