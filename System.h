@@ -1,73 +1,67 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
-
-#include <stdlib.h>
-#include <string>
-#include <iostream>
-#include "Spell.h"
-#include "Item.h"
-#include "Weapon.h"
-#include "Armor.h"
+#include "EntityList.h"
 #include "Character.h"
+#include "Item.h"
+#include "Spell.h"
+
+
+enum MenuModeType {CHARACTER, ITEM, SPELL};
 
 class System{
     private:
-        static System* instance; 
-        std::vector<Item*> itemVector;
-        std::vector<Spell> spellVector;
-        std::vector<Character> characterVector;
-
         System();
-        ~System();
+
+        static System *instance; 
+        EntityList<Item*>* itemList;
+        EntityList<Character*>* characterList;
+        EntityList<Spell*>* spellList;
+        MenuModeType menuMode;
+        std::string menuModeString;
 
     public:
-        void printItemList();
-        void printCharacter();
-        void printSpell();
-        void itemVectorFromFile(std::string filepath);
-        void printItemDetailedList();
-        void printItemShortList();
-        Item* searchItemByName(std::string name);
-        Item* searchItemByID(int ID);
-        void createItem();
-        void editItem();
-        void itemMenu();
 
+        ~System();
+        void StartMenu();
+        template<typename E>
+        void EntityMenu(EntityList<E*>* list);
+        template<typename E>
+        void ViewEditMenu(EntityList<E>* list);
+        template<typename E>
+        void SearchListMenu(EntityList<E>* list);
+        void changeMenuMode(MenuModeType menuMode);
+        template<typename T>
+        void addEntity(MenuModeType entityType, T entity);
 
-        void addItem(const Item &item);
-        void addSpell(const Spell &spell);
-        void addCharacter(const Character &character);
-        Character* getCharacter(std::string name);
-        Spell* getSpell(std::string name);
-        Item* getItem(std::string name);
-        /*Character* getCharacterByPlayer(std::string player);*/
-        Character* getCharacterByID(int charID);
-        Spell* getSpellByID(int spellID);
-        Item* getItemByID(int itemID);
-
-        void deleteCharacter(std::string name);
-        void deleteSpell(std::string name);
-        void deleteItem(std::string name);
-
-        static System& getInstance();
-        void exportCharactersToFile(std::string spellFilePath);
-        void exportItemsToFile(std::string spellFilePath);
-        void exportSpellsToFile(std::string spellFilePath);
-        void standardSystemExportToFiles();
-        void MenuStart();
-        void displayDefaultCaseMenuResponse();
-        void displayMainMenu();
-        void displayApplicationWelcomeMessage();
-        void characterMenu();
-        
-
-        void spellMenu();
-        void veSpellMenu();
-        void createSpell();
-        void certainSpellMenu();
-        void editSpell(Spell*);
-        void printSpellShortList();
-
+        void importEntityLists();
+        Item* readItemFromFile(std::ifstream& file, int id);
+        Spell* readSpellFromFile(std::ifstream& file, int id);
+        Character* readCharacterFromFile(std::ifstream& file, int id);
+        EntityList<Item*>* getItemList(){return itemList;}
+        EntityList<Spell*>* getSpellList(){return spellList;} 
+        EntityList<Character*>* getCharacterList(){return characterList;}
+        static System* getInstance(){
+            if(!(instance)){
+                instance = new System;
+            }
+            return instance;
+        }
 };
 
+template<typename T>
+void System::addEntity(MenuModeType entityType, T entity){
+    switch(entityType){
+        case CHARACTER:
+            characterList->addEntity((Character*)entity);
+            break;
+        case ITEM:
+            itemList->addEntity((Item*)entity);
+            break;
+        case SPELL:
+            spellList->addEntity((Spell*)entity);
+            break;
+        default:
+            break;
+    }
+}
 #endif

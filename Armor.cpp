@@ -1,53 +1,45 @@
 #include "Armor.h"
+#include "EntityList.h"
 
-Armor::Armor(std::string name, std::string damage, double weight, int itemID, int price,  armorType type) : Item(name, damage, ARMOR, weight, itemID, price){
-    setArmorType(type);
-    std::cout << "Armor Constructor Called" << std::endl;
-}
-Armor::Armor(){
-    std::cout << "Armor Default Constructor Called." << std::endl;
-}
-Armor::~Armor(){
-    std::cout << "Armor Default Destructor Called." << std::endl;
-}
-void Armor::setArmorType(armorType type)
-{
-    type_ = type;
-}
 
-std::string Armor::to_string()
-{
+Armor::Armor(){}
+Armor::Armor(std::string name, std::string damage, double weight, int itemID, int price, ArmorType type) : Item(name, damage, ARMOR, weight, itemID, price){
+    this->armorType = type;
+}
+Armor::~Armor(){}
+
+ArmorType Armor::getArmorType() const{return armorType;}
+
+std::string Armor::to_string(){
     std::stringstream myStream;
 
-    myStream << "NAME: " << Name_() << std::endl; 
-    myStream << "DAMAGE: " << Damage_() << std::endl;
+    myStream << "NAME: " << getName() << std::endl; 
+    myStream << "DAMAGE: " << getDamage() << std::endl;
     myStream << "ITEMTYPE: " << itemTypeToString() << std::endl;
     myStream << "ARMORTYPE: " << typeToString() << std::endl; //Probably need a armor type switch function to properly display this
-    myStream << "WEIGHT: " << Weight_() << std::endl;
-    myStream << "ID: " << ID_() << std::endl;
-    myStream << "PRICE: " << Price_() << std::endl; 
+    myStream << "WEIGHT: " << getWeight() << std::endl;
+    myStream << "ID: " << getID() << std::endl;
+    myStream << "PRICE: " << getPrice() << std::endl; 
 
     return myStream.str();
 }
 
-std::string Armor::toExportString()
-{
+std::string Armor::toExportString(){
     std::stringstream myStream;
 
-    myStream << ItemType_() << std::endl;
-    myStream << Name_() << std::endl;
-    myStream << Damage_() << std::endl;
-    myStream << ArmorType() << std::endl;
-    myStream << Weight_() << std::endl;
-    myStream << ID_() << std::endl;
-    myStream << Price_() << std::endl;
+    myStream << getItemType() << std::endl;
+    myStream << getName() << std::endl;
+    myStream << getDamage() << std::endl;
+    myStream << getArmorType() << std::endl;
+    myStream << getWeight() << std::endl;
+    myStream << getID() << std::endl;
+    myStream << getPrice() << std::endl;
 
     return myStream.str();
 }
-std::string Armor::typeToString()
-{
-    switch(type_)
-    {
+
+std::string Armor::typeToString(){
+    switch(armorType){
         case LIGHT:
             return std::string("Light");
         case MEDIUM:
@@ -56,13 +48,10 @@ std::string Armor::typeToString()
             return std::string("Heavy");
         default:
             return std::string("ERROR: ARMORTYPE UNDEFINED");
-
     }
 }
-armorType Armor::intToType(int type)
-{
-    switch(type)
-    {
+ArmorType Armor::intToType(int type){
+    switch(type){
         case 0:
             return LIGHT;
         case 1:
@@ -74,35 +63,75 @@ armorType Armor::intToType(int type)
     }
 }
 
-void Armor::edit()
-{
-    std::string name = "";
-    std::string damage = "";
-    int armorType = 0;
-    double weight = 0;
-    int id = 0;
-    int price = 0;
-    std::cout << this->to_string();
-    std::cout << "Enter the item name: ";
-    std::cin >> name;
-    std::cout << std::endl << "Enter the item's damage string (ex. 2d4): ";
-    std::cin >> damage;
-    std::cout << std::endl;
-    std::cout << "0. LIGHT" << std::endl;
-    std::cout << "1. MEDIUM" << std::endl;
-    std::cout << "2. HEAVY" << std::endl;
-    std::cout << "Enter the item's armor type (ex. for heavy enter: 2): ";
-    std::cin >> weight;
-    std::cout << std::endl << "Enter the item's unique ID (ex. 423567): ";
-    std::cin >> id;
-    std::cout << std::endl << "Enter the item's weight (ex. 15.67): ";
-    std::cin >> weight;
-    std::cout << std::endl << "Enter the item's price in gold pieces(ex. 45): ";
-    std::cin >> price;
-    setName_(name);
-    setDamage_(damage);
-    setID_(id);
-    setArmorType(this->intToType(armorType));
-    setWeight_(weight);
-    setPrice_(price);
+void Armor::longPrint(){
+    std::cout << to_string();
 }
+void Armor::CreateMenu(EntityList<Item*>* list){
+    std::string name;
+    int ID;
+    std::string damage;
+    //Type itemType = ARMOR;
+    double weight;
+    int price;
+    int armorTypeInt;
+    ArmorType armorType;
+    
+    std::cout << "Please enter the Armor's name: ";
+    std::cin >> name;
+    std::cout << "Please enter the Armor's ID: ";
+    std::cin >> ID;
+    std::cout << "Please enter the damage description of your Armor: "<< std::endl;
+    std::cin >> damage;
+    std::cout << "Please enter your Armor's weight: " << std::endl;
+    std::cin >> weight;
+    std::cout << "Please enter your Armor's price" << std::endl;
+    std::cin >> price;
+    std::cout << "Please enter the number corresponding to your desired Armor's Type:" << std::endl;
+    std::cout << "\t1) Light" << std::endl;
+    std::cout << "\t2) Medium" << std::endl;
+    std::cout << "\t3) Heavy" << std::endl;
+    std::cin >> armorTypeInt;
+    armorType = intToType(armorTypeInt);
+
+    Armor* temp = new Armor(name, damage, weight, ID, price, armorType);
+    list->addEntity(temp);
+}
+void Armor::EditMenu(){
+    std::string name;
+    std::string damage;
+    double weight;
+    int itemID;
+    int price;
+    int armorTypeInt;
+    std::cout << "Here is the Armor's current information:\n" << to_string() << std::endl;
+    std::cout << "Please enter the Armor's name";
+    std::getline(std::cin, name); //clears buffer
+    std::getline(std::cin, name);
+    std::cout << "Please enter the Armor's damage";
+    std::getline(std::cin, damage); //clears buffer
+    std::getline(std::cin, damage);
+    std::cout << "Please enter the Armor's weight";
+    std::cin >> weight;
+    std::cout << "Please enter the Armor's ID";
+    std::cin >> itemID;
+    std::cout << "Please enter the Armor's price";
+    std::cin >> price;
+    std::cout << "Please enter the number corresponding to your desired Armor Type:" << std::endl;
+    std::cout << "\t0) Fire" << std::endl;
+    std::cout << "\t1) Cold" << std::endl;
+    std::cout << "\t2) Lightning" << std::endl;
+    std::cout << "\t3) Acid" << std::endl;
+    std::cout << "\t4) Slashing" << std::endl;
+    std::cout << "\t5) Poison" << std::endl;
+    std::cout << "\t6) Slashing" << std::endl;
+    std::cin >> armorTypeInt;
+
+    this->setName(name);
+    this->setID(itemID);
+    this->setItemType(ARMOR);
+    this->setWeight(weight);
+    this->setDamage(damage);
+    this->setPrice(price);
+    this->armorType = intToType(armorTypeInt);
+}
+

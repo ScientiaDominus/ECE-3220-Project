@@ -4,7 +4,7 @@ SOURCES := $(wildcard *.cpp)
 OBJS := $(SOURCES:%.cpp=%.o)
 
 
-TARGET := character
+TARGET := main
 
 .PHONY : all
 all : $(TARGET)

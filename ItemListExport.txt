@@ -1,0 +1,21 @@
+10
+Cool Item
+Cool Damage
+100
+10
+OBJECT
+2
+Cool Weapon
+weapon go bam
+8
+9
+WEAPON
+0
+100
+420
+Rad Armor
+Armor protec
+2000
+1
+ARMOR
+0
