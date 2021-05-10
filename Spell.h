@@ -9,6 +9,11 @@
 #include "EntityList.h"
 
 class Spell: public Entity{
+    private:
+        std::string description_;
+        int castingTime_;
+        int range_;
+        int duration_;
     public:
         //default constructor
         Spell();
@@ -42,11 +47,6 @@ class Spell: public Entity{
         //prints the spell to_string()
         virtual void longPrint();
 
-    private:
-        std::string description_;
-        int castingTime_;
-        int range_;
-        int duration_;
 
 };
 

@@ -32,18 +32,20 @@ class Item : public Entity{
         double getWeight() const;
         int getPrice() const;
 
-        static std::string itemTypeToConstantStyleString(Type itemType);
-        std::string itemTypeToString();
-        Type intToType(int type);
-        std::string to_ShortString();
+        //Helper Conversion Functions
+        static std::string itemTypeToConstantStyleString(Type itemType); //returns CAPITALIZED string representation of Type enum 
+        std::string itemTypeToString(); //takes in integer representation of itemType and returns string representation of the itemType
+        Type intToType(int type); //takes in an integer representation of itemType and returns the Type enum of that type
         
-        
-        static void ObjectCreateMenu(EntityList<Item*>* list);
-        static void CreateMenu(EntityList<Item*>* list);
+        //Menu Functions
+        static void ObjectCreateMenu(EntityList<Item*>* list); //prompts and gathers response from user to create and add an Object Item to the System's EntityList
+        static void CreateMenu(EntityList<Item*>* list); //Menu that prompts and redirect users to the specific item type menu they are wishing to create an item for
         virtual void EditMenu();
-        virtual void longPrint();
-        virtual std::string toExportString();
-        virtual std::string to_string();
+        
+        //Virtual Functions inherited from Entity: Printing and String functions
+        virtual void longPrint(); //prints a user-friendly representation of an object items attributes
+        virtual std::string toExportString(); //returns an exportable string representation of the Item object
+        virtual std::string to_string(); //returns a user-friendly representation of an object items attributes
 
 };
 
