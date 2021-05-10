@@ -97,11 +97,13 @@ void Weapon::CreateMenu(EntityList<Item*>* list){
     int range = 0;
     
     std::cout << "Please enter the Weapon's name: ";
-    std::cin >> name;
+    std::getline(std::cin, name); //clears buffer
+    std::getline(std::cin, name);
     std::cout << "Please enter the Weapon's ID: ";
     std::cin >> ID;
     std::cout << "Please enter the damage description of your Weapon: "<< std::endl;
-    std::cin >> damage;
+    std::getline(std::cin, damage); //clears buffer
+    std::getline(std::cin, damage);
     std::cout << "Please enter your Weapon's weight: " << std::endl;
     std::cin >> weight;
     std::cout << "Please enter your Weapon's price" << std::endl;
@@ -137,7 +139,6 @@ void Weapon::EditMenu(){
     std::getline(std::cin, name);
     std::cout << "Please enter the Weapon's damage";
     std::getline(std::cin, damage); //clears buffer
-    std::getline(std::cin, damage);
     std::cout << "Please enter the Weapon's weight";
     std::cin >> weight;
     std::cout << "Please enter the Weapon's ID";

@@ -5,4 +5,5 @@
 
 int main(){
     System::getInstance()->StartMenu();
+    delete System::getInstance();
 }

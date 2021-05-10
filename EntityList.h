@@ -11,7 +11,9 @@ class EntityList{
         std::vector<T>* entityVector;
     public:
         EntityList(){entityVector = new std::vector<T>();}
-        ~EntityList(){delete entityVector;}
+        ~EntityList(){
+            delete entityVector;
+        }
         void printList(){
             typename std::vector<T>::iterator i;
             for(i = entityVector->begin(); i < entityVector->end(); i++){
@@ -29,10 +31,7 @@ class EntityList{
         }
 
         void addEntity(T entity){
-            std::cout << entity << std::endl;
-            std::cout << "attempting push back\n";
             entityVector->push_back(entity);
-            std::cout << "push back successful";
         }
         
         T searchForEntityByID(int ID){

@@ -18,23 +18,27 @@ class Item : public Entity{
         int price;
     public:
         Item();
+        //Parameterized Constructor
         Item(std::string name, std::string damage, Type itemType, double weight, int itemID, int price);
+        //Destructor
         ~Item();
-        void setDamage(std::string damage){this->damage = damage;}
-        void setItemType(Type itemType){this->itemType = itemType;}
-        void setWeight(double weight){this->weight = weight;}
-        void setPrice(int price){this->price = price;}
-        std::string getDamage() const{return damage;}
-        Type getItemType() const{return itemType;}
-        double getWeight() const{return weight;}
-        int getPrice() const{return price;}
+        //Getters and Setters
+        void setDamage(std::string damage);
+        void setItemType(Type itemType);
+        void setWeight(double weight);
+        void setPrice(int price);
+        std::string getDamage() const;
+        Type getItemType() const;
+        double getWeight() const;
+        int getPrice() const;
+
         static std::string itemTypeToConstantStyleString(Type itemType);
         std::string itemTypeToString();
         Type intToType(int type);
         std::string to_ShortString();
         
         
-        //these are needed in each class
+        static void ObjectCreateMenu(EntityList<Item*>* list);
         static void CreateMenu(EntityList<Item*>* list);
         virtual void EditMenu();
         virtual void longPrint();

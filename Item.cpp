@@ -14,6 +14,16 @@ Item::Item(std::string name, std::string damage, Type itemType, double weight, i
     this->weight = weight;
     this->price =  price;
 }
+
+void Item::setDamage(std::string damage){this->damage = damage;}
+void Item::setItemType(Type itemType){this->itemType = itemType;}
+void Item::setWeight(double weight){this->weight = weight;}
+void Item::setPrice(int price){this->price = price;}
+std::string Item::getDamage() const{return damage;}
+Type Item::getItemType() const{return itemType;}
+double Item::getWeight() const{return weight;}
+int Item::getPrice() const{return price;}
+
 std::string Item::to_string(){
     std::stringstream myStream;
 
@@ -79,19 +89,24 @@ std::string Item::itemTypeToConstantStyleString(Type itemType){
 }
 void Item::CreateMenu(EntityList<Item*>* list){
     std::cout << "Welcome to the Item Create Menu! Please select which item you'd like to create" << std::endl;
-    std::cout << "\t1) Weapon" << std::endl;
-    std::cout << "\t2) Armor" << std::endl;
-    std::cout << "\t3) Return" << std::endl;
+    std::cout << "\t1) Object" << std::endl;
+    std::cout << "\t2) Weapon" << std::endl;
+    std::cout << "\t3) Armor" << std::endl;
+    std::cout << "\t4) Return" << std::endl;
+    std::cout << "Your Selection: ";
     int response;
     std::cin >> response;
     switch(response){
         case 1:
-            Weapon::CreateMenu(list);
+            Item::ObjectCreateMenu(list);
             break;
         case 2:
-            Armor::CreateMenu(list);
+            Weapon::CreateMenu(list);
             break;
         case 3:
+            Armor::CreateMenu(list);
+            break;
+        case 4:
             return;
     }
 }
@@ -104,6 +119,7 @@ void Item::EditMenu(){
     int price;
     std::cout << "Here is the items current information:\n" << to_string() << std::endl;
     std::cout << "Please enter the Item's name";
+    std::getline(std::cin, name); //clears buffer
     std::getline(std::cin, name);
     std::cout << "Please enter the Item's damage";
     std::getline(std::cin, damage);
@@ -120,4 +136,26 @@ void Item::EditMenu(){
     this->weight = weight;
     this->damage = damage;
     this->price = price;
+}
+
+void Item::ObjectCreateMenu(EntityList<Item*>* list){
+    std::string name;
+    int ID = 0;
+    std::string damage;
+    double weight = 0;
+    int price = 0;
+    
+    std::cout << "Please enter the Object's name: ";
+    std::cin >> name;
+    std::cout << "Please enter the Object's ID: ";
+    std::cin >> ID;
+    std::cout << "Please enter the damage description of your Object: "<< std::endl;
+    std::cin >> damage;
+    std::cout << "Please enter your Object's weight: " << std::endl;
+    std::cin >> weight;
+    std::cout << "Please enter your Object's price" << std::endl;
+    std::cin >> price;
+
+    Item* temp = new Item(name, damage, OBJECT, weight, ID, price);
+    list->addEntity(temp);
 }

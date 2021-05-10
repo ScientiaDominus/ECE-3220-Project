@@ -15,7 +15,7 @@
 #include "Spell.h"
 
 
-class Character : public Entity{
+class Character: public Entity{
 	private:
 		std::string player_;
 		CharacterClass class_;

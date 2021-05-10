@@ -11,8 +11,20 @@ System::System(){
     this->spellList = new EntityList<Spell*>();
 }
 System::~System(){
-    delete itemList;
+    std::vector<Character*>::iterator i;
+    for(i = characterList->getVector()->begin(); i < characterList->getVector()->end(); i++){
+        delete (*i);
+    } 
     delete characterList;
+    std::vector<Item*>::iterator j;
+    for(j = itemList->getVector()->begin(); j < itemList->getVector()->end(); j++){
+        delete (*j);
+    }    
+    delete itemList;
+    std::vector<Spell*>::iterator k;
+    for(k = spellList->getVector()->begin(); k < spellList->getVector()->end(); k++){
+        delete (*k);
+    }   
     delete spellList;
 }
 void System::StartMenu(){
@@ -22,6 +34,7 @@ void System::StartMenu(){
         std::cout << "Main Menu. Pick and Option Below" << std::endl;
         std::cout << "\t1) Character\n\t2) Item\n\t3) Spell\n\t4) Exit" << std::endl;
         int response;
+        std::cout << "Your Selection: ";
         std::cin >> response;
         switch (response){
              case 1:
@@ -46,23 +59,18 @@ void System::StartMenu(){
 }
 
 void System::importEntityLists(){
-    std::cout << "starting import" << std::endl;
     std::ifstream itemFile("ItemListExport.txt");
     int id;
     while(itemFile >> id){
-        std::cout << "starting item import" << std::endl;
         Item *item = readItemFromFile(itemFile, id);
         if(item != NULL){
-            std::cout << "adding Entity\n";
             itemList->addEntity(item);
-            std::cout << "done adding Entity\n";
         }
     }
     itemList->printList();
 
     std::ifstream spellFile("SpellListExport.txt");
     while(spellFile >> id){
-        std::cout << "starting spell import" << std::endl;
         Spell *spell = readSpellFromFile(spellFile, id);
         if(spell != NULL){
             spellList->addEntity(spell);
@@ -72,7 +80,6 @@ void System::importEntityLists(){
 
     std::ifstream characterFile("CharacterListExport.txt");
     while(characterFile >> id){
-        std::cout << "starting character import" << std::endl;
         Character *character = readCharacterFromFile(characterFile, id);
         if(character != NULL){
             characterList->addEntity(character);
@@ -86,6 +93,7 @@ void System::EntityMenu(EntityList<E*>* list){
     std::cout << "\t1) View/Edit Existing " << menuModeString << std::endl;
     std::cout << "\t2) Create New " << menuModeString << std::endl;
     std::cout << "\t3) Exit" << std::endl;
+    std::cout << "Your Selection: ";
     int response;
     std::cin >> response;
     switch (response){
@@ -106,6 +114,7 @@ void System::ViewEditMenu(EntityList<E>* list){
         std::cout << "\t1) View List of Existing " << menuModeString << std::endl;
         std::cout << "\t2) Look up " << menuModeString << std::endl;
         std::cout << "\t3) Exit" << std::endl;
+        std::cout << "Your Selection: ";
         int response;
         std::cin >> response;
         switch (response)
@@ -127,6 +136,7 @@ void System::SearchListMenu(EntityList<E>* list){
     std::cout << "You've selected to look up an existing " << menuModeString << "\nPlease Select an option below." << std::endl;
     std::cout << "\t1) Search " << menuModeString << " by ID\n\t2) Search " << menuModeString << "by Name\n\t3) Exit" << std::endl;
     E entity;
+    std::cout << "Your Selection: ";
     int response;
     std::cin >> response;
     int ID;
@@ -150,6 +160,7 @@ void System::SearchListMenu(EntityList<E>* list){
         std::cout << "\t1)View" << std::endl;
         std::cout << "\t2)Edit" << std::endl;
         std::cout << "\t3)Return" << std::endl;
+        std::cout << "Your Selection: ";
         std::cin >> response;
         switch(response){
             case 1:
