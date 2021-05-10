@@ -4,7 +4,6 @@
 #include "System.h"
 
 int main(){
-    System* system = System::getInstance();
-    system->importEntityLists();
-    system->StartMenu();
+    System::getInstance()->StartMenu();
+    delete System::getInstance();
 }

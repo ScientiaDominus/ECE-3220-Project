@@ -19,6 +19,22 @@ Armor protec
 1
 ARMOR
 0
+789
+The Great Sword
+This is the best description ever written
+15
+999
+WEAPON
+5
+8
+6
+Invisible Dagger
+This is extremely dangers, be careful picking it up
+75
+12
+WEAPON
+5
+8
 11223344
 Slicey Dicey Stabby Knifey
 ohhhh it'll getcha alright.

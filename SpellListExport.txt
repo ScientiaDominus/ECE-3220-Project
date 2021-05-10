@@ -10,6 +10,12 @@ This spell allows the caster to turn pencils to rubber at will!
 1
 10
 1
+21
+Cool Wizard Shiz
+Cool Wizard Shiz Happens
+1
+50
+50
 2
 Fireball
 Shoot a fireball out of your hands dealing 2d6 Fire damage to all creatures in a 10 foot radius
@@ -34,3 +40,9 @@ A blast of cold air erupts from your hands dealing 2d8 cold damage to everyone i
 1
 0
 0
+100
+Ekin gives everyone an A
+Ekin likes all his students and wants them all to have an A for their hard work
+100
+100
+100

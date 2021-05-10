@@ -8,7 +8,9 @@ class Entity{
         std::string name;
         int ID;
     public:
-        //getters and setters
+        virtual ~Entity(){}
+
+        //Getters and Setters
         void setName(std::string name);
         void setID(int ID);
         std::string getName() const;
@@ -18,8 +20,8 @@ class Entity{
         void shortPrint();
         
         //pure virtuals for child classes to impliment
-        virtual void longPrint() =0;
-        virtual std::string toExportString() =0;
+        virtual void longPrint() =0; //intended to print user-friendly representation of child Entity objects attributes
+        virtual std::string toExportString() =0; //intended to return exportable string representation of child Entity objects attributes
 };
 
 #endif

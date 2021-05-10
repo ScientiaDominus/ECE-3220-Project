@@ -57,12 +57,13 @@ void Spell::set_duration(int duration){
 
 std::string Spell::toExportString(){
     std::stringstream exportString;
-    exportString << getName() << std::endl;
     exportString << getID() << std::endl;
+    exportString << getName() << std::endl;
+    exportString << get_description() << std::endl;
     exportString << get_castingTime() << std::endl;
     exportString << get_range() << std::endl;
-    exportString << get_duration() << std::endl;
-    exportString << get_description() << std::endl;
+    exportString << get_duration();
+    
     return exportString.str();
 }
 
@@ -101,7 +102,6 @@ void Spell::CreateMenu(EntityList<Spell*>* list){
 
 
     Spell* temp = new Spell(spellName, spellID, description, castingTime, range, duration);
-    //std::cout << "Your new spell is:\n" << temp->to_string() << std::endl;
 
     list->addEntity(temp);
 }

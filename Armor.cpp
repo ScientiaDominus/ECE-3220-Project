@@ -26,18 +26,24 @@ std::string Armor::to_string(){
 
 std::string Armor::toExportString(){
     std::stringstream myStream;
-
-    myStream << getItemType() << std::endl;
-    myStream << getName() << std::endl;
-    myStream << getDamage() << std::endl;
-    myStream << getArmorType() << std::endl;
-    myStream << getWeight() << std::endl;
-    myStream << getID() << std::endl;
-    myStream << getPrice() << std::endl;
-
+    myStream << this->Item::toExportString();
+    myStream << std::endl;
+    myStream << armorTypeToInt(getArmorType());
     return myStream.str();
 }
 
+int Armor::armorTypeToInt(ArmorType armorType){
+    switch(armorType){
+        case LIGHT:
+            return 0;
+        case MEDIUM:
+            return 1;
+        case HEAVY:
+            return 2;
+        default:
+            return 1;
+    }
+}
 std::string Armor::typeToString(){
     switch(armorType){
         case LIGHT:
@@ -70,26 +76,28 @@ void Armor::CreateMenu(EntityList<Item*>* list){
     std::string name;
     int ID;
     std::string damage;
-    //Type itemType = ARMOR;
     double weight;
     int price;
     int armorTypeInt;
     ArmorType armorType;
     
     std::cout << "Please enter the Armor's name: ";
-    std::cin >> name;
+    std::getline(std::cin, name); //clears buffer
+    std::getline(std::cin, name);
     std::cout << "Please enter the Armor's ID: ";
     std::cin >> ID;
     std::cout << "Please enter the damage description of your Armor: "<< std::endl;
-    std::cin >> damage;
+    std::getline(std::cin, damage); //clears buffer
+    std::getline(std::cin, damage);
     std::cout << "Please enter your Armor's weight: " << std::endl;
     std::cin >> weight;
-    std::cout << "Please enter your Armor's price" << std::endl;
+    std::cout << "Please enter your Armor's price: " << std::endl;
     std::cin >> price;
     std::cout << "Please enter the number corresponding to your desired Armor's Type:" << std::endl;
     std::cout << "\t1) Light" << std::endl;
     std::cout << "\t2) Medium" << std::endl;
     std::cout << "\t3) Heavy" << std::endl;
+    std::cout << "Your Selection: ";
     std::cin >> armorTypeInt;
     armorType = intToType(armorTypeInt);
 
@@ -104,17 +112,17 @@ void Armor::EditMenu(){
     int price;
     int armorTypeInt;
     std::cout << "Here is the Armor's current information:\n" << to_string() << std::endl;
-    std::cout << "Please enter the Armor's name";
+    std::cout << "Please enter the Armor's name: ";
     std::getline(std::cin, name); //clears buffer
     std::getline(std::cin, name);
-    std::cout << "Please enter the Armor's damage";
+    std::cout << "Please enter the Armor's damage: ";
     std::getline(std::cin, damage); //clears buffer
     std::getline(std::cin, damage);
-    std::cout << "Please enter the Armor's weight";
+    std::cout << "Please enter the Armor's weight: ";
     std::cin >> weight;
-    std::cout << "Please enter the Armor's ID";
+    std::cout << "Please enter the Armor's ID: ";
     std::cin >> itemID;
-    std::cout << "Please enter the Armor's price";
+    std::cout << "Please enter the Armor's price: ";
     std::cin >> price;
     std::cout << "Please enter the number corresponding to your desired Armor Type:" << std::endl;
     std::cout << "\t0) Fire" << std::endl;
@@ -124,6 +132,7 @@ void Armor::EditMenu(){
     std::cout << "\t4) Slashing" << std::endl;
     std::cout << "\t5) Poison" << std::endl;
     std::cout << "\t6) Slashing" << std::endl;
+    std::cout << "Your Selection: ";
     std::cin >> armorTypeInt;
 
     this->setName(name);

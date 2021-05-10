@@ -3,17 +3,20 @@
 #include <vector>
 #include <sstream>
 #include <string>
+#include <iostream>
 
 template<typename T>
 class EntityList{
     private:
-        std::vector<T> entityVector;
+        std::vector<T>* entityVector;
     public:
-        EntityList(){}
-        
+        EntityList(){entityVector = new std::vector<T>();}
+        ~EntityList(){
+            delete entityVector;
+        }
         void printList(){
             typename std::vector<T>::iterator i;
-            for(i = entityVector.begin(); i < entityVector.end(); i++){
+            for(i = entityVector->begin(); i < entityVector->end(); i++){
                 (*i)->shortPrint();
             }
         }
@@ -21,19 +24,19 @@ class EntityList{
         std::string exportListToString(){
             typename std::vector<T>::iterator i;
             std::stringstream outstring;
-            for(i = entityVector.begin(); i < entityVector.end(); i++){
+            for(i = entityVector->begin(); i < entityVector->end(); i++){
                 outstring << (*i)->toExportString();
             }
             return outstring.str();
         }
 
         void addEntity(T entity){
-            entityVector.push_back(entity);
+            entityVector->push_back(entity);
         }
         
         T searchForEntityByID(int ID){
             typename std::vector<T>::iterator i;
-            for(i = entityVector.begin(); i < entityVector.end(); i++){
+            for(i = entityVector->begin(); i < entityVector->end(); i++){
                 if(ID == (*i)->getID()){
                     return *i;
                 }   
@@ -44,8 +47,8 @@ class EntityList{
 
         T searchForEntityByName(std::string name){
             typename std::vector<T>::iterator i;
-            for(i = entityVector.begin(); i < entityVector.end(); i++){
-                if(name.compare((*i)->getName())){
+            for(i = entityVector->begin(); i < entityVector->end(); i++){
+                if(name.compare((*i)->getName()) == 0){
                     return *i;
                 }    
             }
@@ -53,17 +56,28 @@ class EntityList{
         }
 
         std::string getStringListOfIDs(){
-            std::string stringListOfIDs = "List Start\n";
+            std::stringstream outputStream;
             typename std::vector<T>::iterator i;
-            for(i = entityVector.begin(); i < entityVector.end(); i++){
-                stringListOfIDs += std::to_string((*i)->getID()) + "\n";
-              
+            for(i = entityVector->begin(); i < entityVector->end(); i++){
+                outputStream << std::to_string((*i)->getID()) << std::endl;
             }
-            stringListOfIDs += "List End\n";
-            return stringListOfIDs;
+            return outputStream.str();
         }
 
-        std::vector<T> getVector(){
+        std::string getStringListOfNames(){
+            std::stringstream outputStream;
+            typename std::vector<T>::iterator i = entityVector->begin();
+            if(i < entityVector->end()){
+                outputStream << "\t-" << (*i)->getName();
+            }
+            for(i += 1; i < entityVector->end(); i++){
+                outputStream << std::endl;
+                outputStream << "\t-" << (*i)->getName();
+            }
+            return outputStream.str();
+        }
+
+        std::vector<T>* getVector(){
             return entityVector;
         }
 
