@@ -132,7 +132,7 @@ void System::ViewEditMenu(EntityList<E>* list){
 template<typename E>
 void System::SearchListMenu(EntityList<E>* list){
     std::cout << "You've selected to look up an existing " << menuModeString << "\nPlease Select an option below." << std::endl;
-    std::cout << "\t1) Search " << menuModeString << " by ID\n\t2) Search " << menuModeString << " by Name\n\t3) Exit" << std::endl;
+    std::cout << "\t1) Search " << menuModeString << " by ID\n\t2) Search " << menuModeString << "by Name\n\t3) Exit" << std::endl;
     E entity;
     std::cout << "Your Selection: ";
     int response;
