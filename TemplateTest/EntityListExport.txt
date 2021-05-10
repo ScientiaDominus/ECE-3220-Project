@@ -1,6 +1,0 @@
-10
-Cool Item
-Cool Damage
-100
-10
-OBJECT

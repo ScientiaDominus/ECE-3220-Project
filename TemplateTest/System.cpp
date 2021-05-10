@@ -43,14 +43,15 @@ void System::StartMenu(){
 }
 
 void System::importEntityLists(){
-    std::ifstream myFile("EntityListExport.txt");
+    std::ifstream itemFile("ItemListExport.txt");
     int id;
-    while(myFile >> id){
-        Item *item = readItemFromFile(myFile, id);
+    while(itemFile >> id){
+        Item *item = readItemFromFile(itemFile, id);
         if(item != NULL){
             itemList->addEntity(item);
         }
     }
+    itemList->printList();
 
     std::ifstream spellFile("SpellListExport.txt");
     while(spellFile >> id){
@@ -59,6 +60,7 @@ void System::importEntityLists(){
             spellList->addEntity(spell);
         }
     }
+    spellList->printList();
 
     std::ifstream characterFile("CharacterListExport.txt");
     while(characterFile >> id){
@@ -114,7 +116,7 @@ void System::ViewEditMenu(EntityList<E>* list){
 template<typename E>
 void System::SearchListMenu(EntityList<E>* list){
     std::cout << "You've selected to look up an existing " << menuModeString << "\nPlease Select an option below." << std::endl;
-    std::cout << "\tSearch " << menuModeString << " by ID\n\t2) Search " << menuModeString << "by Name\n\t3) Exit" << std::endl;
+    std::cout << "\t1) Search " << menuModeString << " by ID\n\t2) Search " << menuModeString << "by Name\n\t3) Exit" << std::endl;
     E entity;
     int response;
     std::cin >> response;
@@ -184,10 +186,11 @@ Item* System::readItemFromFile(std::ifstream& file, int id){
     file >> price;
     std::getline(file, itemTypeString); //clear buffer
     std::getline(file, itemTypeString);
-    if(itemTypeString.compare("OBJECT")){
+    if(itemTypeString.compare("OBJECT") == 0){
         Item* item = new Item(itemName, damage, OBJECT, weight, id, price);
+        std::cout << item->to_string();
         return item;
-    } else if(itemTypeString.compare("WEAPON")){
+    } else if(itemTypeString.compare("WEAPON") == 0){
         int damageTypeInt;
         int range;
         file >> damageTypeInt;
@@ -195,7 +198,7 @@ Item* System::readItemFromFile(std::ifstream& file, int id){
         file >> range;
         Weapon* weapon = new Weapon(itemName, damage, weight, id, price, dmgType, range);
         return weapon;
-    } else if(itemTypeString.compare("ARMOR")){
+    } else if(itemTypeString.compare("ARMOR") == 0){
         int armorTypeInt;
         file >> armorTypeInt;
         ArmorType ArmorType = Armor::intToType(armorTypeInt);
@@ -253,26 +256,30 @@ Character* System::readCharacterFromFile(std::ifstream& file, int id){
     file >> itemID;
     while(itemID != -1){
         Item *item = itemList->searchForEntityByID(itemID);
-        if(!item){
+        if(item){
             itemInventory->addEntity(item);
         } else{
             std::cout << "Item with ID " << itemID << " could not be found in your system, was not added to Character" << std::endl;
         }
+        file >> itemID;
     }
     int spellID;
     file >> spellID;
     while(spellID != -1){
         Spell *spell = spellList->searchForEntityByID(spellID);
-        if(!spell){
+        if(spell){
             spellInventory->addEntity(spell);
         } else{
-            std::cout << "Spell with ID " << itemID << " could not be found in your system, was not added to Character" << std::endl;
+            std::cout << "Spell with ID " << spellID << " could not be found in your system, was not added to Character" << std::endl;
         }
+        file >> spellID;
     }
     file >> goldCount;
     CharacterClass characterClass = Character::intToClass(classInt);
     Race race = Character::intToRace(raceInt);
     AbilityScores* abilityScores = new AbilityScores(strength, dexterity, constitution, intelligence, wisdom, charisma);
     Character* character = new Character(playerName, characterName, id, characterClass, race, level, abilityScores, itemInventory, spellInventory, goldCount);
+    character->setItems(itemInventory);
+    character->setSpells(spellInventory);
     return character;
 }

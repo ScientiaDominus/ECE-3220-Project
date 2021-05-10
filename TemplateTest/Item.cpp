@@ -9,10 +9,10 @@ Item::~Item(){}
 Item::Item(std::string name, std::string damage, Type itemType, double weight, int itemID, int price){   
     setName(name);
     setID(itemID);
-    damage = damage;
-    itemType = itemType;
-    weight = weight;
-    price =  price;
+    this->damage = damage;
+    this->itemType = itemType;
+    this->weight = weight;
+    this->price =  price;
 }
 std::string Item::to_string(){
     std::stringstream myStream;
@@ -64,8 +64,7 @@ Type Item::intToType(int type){
     }
 }
 void Item::longPrint(){
-    std::cout << "Long Print for all Items" << std::endl;
-    shortPrint();
+    std::cout << to_string();
 }
 
 void Item::CreateMenu(EntityList<Item*>* list){
