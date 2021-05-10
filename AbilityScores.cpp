@@ -11,13 +11,6 @@ AbilityScores::AbilityScores(int strength, int dexterity, int constitution, int 
     this->wisdom = wisdom;
     this->charisma = charisma;
 }
-/*AbilityScores::~AbilityScores(){}
-int AbilityScores::getStrength(){return strength;}
-int AbilityScores::getDexterity(){return dexterity;}
-int AbilityScores::getConstitution(){return constitution;}
-int AbilityScores::getIntelligence(){return intelligence;}
-int AbilityScores::getWisdom(){return wisdom;}
-int AbilityScores::getCharisma(){return charisma;}*/
 
 int AbilityScores::getStrength(){return strength;}
 int AbilityScores::getDexterity(){return dexterity;}
@@ -26,32 +19,31 @@ int AbilityScores::getIntelligence(){return intelligence;}
 int AbilityScores::getWisdom(){return wisdom;}
 int AbilityScores::getCharisma(){return charisma;}
 
-void AbilityScores::increaseStrength(int points){
-    strength += points;
-}
-void AbilityScores::increaseDexterity(int points){
-    dexterity += points;
-}
-void AbilityScores::increaseConstitution(int points){
-    constitution += points;
-}
-void AbilityScores::increaseIntelligence(int points){
-    intelligence += points;
-}
-void AbilityScores::increaseWisdom(int points){
-    wisdom += points;
-}
-void AbilityScores::increaseCharisma(int points){
-    charisma += points;
-}
+void AbilityScores::setStrength(int strength){this->strength = strength;}
+void AbilityScores::setDexterity(int dexterity){this->dexterity = dexterity;}
+void AbilityScores::setConstitution(int constitution){this->constitution = constitution;}
+void AbilityScores::setIntelligence(int intelligence){this->intelligence = intelligence;}
+void AbilityScores::setWisdom(int wisdom){this->wisdom = wisdom;}
+void AbilityScores::setCharisma(int charisma){this->charisma = charisma;}
+
 
 std::string AbilityScores::toExportString() {
-    std::string exportString = std::to_string(getStrength()) +
-                                "\n" + std::to_string(getDexterity()) +
-                                "\n" + std::to_string(getConstitution()) +
-                                "\n" + std::to_string(getIntelligence()) +
-                                "\n" + std::to_string(getWisdom()) + 
-                                "\n" + std::to_string(getCharisma());
-
-    return exportString;
+    std::stringstream exportString; 
+    exportString << getStrength() << std::endl;
+    exportString << getDexterity() << std::endl;
+    exportString << getConstitution() << std::endl;
+    exportString << getIntelligence() << std::endl;
+    exportString << getWisdom() << std::endl;
+    exportString << getCharisma() << std::endl;
+    return exportString.str();
+}
+std::string AbilityScores::toString(){
+   std::stringstream exportString; 
+    exportString << "STRENGTH: " << getStrength() << std::endl;
+    exportString << "DEXTERITY: " << getDexterity() << std::endl;
+    exportString << "CONSTITUTION: " << getConstitution() << std::endl;
+    exportString << "INTELLIGENCE: " << getIntelligence() << std::endl;
+    exportString << "WISDOM: " << getWisdom() << std::endl;
+    exportString << "CHARISMA: " << getCharisma() << std::endl;
+    return exportString.str(); 
 }

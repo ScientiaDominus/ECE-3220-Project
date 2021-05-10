@@ -1,27 +1,34 @@
 #ifndef ARMOR_H
 #define ARMOR_H
 #include "Item.h"
+#include "EntityList.h"
+#include "Entity.h"
 #include <string>
 
-enum armorType {LIGHT, MEDIUM, HEAVY};
+enum ArmorType {LIGHT, MEDIUM, HEAVY};
 
 class Armor : public Item
-{
+{   
+    private:
+        ArmorType armorType;
     public:
         Armor();
-        Armor(std::string name, std::string damage, double weight, int itemID, int price,  armorType type);
+        Armor(std::string name, std::string damage, double weight, int itemID, int price,  ArmorType type);
         ~Armor();
 
-        void setArmorType(armorType type);
-        void edit() override;
-        armorType intToType(int type);
+        //helper functions
+        static ArmorType intToType(int type);
         std::string typeToString();
-        armorType ArmorType() const{return type_;}
-        std::string to_string() override;
+        ArmorType getArmorType() const;
+        
+        //inheritted from Item: String and Printing functions
+        void longPrint() override;
         std::string toExportString() override;
-    private:
-        armorType type_;
+        std::string to_string() override;
 
+        //menu related functions
+        static void CreateMenu(EntityList<Item*>* list);
+        void EditMenu();
 
 
 };
