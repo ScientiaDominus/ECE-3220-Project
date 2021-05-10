@@ -1,0 +1,13 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/cameron/Classes/ece3220/project/ECE-3220-Project/TemplateTest'
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o Armor.o Armor.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o AbilityScores.o AbilityScores.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o Item.o Item.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o Weapon.o Weapon.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o Character.o Character.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o System.o System.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o main.o main.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0   -c -o Spell.o Spell.cpp
+g++ -std=c++11 -Wall -Werror -ggdb -O0 Armor.o AbilityScores.o Item.o Weapon.o Character.o System.o main.o Spell.o -o main 
+make: Leaving directory '/home/cameron/Classes/ece3220/project/ECE-3220-Project/TemplateTest'
+ 
