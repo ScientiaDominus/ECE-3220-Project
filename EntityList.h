@@ -48,7 +48,7 @@ class EntityList{
         T searchForEntityByName(std::string name){
             typename std::vector<T>::iterator i;
             for(i = entityVector->begin(); i < entityVector->end(); i++){
-                if(name.compare((*i)->getName())){
+                if(name.compare((*i)->getName()) == 0){
                     return *i;
                 }    
             }

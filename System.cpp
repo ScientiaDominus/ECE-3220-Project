@@ -67,7 +67,6 @@ void System::importEntityLists(){
             itemList->addEntity(item);
         }
     }
-    itemList->printList();
 
     std::ifstream spellFile("SpellListExport.txt");
     while(spellFile >> id){
@@ -76,7 +75,6 @@ void System::importEntityLists(){
             spellList->addEntity(spell);
         }
     }
-    spellList->printList();
 
     std::ifstream characterFile("CharacterListExport.txt");
     while(characterFile >> id){
@@ -134,7 +132,7 @@ void System::ViewEditMenu(EntityList<E>* list){
 template<typename E>
 void System::SearchListMenu(EntityList<E>* list){
     std::cout << "You've selected to look up an existing " << menuModeString << "\nPlease Select an option below." << std::endl;
-    std::cout << "\t1) Search " << menuModeString << " by ID\n\t2) Search " << menuModeString << "by Name\n\t3) Exit" << std::endl;
+    std::cout << "\t1) Search " << menuModeString << " by ID\n\t2) Search " << menuModeString << " by Name\n\t3) Exit" << std::endl;
     E entity;
     std::cout << "Your Selection: ";
     int response;
@@ -149,7 +147,8 @@ void System::SearchListMenu(EntityList<E>* list){
             break;
         case 2:
             std::cout << "Enter the name: ";
-            std::cin >> name;
+            std::getline(std::cin, name); //clears buffer
+            std::getline(std::cin, name);
             entity = list->searchForEntityByName(name);
             break;
         default:

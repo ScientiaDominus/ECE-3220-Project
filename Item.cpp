@@ -146,11 +146,13 @@ void Item::ObjectCreateMenu(EntityList<Item*>* list){
     int price = 0;
     
     std::cout << "Please enter the Object's name: ";
-    std::cin >> name;
+    std::getline(std::cin, name);
+    std::getline(std::cin, name);
     std::cout << "Please enter the Object's ID: ";
     std::cin >> ID;
     std::cout << "Please enter the damage description of your Object: "<< std::endl;
-    std::cin >> damage;
+    std::getline(std::cin, damage);
+    std::getline(std::cin, damage);
     std::cout << "Please enter your Object's weight: " << std::endl;
     std::cin >> weight;
     std::cout << "Please enter your Object's price" << std::endl;

@@ -102,7 +102,6 @@ void Spell::CreateMenu(EntityList<Spell*>* list){
 
 
     Spell* temp = new Spell(spellName, spellID, description, castingTime, range, duration);
-    //std::cout << "Your new spell is:\n" << temp->to_string() << std::endl;
 
     list->addEntity(temp);
 }
